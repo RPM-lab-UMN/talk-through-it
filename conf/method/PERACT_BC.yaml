@@ -1,0 +1,4 @@
+name: 'PERACT_BC'
+
+demo_augmentation: True
+demo_augmentation_every_n: 10

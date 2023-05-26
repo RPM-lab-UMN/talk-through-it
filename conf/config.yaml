@@ -1,0 +1,17 @@
+rlbench:
+  task_name: 'move_above'
+  tasks: [move_above]
+  demos: 64
+  cameras: [front, left_shoulder, right_shoulder, wrist]
+  camera_resolution: [128, 128]
+  scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
+
+replay:
+  batch_size: 8
+  timesteps: 1
+  use_disk: True
+  path: '/tmp/peract/replay'
+  max_parallel_processes: 32
+
+defaults:
+  - method: PERACT_BC
