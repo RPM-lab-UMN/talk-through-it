@@ -1,17 +1,35 @@
+ddp:
+  master_addr: "localhost"
+  master_port: "29500"
+  num_devices: 1
+
 rlbench:
   task_name: 'move_above'
   tasks: [move_above]
   demos: 64
+  demo_path: /home/user/School/peract_l2r/data_above
+  episode_length: 25
   cameras: [front, left_shoulder, right_shoulder, wrist]
   camera_resolution: [128, 128]
   scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
 
 replay:
-  batch_size: 8
+  batch_size: 1
   timesteps: 1
   use_disk: True
   path: '/tmp/peract/replay'
   max_parallel_processes: 32
+
+framework:
+  log_freq: 100
+  save_freq: 100
+  tensorboard_logging: False
+  csv_logging: True
+  training_iterations: 40000
+  logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
+  load_existing_weights: False
+  num_weights_to_keep: 60 # older checkpoints will be deleted chronologically
+  num_workers: 0
 
 defaults:
   - method: PERACT_BC

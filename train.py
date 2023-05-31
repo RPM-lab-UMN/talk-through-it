@@ -9,15 +9,25 @@ from yarr.runners.offline_train_runner import OfflineTrainRunner
 from yarr.utils.stat_accumulator import SimpleAccumulator
 import gc
 import torch
+import torch.distributed as dist
 
-@hydra.main(version_base=None, config_path='conf', config_name='config')
+
+@hydra.main(config_path='conf', config_name='config')
 def main(cfg: DictConfig) -> None:
     cfg_yaml = OmegaConf.to_yaml(cfg)
     logging.info('\n' + cfg_yaml)
 
     obs_config = create_obs_config(cfg.rlbench.cameras,
-                                   cfg.rlbench.camera_resolution,
-                                   cfg.method.name)
+                                   cfg.rlbench.camera_resolution)
+    
+    rank = 0
+    world_size = cfg.ddp.num_devices
+    os.environ['MASTER_ADDR'] = cfg.ddp.master_addr
+    os.environ['MASTER_PORT'] = cfg.ddp.master_port
+
+    dist.init_process_group("gloo",
+                        rank=rank,
+                        world_size=world_size)
 
     task = cfg.rlbench.tasks[0]
     tasks = cfg.rlbench.tasks
@@ -34,7 +44,6 @@ def main(cfg: DictConfig) -> None:
         cfg.method.voxel_sizes,
         cfg.rlbench.camera_resolution
     )
-    rank = 0
     peract_bc.launch_utils.fill_multi_task_replay(
         cfg,
         obs_config,
@@ -62,7 +71,6 @@ def main(cfg: DictConfig) -> None:
     weightsdir = os.path.join(cwd, 'seed%d' % seed, 'weights')
     logdir = os.path.join(cwd, 'seed%d' % seed)
 
-    world_size = cfg.ddp.num_devices
     train_runner = OfflineTrainRunner(
         agent=agent,
         wrapped_replay_buffer=wrapped_replay,

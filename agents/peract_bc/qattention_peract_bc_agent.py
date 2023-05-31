@@ -13,7 +13,7 @@ from yarr.agents.agent import Agent, ActResult, ScalarSummary, \
     HistogramSummary, ImageSummary, Summary
 
 from helpers import utils
-from helpers.utils import visualise_voxel, stack_on_channel
+from helpers.utils import visualise_voxel
 from voxel.voxel_grid import VoxelGrid
 from voxel.augmentation import apply_se3_augmentation
 from einops import rearrange
