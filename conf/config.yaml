@@ -12,6 +12,7 @@ rlbench:
   cameras: [front, left_shoulder, right_shoulder, wrist]
   camera_resolution: [128, 128]
   scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
+  include_lang_goal_in_obs: True
 
 replay:
   batch_size: 1
@@ -26,6 +27,7 @@ framework:
   tensorboard_logging: False
   csv_logging: True
   training_iterations: 40000
+  logdir: '/tmp/arm_test/'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   load_existing_weights: False
   num_weights_to_keep: 60 # older checkpoints will be deleted chronologically
@@ -33,3 +35,7 @@ framework:
 
 defaults:
   - method: PERACT_BC
+
+hydra:
+    run:
+        dir: ${framework.logdir}/${rlbench.task_name}/${method.name}

@@ -17,13 +17,14 @@ def main(cfg: DictConfig) -> None:
     cfg_yaml = OmegaConf.to_yaml(cfg)
     logging.info('\n' + cfg_yaml)
 
+    os.environ['MASTER_ADDR'] = cfg.ddp.master_addr
+    os.environ['MASTER_PORT'] = cfg.ddp.master_port
+
     obs_config = create_obs_config(cfg.rlbench.cameras,
                                    cfg.rlbench.camera_resolution)
     
     rank = 0
     world_size = cfg.ddp.num_devices
-    os.environ['MASTER_ADDR'] = cfg.ddp.master_addr
-    os.environ['MASTER_PORT'] = cfg.ddp.master_port
 
     dist.init_process_group("gloo",
                         rank=rank,
@@ -33,7 +34,14 @@ def main(cfg: DictConfig) -> None:
     tasks = cfg.rlbench.tasks
     task_folder = task # if not multi_task else 'multi'
     seed = 0
+    start_seed = 0
     replay_path = os.path.join(cfg.replay.path, task_folder, cfg.method.name, 'seed%d' % seed)
+
+    seed_folder = os.path.join(os.getcwd(), 'seed%d' % start_seed)
+    os.makedirs(seed_folder, exist_ok=True)
+
+    with open(os.path.join(seed_folder, 'config.yaml'), 'w') as f:
+        f.write(cfg_yaml)
 
     # create the replay buffer from RLBench demos
     replay_buffer = peract_bc.launch_utils.create_replay(

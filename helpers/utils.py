@@ -302,3 +302,11 @@ def create_obs_config(camera_names: List[str],
         gripper_joint_positions=True,
     )
     return obs_config
+
+def get_device(gpu):
+    if gpu is not None and gpu >= 0 and torch.cuda.is_available():
+        device = torch.device("cuda:%d" % gpu)
+        torch.backends.cudnn.enabled = torch.backends.cudnn.benchmark = True
+    else:
+        device = torch.device("cpu")
+    return device
