@@ -5,13 +5,13 @@ rlbench:
     task_name: 'move_above'
     tasks: [move_above]
     demo_path: /home/user/School/peract_l2r/data_above
-    episode_length: 25
+    episode_length: 10
     cameras: [front,left_shoulder,right_shoulder,wrist]
     camera_resolution: [128, 128]
     scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
     include_lang_goal_in_obs: True
     time_in_state: True
-    headless: True
+    headless: False
 
 framework:
     gpu: 1
@@ -21,7 +21,7 @@ framework:
 
     eval_envs: 1
     eval_from_eps_number: 0
-    eval_episodes: 25
+    eval_episodes: 10
     # eval_type: 'missing'
     eval_type: 'last'
     eval_save_metrics: True

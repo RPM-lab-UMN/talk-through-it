@@ -43,6 +43,9 @@ def quaternion_to_discrete_euler(quaternion, resolution):
     disc[disc == int(360 / resolution)] = 0
     return disc
 
+def discrete_euler_to_quaternion(discrete_euler, resolution):
+    euluer = (discrete_euler * resolution) - 180
+    return Rotation.from_euler('xyz', euluer, degrees=True).as_quat()
 
 def point_to_voxel_index(
         point: np.ndarray,
@@ -58,6 +61,17 @@ def point_to_voxel_index(
             np.int32), dims_m_one)
     return voxel_indicy
 
+def point_to_pixel_index(
+        point: np.ndarray,
+        extrinsics: np.ndarray,
+        intrinsics: np.ndarray):
+    point = np.array([point[0], point[1], point[2], 1])
+    world_to_cam = np.linalg.inv(extrinsics)
+    point_in_cam_frame = world_to_cam.dot(point)
+    px, py, pz = point_in_cam_frame[:3]
+    px = 2 * intrinsics[0, 2] - int(-intrinsics[0, 0] * (px / pz) + intrinsics[0, 2])
+    py = 2 * intrinsics[1, 2] - int(-intrinsics[1, 1] * (py / pz) + intrinsics[1, 2])
+    return px, py
 
 def _compute_initial_camera_pose(scene):
     # Adapted from:

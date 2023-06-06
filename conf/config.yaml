@@ -17,18 +17,22 @@ rlbench:
 replay:
   batch_size: 1
   timesteps: 1
+  prioritisation: False
+  task_uniform: True
   use_disk: True
   path: '/tmp/peract/replay'
   max_parallel_processes: 32
 
 framework:
-  log_freq: 100
-  save_freq: 100
+  log_freq: 50
+  save_freq: 200
   tensorboard_logging: False
   csv_logging: True
-  training_iterations: 40000
-  logdir: '/tmp/arm_test/'
+  training_iterations: 10000
+  logdir: '/tmp/peract/move_above'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
+  seeds: 1
+  start_seed: 0
   load_existing_weights: False
   num_weights_to_keep: 60 # older checkpoints will be deleted chronologically
   num_workers: 0

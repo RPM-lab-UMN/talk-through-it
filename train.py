@@ -1,15 +1,25 @@
 import logging
-import hydra
-from omegaconf import DictConfig, OmegaConf
-from agents import peract_bc
 import os
+import sys
+
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+
+import hydra
+from omegaconf import DictConfig, OmegaConf, ListConfig
+
+import run_seed_fn
 from helpers.utils import create_obs_config
-from yarr.replay_buffer.wrappers.pytorch_replay_buffer import PyTorchReplayBuffer
-from yarr.runners.offline_train_runner import OfflineTrainRunner
-from yarr.utils.stat_accumulator import SimpleAccumulator
-import gc
-import torch
-import torch.distributed as dist
+
+import torch.multiprocessing as mp
+mp.set_sharing_strategy('file_system')
+from torch.multiprocessing import set_start_method, get_start_method
+
+try:
+    if get_start_method() != 'spawn':
+        set_start_method('spawn', force=True)
+except RuntimeError:
+    print("Could not set start method to spawn")
+    pass
 
 
 @hydra.main(config_path='conf', config_name='config')
@@ -20,22 +30,27 @@ def main(cfg: DictConfig) -> None:
     os.environ['MASTER_ADDR'] = cfg.ddp.master_addr
     os.environ['MASTER_PORT'] = cfg.ddp.master_port
 
+    cfg.rlbench.cameras = cfg.rlbench.cameras \
+        if isinstance(cfg.rlbench.cameras, ListConfig) else [cfg.rlbench.cameras]
     obs_config = create_obs_config(cfg.rlbench.cameras,
                                    cfg.rlbench.camera_resolution)
+    multi_task = len(cfg.rlbench.tasks) > 1
     
-    rank = 0
-    world_size = cfg.ddp.num_devices
+    cwd = os.getcwd()
+    logging.info('CWD:' + os.getcwd())
 
-    dist.init_process_group("gloo",
-                        rank=rank,
-                        world_size=world_size)
-
-    task = cfg.rlbench.tasks[0]
-    tasks = cfg.rlbench.tasks
-    task_folder = task # if not multi_task else 'multi'
-    seed = 0
-    start_seed = 0
-    replay_path = os.path.join(cfg.replay.path, task_folder, cfg.method.name, 'seed%d' % seed)
+    if cfg.framework.start_seed >= 0:
+        # seed specified
+        start_seed = cfg.framework.start_seed
+    elif cfg.framework.start_seed == -1 and \
+            len(list(filter(lambda x: 'seed' in x, os.listdir(cwd)))) > 0:
+        # unspecified seed; use largest existing seed plus one
+        largest_seed =  max([int(n.replace('seed', ''))
+                             for n in list(filter(lambda x: 'seed' in x, os.listdir(cwd)))])
+        start_seed = largest_seed + 1
+    else:
+        # start with seed 0
+        start_seed = 0
 
     seed_folder = os.path.join(os.getcwd(), 'seed%d' % start_seed)
     os.makedirs(seed_folder, exist_ok=True)
@@ -43,66 +58,37 @@ def main(cfg: DictConfig) -> None:
     with open(os.path.join(seed_folder, 'config.yaml'), 'w') as f:
         f.write(cfg_yaml)
 
-    # create the replay buffer from RLBench demos
-    replay_buffer = peract_bc.launch_utils.create_replay(
-        cfg.replay.batch_size,
-        cfg.replay.timesteps,
-        replay_path if cfg.replay.use_disk else None,
-        cfg.rlbench.cameras,
-        cfg.method.voxel_sizes,
-        cfg.rlbench.camera_resolution
-    )
-    peract_bc.launch_utils.fill_multi_task_replay(
-        cfg,
-        obs_config,
-        rank,
-        replay_buffer,
-        tasks,
-        cfg.rlbench.demos,
-        cfg.method.demo_augmentation,
-        cfg.method.demo_augmentation_every_n,
-        cfg.rlbench.cameras,
-        cfg.rlbench.scene_bounds,
-        cfg.method.voxel_sizes,
-        cfg.method.bounds_offset,
-        cfg.method.rotation_resolution,
-        cfg.method.crop_augmentation,
-        keypoint_method=cfg.method.keypoint_method
-    )
+    # check if previous checkpoints already exceed the number of desired training iterations
+    # if so, exit the script
+    weights_folder = os.path.join(seed_folder, 'weights')
+    if os.path.isdir(weights_folder) and len(os.listdir(weights_folder)) > 0:
+        weights = os.listdir(weights_folder)
+        latest_weight = sorted(map(int, weights))[-1]
+        if latest_weight >= cfg.framework.training_iterations:
+            logging.info('Agent was already trained for %d iterations. Exiting.' % latest_weight)
+            sys.exit(0)
 
-    agent = peract_bc.launch_utils.create_agent(cfg)
+    # run train jobs with multiple seeds (sequentially)
+    for seed in range(start_seed, start_seed + cfg.framework.seeds):
+        logging.info('Starting seed %d.' % seed)
 
-    wrapped_replay = PyTorchReplayBuffer(replay_buffer, num_workers=cfg.framework.num_workers)
-    stat_accum = SimpleAccumulator(eval_video_fps=30)
-
-    cwd = os.getcwd()
-    weightsdir = os.path.join(cwd, 'seed%d' % seed, 'weights')
-    logdir = os.path.join(cwd, 'seed%d' % seed)
-
-    train_runner = OfflineTrainRunner(
-        agent=agent,
-        wrapped_replay_buffer=wrapped_replay,
-        train_device=rank,
-        stat_accumulator=stat_accum,
-        iterations=cfg.framework.training_iterations,
-        logdir=logdir,
-        logging_level=cfg.framework.logging_level,
-        log_freq=cfg.framework.log_freq,
-        weightsdir=weightsdir,
-        num_weights_to_keep=cfg.framework.num_weights_to_keep,
-        save_freq=cfg.framework.save_freq,
-        tensorboard_logging=cfg.framework.tensorboard_logging,
-        csv_logging=cfg.framework.csv_logging,
-        load_existing_weights=cfg.framework.load_existing_weights,
-        rank=rank,
-        world_size=world_size)
-
-    train_runner.start()
-
-    del train_runner
-    del agent
-    gc.collect()
-    torch.cuda.empty_cache()
-
+        world_size = cfg.ddp.num_devices
+        mp.spawn(run_seed_fn.run_seed,
+                 args=(cfg,
+                       obs_config,
+                       cfg.rlbench.cameras,
+                       multi_task,
+                       seed,
+                       world_size,),
+                 nprocs=world_size,
+                 join=True)
+        # run_seed_fn.run_seed(0,
+        #                     cfg,
+        #                     obs_config,
+        #                     cfg.rlbench.cameras,
+        #                     multi_task,
+        #                     seed,
+        #                     world_size,)
+        
 if __name__ == "__main__":
     main()
