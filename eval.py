@@ -140,7 +140,7 @@ def eval_seed(train_cfg,
                               save_load_lock,
                               writer_lock,
                               env_config,
-                              e_idx % torch.cuda.device_count(),
+                              eval_cfg.framework.gpu,
                               eval_cfg.framework.eval_save_metrics,
                               eval_cfg.cinematic_recorder))
             p.start()
