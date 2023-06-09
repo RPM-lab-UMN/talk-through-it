@@ -6,10 +6,11 @@ ddp:
 rlbench:
   task_name: 'move_above'
   tasks: [move_above]
-  demos: 64
+  demos: 10
   demo_path: /home/user/School/peract_l2r/data_above
   episode_length: 25
   cameras: [front, left_shoulder, right_shoulder, wrist]
+  # cameras: [front]
   camera_resolution: [128, 128]
   scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
   include_lang_goal_in_obs: True

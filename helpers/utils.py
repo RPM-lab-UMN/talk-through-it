@@ -16,6 +16,9 @@ REMOVE_KEYS = ['joint_velocities', 'joint_positions', 'joint_forces',
 
 DEFAULT_SCENE_SCALE = 2.0
 
+def stack_on_channel(x):
+    # expect (B, T, C, ...)
+    return torch.cat(torch.split(x, 1, dim=1), dim=2).squeeze(1)
 
 def normalize_quaternion(quat):
     return np.array(quat) / np.linalg.norm(quat, axis=-1, keepdims=True)
