@@ -6,7 +6,7 @@ ddp:
 rlbench:
   task_name: 'move_above'
   tasks: [move_above]
-  demos: 10
+  demos: 64
   demo_path: /home/user/School/peract_l2r/data_above
   episode_length: 25
   cameras: [front, left_shoulder, right_shoulder, wrist]
@@ -26,11 +26,11 @@ replay:
 
 framework:
   log_freq: 50
-  save_freq: 500
+  save_freq: 1000
   tensorboard_logging: False
   csv_logging: True
-  training_iterations: 20000
-  logdir: '/home/user/School/peract_l2r/logs/batch4'
+  training_iterations: 40000
+  logdir: '/home/user/School/peract_l2r/logs/height'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

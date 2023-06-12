@@ -102,9 +102,9 @@ class CustomRLBenchEnv(RLBenchEnv):
             self._record_cam.set_pose(cam_placeholder.get_pose())
             self._record_cam.set_render_mode(RenderMode.OPENGL)
 
-    def reset(self) -> dict:
+    def reset(self, seed=None) -> dict:
         self._i = 0
-        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset()
+        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed)
         self._record_current_episode = (
                 self.eval and self._episode_index % self._record_every_n == 0)
         self._episode_index += 1
@@ -195,6 +195,16 @@ class CustomRLBenchEnv(RLBenchEnv):
         self._episode_index += 1
         self._recorded_images.clear()
 
+        return self._previous_obs_dict
+    
+    def reset_to_seed(self, variation, seed):
+        self._i = 0
+        self._task.set_variation(variation)
+        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed)
+        self._record_current_episode = (
+                self.eval and self._episode_index % self._record_every_n == 0)
+        self._episode_index += 1
+        self._recorded_images.clear()
         return self._previous_obs_dict
 
 
