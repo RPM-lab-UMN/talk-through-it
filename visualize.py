@@ -54,7 +54,7 @@ def main(cfg: DictConfig) -> None:
         max_num_coords=np.prod(image_size) * len(cfg.rlbench.cameras)
     )
     os.environ['MASTER_ADDR'] = cfg.ddp.master_addr
-    os.environ['MASTER_PORT'] = cfg.ddp.master_port
+    os.environ['MASTER_PORT'] = cfg.ddp.visualize_port
     cfg.rlbench.cameras = cfg.rlbench.cameras \
         if isinstance(cfg.rlbench.cameras, ListConfig) else [cfg.rlbench.cameras]
     cams = cfg.rlbench.cameras
@@ -129,6 +129,7 @@ def main(cfg: DictConfig) -> None:
 
         rotation_amount = 15
         show = True # shows trimesh scene
+        # show = False # shows plt.imshow
         rendered_img = visualise_voxel(vis_voxel_grid[0],
                                     None,
                                     None,

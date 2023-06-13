@@ -1,6 +1,7 @@
 ddp:
   master_addr: "localhost"
   master_port: "29500"
+  visualize_port: "29501"
   num_devices: 1
 
 rlbench:
@@ -25,12 +26,12 @@ replay:
   max_parallel_processes: 32
 
 framework:
-  log_freq: 50
-  save_freq: 1000
+  log_freq: 100
+  save_freq: 2000
   tensorboard_logging: False
   csv_logging: True
-  training_iterations: 40000
-  logdir: '/home/user/School/peract_l2r/logs/height'
+  training_iterations: 40001
+  logdir: '/home/user/School/peract_l2r/logs/lang'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0
