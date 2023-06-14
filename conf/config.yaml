@@ -30,8 +30,8 @@ framework:
   save_freq: 2000
   tensorboard_logging: False
   csv_logging: True
-  training_iterations: 40001
-  logdir: '/home/user/School/peract_l2r/logs/lang'
+  training_iterations: 50001
+  logdir: '/home/user/School/peract_l2r/logs/lang_2'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

@@ -243,24 +243,26 @@ def fill_replay(cfg: DictConfig,
 
         if rank == 0:
             logging.info(f"Loading Demo({d_idx}) - found {len(episode_keypoints)} keypoints - {task}")
-        for i in range(len(demo) - 1):
-            if not demo_augmentation and i > 0:
-                break
-            if i % demo_augmentation_every_n != 0:
-                continue
+        # loop through all descriptions
+        for j in range(len(descs)):
+            for i in range(len(demo) - 1):
+                if not demo_augmentation and i > 0:
+                    break
+                if i % demo_augmentation_every_n != 0:
+                    continue
 
-            obs = demo[i]
-            desc = descs[0]
-            # if our starting point is past one of the keypoints, then remove it
-            while len(episode_keypoints) > 0 and i >= episode_keypoints[0]:
-                episode_keypoints = episode_keypoints[1:]
-            if len(episode_keypoints) == 0:
-                break
-            _add_keypoints_to_replay(
-                cfg, task, replay, obs, demo, episode_keypoints, cameras,
-                rlbench_scene_bounds, voxel_sizes, bounds_offset,
-                rotation_resolution, crop_augmentation, description=desc,
-                clip_model=clip_model, device=device)
+                obs = demo[i]
+                desc = descs[j]
+                # if our starting point is past one of the keypoints, then remove it
+                while len(episode_keypoints) > 0 and i >= episode_keypoints[0]:
+                    episode_keypoints = episode_keypoints[1:]
+                if len(episode_keypoints) == 0:
+                    break
+                _add_keypoints_to_replay(
+                    cfg, task, replay, obs, demo, episode_keypoints, cameras,
+                    rlbench_scene_bounds, voxel_sizes, bounds_offset,
+                    rotation_resolution, crop_augmentation, description=desc,
+                    clip_model=clip_model, device=device)
     logging.debug('Replay %s filled with demos.' % task)
 
 def fill_multi_task_replay(cfg: DictConfig,
