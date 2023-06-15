@@ -118,8 +118,7 @@ def main():
         print(f'Epoch: {epoch + 1}/{epochs}, Loss: {np.mean(train_losses):.4f}')
         train_losses = []
         
-        if (epoch + 1) % interval == 0:
-            torch.save(model.state_dict(), os.path.join('./', f'model_{epoch}.pt'))
+
 
         # check accuracy
         model.eval()
@@ -138,8 +137,10 @@ def main():
             # count correct
             correct += pred == gt
         # print accuracy
-        print('Accuracy: ', correct / (i+1))
-
+        accuracy = correct / (i+1)
+        print('Accuracy: ', accuracy)
+        if accuracy == 1:
+            torch.save(model.state_dict(), os.path.join('./', f'text_classifier.pt'))
 
 if __name__ == '__main__':
     main()
