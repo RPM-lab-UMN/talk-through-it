@@ -5,15 +5,15 @@ ddp:
   num_devices: 1
 
 rlbench:
-  task_name: 'move_above'
-  tasks: [move_above]
-  demos: 128
-  demo_path: /home/user/School/peract_l2r/data_above
+  task_name: 'move_front'
+  tasks: [move_front]
+  demos: 64
+  demo_path: /home/user/School/peract_l2r/data
   episode_length: 30
-  cameras: [front, left_shoulder, right_shoulder, wrist]
+  cameras: [overhead, left_shoulder, right_shoulder, wrist]
   # cameras: [front]
   camera_resolution: [128, 128]
-  scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
+  scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
   include_lang_goal_in_obs: True
 
 replay:
@@ -31,7 +31,7 @@ framework:
   tensorboard_logging: False
   csv_logging: True
   training_iterations: 100001
-  logdir: '/home/user/School/peract_l2r/logs/lang_3'
+  logdir: '/home/user/School/peract_l2r/logs/kitchen_1'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

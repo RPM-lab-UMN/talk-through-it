@@ -3,7 +3,6 @@ import torch
 import torch.utils.data as data
 import numpy as np
 import os
-import clip
 from helpers.clip.core.clip import build_model, load_clip, tokenize
 
 
@@ -54,6 +53,9 @@ def generate_commands():
                 if t2 == '' and t3 == 'object':
                     continue
                 commands.append(t1 + t2 + t3)
+
+    commands.append('move in front of the blue cup')
+    commands.append('move in front of the dispenser')
 
     return commands
 

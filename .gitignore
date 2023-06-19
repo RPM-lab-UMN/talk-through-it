@@ -1,4 +1,4 @@
 *.pyc
-data_*
+data*
 outputs/*
 logs/*
