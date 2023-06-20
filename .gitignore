@@ -2,3 +2,5 @@
 data*
 outputs/*
 logs/*
+interactive_test.py
+*.pt

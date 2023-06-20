@@ -4,7 +4,7 @@ import torch
 from agents.l2a import L2A
 
 class CommandClassifier(nn.Module):
-    def __init__(self, input_size=512, device='cuda:1', l2a_weights=None):
+    def __init__(self, l2a_weights, input_size=512, device='cuda:1'):
         self.device = device
         super(CommandClassifier, self).__init__()
         self.fc1 = nn.Linear(input_size, 256)
@@ -39,7 +39,9 @@ class CommandClassifier(nn.Module):
         # make the tokens an embedding with the clip model
         token_tensor = torch.from_numpy(tokens).to(self.device)
         sentence_emb, token_embs = self.clip_model.encode_text_with_embeddings(token_tensor)
-        self.sentence_emb = sentence_emb
+        self.sentence_emb = sentence_emb.float()
         # pass the sentence embedding through the classifier
-        out = self.forward(sentence_emb)
+        out = self.forward(self.sentence_emb)
+        # change to 0 or 1 scalar value
+        out = torch.argmax(out, dim=1)
         return out

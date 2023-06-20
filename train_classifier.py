@@ -88,7 +88,9 @@ def main():
     train_loader = data.DataLoader(dataset, batch_size=32, shuffle=True, num_workers=0)
     val_loader = data.DataLoader(dataset, batch_size=1, shuffle=False, num_workers=0)
     # create a command classifier
-    model = CommandClassifier(input_size=1024).to(device)
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    l2a_path = os.path.join(cwd, 'l2a.pt')
+    model = CommandClassifier(input_size=1024, l2a_weights=l2a_path).to(device)
     # training loop
     epochs = 20
     lr = 1e-3

@@ -25,8 +25,12 @@ framework:
     eval_type: 'missing'
     # eval_type: 'last'
     # eval_type: 34000
-    interactive_weight: 10000
+    interactive_weight: 60000
     eval_save_metrics: True
 
 cinematic_recorder:
     enabled: False
+
+hydra:
+    run:
+        dir: ${framework.logdir}/${rlbench.task_name}/${method.name}

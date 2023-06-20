@@ -18,6 +18,7 @@ from yarr.runners.independent_env_runner import IndependentEnvRunner
 from yarr.utils.stat_accumulator import SimpleAccumulator
 
 from agents import peract_bc
+from agents.command_classifier import CommandClassifier
 
 from helpers import utils
 
@@ -41,6 +42,13 @@ def eval_seed(train_cfg,
     agent = peract_bc.launch_utils.create_agent(train_cfg)
     stat_accum = SimpleAccumulator(eval_video_fps=30)
     weightsdir = os.path.join(logdir, 'weights')
+    # get this file path
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    l2a_path = os.path.join(cwd, 'l2a.pt')
+    classifier = CommandClassifier(input_size=1024, l2a_weights=l2a_path).to(env_device)
+    # load classifier weights
+    classifier_path = os.path.join(cwd, 'text_classifier.pt')
+    classifier.load_state_dict(torch.load(classifier_path))
 
     env_runner = IndependentEnvRunner(
         train_env=None,
@@ -59,7 +67,8 @@ def eval_seed(train_cfg,
         env_device=env_device,
         rollout_generator=rg,
         num_eval_runs=len(tasks),
-        multi_task=multi_task)
+        multi_task=multi_task,
+        classifier=classifier)
 
     manager = Manager()
     save_load_lock = manager.Lock()

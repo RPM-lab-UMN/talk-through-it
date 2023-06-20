@@ -1,19 +1,25 @@
-from calendar import c
-from numpy import arange
 import numpy as np
-from regex import BESTMATCH
 import torch
 import clip
 import sys
 import os
-sys.path.insert(0, os.getcwd())
-sys.path.insert(0, os.path.join(os.getcwd(), '..'))
-from model_grip import Model
+from agents.l2a import L2A
 import matplotlib.pyplot as plt
-from speech_dataset import SpeechDataset
+import torch.utils.data as data
+from helpers.clip.core.clip import build_model, load_clip
+
+class LangDataset(data.Dataset):
+    def __init__(self, samples):
+        self.samples = samples
+
+    def __getitem__(self, index):
+        return self.samples[index]
+
+    def __len__(self):
+        return len(self.samples)
 
 def get_dataset(values, directions, speeds, clip_model):
-    device = 'cuda'
+    device = 'cuda:1'
     i = 0
     commands = []
     labels = []
@@ -167,24 +173,28 @@ directions = ['left', 'right', 'forward', 'backward', 'up', 'down', 'left and fo
               'forward and down', 'backward and up', 'backward and down']
 speeds = ['', ' slowly', ' quickly']
 # initialize CLIP model
-device = 'cuda'
-clip_model, preprocess = clip.load('ViT-B/32', device=device)
+device = 'cuda:1'
+# create the clip model
+model, _ = load_clip('RN50', jit=False, device=device)
+clip_model = build_model(model.state_dict())
+clip_model.to(device)
+del model
 samples = get_dataset(values, directions, speeds, clip_model)
 # create dataset object
-train_dataset = SpeechDataset(samples)
+train_dataset = LangDataset(samples)
 # create data loader
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=512, shuffle=True)
 
 # initialize MLP model
-mlp = Model(h1 = 517).to(device)
+l2a = L2A(h1 = 1029).to(device)
 
 # training loop
 epochs = 30
 lr = 5e-4
-optimizer = torch.optim.Adam(mlp.parameters(), lr=lr)
+optimizer = torch.optim.Adam(l2a.parameters(), lr=lr)
 loss_fn = torch.nn.MSELoss()
 train_losses = []
-mlp.train()
+l2a.train()
 best_loss = 1e9
 for epoch in range(epochs):
     # cut learning rate after n epochs
@@ -202,9 +212,9 @@ for epoch in range(epochs):
         label = label.to(device)
         optimizer.zero_grad()
         # get predictions
-        y, g = mlp.forward(previous, command)
+        y, g = l2a.forward(previous, command)
         # calculate loss
-        loss = mlp.loss(y, g, label)
+        loss = l2a.loss(y, g, label)
         # backprop
         loss.backward(retain_graph = True)
         # loss.backward()
@@ -216,7 +226,7 @@ for epoch in range(epochs):
     # save the model if best loss
     if loss.item() < best_loss:
         best_loss = loss.item()
-        torch.save(mlp.state_dict(), 'gripper_model.pt')
+        torch.save(l2a.state_dict(), 'l2a.pt')
 
 # plot losses
 plt.plot(train_losses, label='train')

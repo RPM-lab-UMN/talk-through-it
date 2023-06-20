@@ -87,7 +87,7 @@ class CustomRLBenchEnv(RLBenchEnv):
         # obs.gripper_pose = grip_pose
         obs.joint_positions = joint_pos
         obs.gripper_pose = grip_pose
-        # obs_dict['gripper_pose'] = grip_pose
+        obs_dict['gripper_pose'] = grip_pose
         return obs_dict
 
     def launch(self):
@@ -129,8 +129,9 @@ class CustomRLBenchEnv(RLBenchEnv):
         final_frames[:, :, :, 1 if success else 0] = 255
         self._recorded_images.extend(list(final_frames))
 
-    def step(self, act_result: ActResult) -> Transition:
-        action = act_result.action
+    def step(self, act_result: ActResult=None, action=None) -> Transition:
+        if act_result is not None:
+            action = act_result.action
         success = False
         obs = self._previous_obs_dict  # in case action fails.
 
@@ -197,10 +198,10 @@ class CustomRLBenchEnv(RLBenchEnv):
 
         return self._previous_obs_dict
     
-    def reset_to_seed(self, variation, seed):
+    def reset_to_seed(self, variation, seed, interactive=False):
         self._i = 0
         self._task.set_variation(variation)
-        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed)
+        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed, interactive)
         self._record_current_episode = (
                 self.eval and self._episode_index % self._record_every_n == 0)
         self._episode_index += 1
