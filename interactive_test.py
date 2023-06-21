@@ -27,6 +27,104 @@ from torch.multiprocessing import Process, Manager
 
 import torch.multiprocessing
 torch.multiprocessing.set_sharing_strategy('file_system')
+from clip import tokenize
+from helpers.custom_rlbench_env import CustomRLBenchEnv
+from yarr.agents.agent import Agent
+
+class InteractiveEnv():
+    def __init__(self, agent: Agent,
+                 weightsdir: str = None,
+                 classifier: CommandClassifier = None,
+                 env_device: str = 'cuda:0'):
+        self.agent = agent
+        self.weightsdir = weightsdir
+        self.classifier = classifier
+        self.env_device = env_device
+
+    def start(self, weight,
+              env_config):
+
+        eval_env = CustomRLBenchEnv(
+            task_class=env_config[0],
+            observation_config=env_config[1],
+            action_mode=env_config[2],
+            dataset_root=env_config[3],
+            episode_length=env_config[4],
+            headless=env_config[5],
+            include_lang_goal_in_obs=env_config[6],
+            time_in_state=env_config[7],
+            record_every_n=env_config[8])
+
+        self.eval_env = eval_env
+        self.run_eval_interactive(weight)
+
+    def _get_type(self, x):
+        if x.dtype == np.float64:
+            return np.float32
+        return x.dtype
+
+    def run_eval_interactive(self, weight):
+
+        self.agent.build(training=False, device=self.env_device)
+
+        logging.info('Launching env.')
+        np.random.seed()
+
+        logging.info('Agent information:')
+        logging.info(self.agent)
+
+        env = self.eval_env
+        env.eval = True
+        env.launch()
+
+        if not os.path.exists(self.weightsdir):
+            raise Exception('No weights directory found.')
+
+        # one weight for all tasks (used for validation)
+        if type(weight) == int:
+            logging.info('Evaluating weight %s' % weight)
+            weight_path = os.path.join(self.weightsdir, str(weight))
+            self.agent.load_weights(weight_path)
+
+        # reset the task
+        variation = 0
+        eval_demo_seed = 1000 # TODO
+        obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+        prev_action = torch.zeros((1, 5)).to(self.env_device)
+        prev_action[0, -1] = 1
+        # replace the language goal with user input
+        command = ''
+        while command != 'quit':
+            command = input("Enter a command: ")
+            if command == 'reset':
+                eval_demo_seed += 1
+                obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+                prev_action = torch.zeros((1, 5)).to(self.env_device)
+                prev_action[0, -1] = 1
+                continue
+            # tokenize the command
+            env._lang_goal = command
+            tokens = tokenize([command]).numpy()
+            # send the tokens to the classifier
+            command_class = self.classifier.predict(tokens)
+            # if command class is 1, use voxel transformer
+            if command_class == 1:
+                obs['lang_goal_tokens'] = tokens[0]
+                self.agent.reset()
+                timesteps = 1
+                obs_history = {k: [np.array(v, dtype=self._get_type(v))] * timesteps for k, v in obs.items()}
+                prepped_data = {k:torch.tensor([v], device=self.env_device) for k, v in obs_history.items()}
+
+                act_result = self.agent.act(0, prepped_data,
+                                        deterministic=eval)
+                transition = env.step(act_result)
+            else:
+                # use l2a model
+                text_embed = self.classifier.sentence_emb
+                action, prev_action = self.classifier.l2a.get_action(prev_action, text_embed, obs)
+                transition = env.step(action=action)
+            env.env._scene.step()
+            obs = dict(transition.observation)
 
 def eval_seed(train_cfg,
               eval_cfg,
@@ -38,47 +136,21 @@ def eval_seed(train_cfg,
               env_config) -> None:
 
     tasks = eval_cfg.rlbench.tasks
-    rg = RolloutGenerator()
     agent = peract_bc.launch_utils.create_agent(train_cfg)
-    stat_accum = SimpleAccumulator(eval_video_fps=30)
     weightsdir = os.path.join(logdir, 'weights')
     # get this file path
     cwd = os.path.dirname(os.path.realpath(__file__))
+    print("cwd:", cwd)
     l2a_path = os.path.join(cwd, 'l2a.pt')
     classifier = CommandClassifier(input_size=1024, l2a_weights=l2a_path).to(env_device)
     # load classifier weights
     classifier_path = os.path.join(cwd, 'text_classifier.pt')
     classifier.load_state_dict(torch.load(classifier_path))
 
-    env_runner = IndependentEnvRunner(
-        train_env=None,
-        agent=agent,
-        train_replay_buffer=None,
-        num_train_envs=0,
-        num_eval_envs=eval_cfg.framework.eval_envs,
-        rollout_episodes=99999,
-        eval_episodes=eval_cfg.framework.eval_episodes,
-        training_iterations=train_cfg.framework.training_iterations,
-        eval_from_eps_number=eval_cfg.framework.eval_from_eps_number,
-        episode_length=eval_cfg.rlbench.episode_length,
-        stat_accumulator=stat_accum,
-        weightsdir=weightsdir,
-        logdir=logdir,
-        env_device=env_device,
-        rollout_generator=rg,
-        num_eval_runs=len(tasks),
-        multi_task=multi_task,
-        classifier=classifier)
-
-    manager = Manager()
-    save_load_lock = manager.Lock()
-    writer_lock = manager.Lock()
-
     # evaluate a specific checkpoint
     if type(eval_cfg.framework.interactive_weight) == int:
         weight_folders = [int(eval_cfg.framework.interactive_weight)]
         print("Weight:", weight_folders)
-
     else:
         raise Exception('Unknown eval type')
     
@@ -87,14 +159,9 @@ def eval_seed(train_cfg,
         logging.info("No weights to evaluate. Results are already available in eval_data.csv")
         sys.exit(0)
 
-    env_runner.start(weight_folders[0],
-                    save_load_lock,
-                    writer_lock,
-                    env_config,
-                    eval_cfg.framework.gpu,
-                    eval_cfg.framework.eval_save_metrics,
-                    eval_cfg.cinematic_recorder,
-                    interactive=True)
+    interactive_env = InteractiveEnv(agent=agent, weightsdir=weightsdir, classifier=classifier, env_device=env_device)
+    interactive_env.start(weight=weight_folders[0],
+                          env_config=env_config)
 
 
 @hydra.main(config_path='conf', config_name='eval')
