@@ -25,7 +25,7 @@ framework:
     eval_type: 'missing'
     # eval_type: 'last'
     # eval_type: 34000
-    interactive_weight: 12000
+    interactive_weight: 50000
     eval_save_metrics: True
 
 cinematic_recorder:

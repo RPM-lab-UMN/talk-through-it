@@ -177,6 +177,56 @@ class CustomRLBenchEnv(RLBenchEnv):
 
             summaries.append(TextSummary('errors', f"Success: {success} | " + error_str))
         return Transition(obs, reward, terminal, summaries=summaries)
+    
+    def record_step(self, act_result: ActResult=None, action=None) -> Transition:
+        if act_result is not None:
+            action = act_result.action
+        success = False
+        obs = self._previous_obs_dict  # in case action fails.
+
+        try:
+            demo, reward, terminal = self._task.record_step(action)
+            obs = demo[-1]
+            if reward >= 1:
+                success = True
+                reward *= self._reward_scale
+            else:
+                reward = 0.0
+            obs = self.extract_obs(obs)
+            self._previous_obs_dict = obs
+        except (IKError, ConfigurationPathError, InvalidActionError) as e:
+            terminal = True
+            reward = 0.0
+
+            if isinstance(e, IKError):
+                self._error_type_counts['IKError'] += 1
+            elif isinstance(e, ConfigurationPathError):
+                self._error_type_counts['ConfigurationPathError'] += 1
+            elif isinstance(e, InvalidActionError):
+                self._error_type_counts['InvalidActionError'] += 1
+
+            self._last_exception = e
+
+        summaries = []
+        self._i += 1
+        if ((terminal or self._i == self._episode_length) and
+                self._record_current_episode):
+            self._append_final_frame(success)
+            vid = np.array(self._recorded_images).transpose((0, 3, 1, 2))
+            summaries.append(VideoSummary(
+                'episode_rollout_' + ('success' if success else 'fail'),
+                vid, fps=30))
+
+            # error summary
+            error_str = f"Errors - IK : {self._error_type_counts['IKError']}, " \
+                        f"ConfigPath : {self._error_type_counts['ConfigurationPathError']}, " \
+                        f"InvalidAction : {self._error_type_counts['InvalidActionError']}"
+            if not success and self._last_exception is not None:
+                error_str += f"\n Last Exception: {self._last_exception}"
+                self._last_exception = None
+
+            summaries.append(TextSummary('errors', f"Success: {success} | " + error_str))
+        return Transition(obs, reward, terminal, summaries=summaries), demo
 
     def reset_to_demo(self, i):
         self._i = 0
