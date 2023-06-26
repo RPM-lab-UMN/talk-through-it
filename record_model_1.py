@@ -34,6 +34,7 @@ from yarr.agents.agent import Agent
 import pickle
 from rlbench.backend.const import *
 from PIL import Image
+from rlbench.demo import Demo
 
 class InteractiveEnv():
     def __init__(self, agent: Agent,
@@ -293,7 +294,7 @@ class InteractiveEnv():
             command = input("Enter a command: ")
             if command == 'reset':
                 # write the demo to file
-                self.save_demo(demo, episode_dir, self.eval_env._observation_config)
+                self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config)
                 demo = []
                 # update the episode directory
                 episode_idx += 1

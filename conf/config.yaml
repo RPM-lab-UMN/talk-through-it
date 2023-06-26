@@ -5,9 +5,9 @@ ddp:
   num_devices: 1
 
 rlbench:
-  task_name: 'move_front'
-  tasks: [move_front]
-  demos: 64
+  task_name: 'pick_up'
+  tasks: [pick_up]
+  demos: 5
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 30
   cameras: [overhead, left_shoulder, right_shoulder, wrist]
