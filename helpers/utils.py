@@ -290,7 +290,7 @@ def create_obs_config(camera_names: List[str],
         rgb=True,
         point_cloud=True,
         mask=False,
-        depth=False,
+        depth=True,
         image_size=camera_resolution,
         render_mode=RenderMode.OPENGL)
 

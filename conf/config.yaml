@@ -7,9 +7,9 @@ ddp:
 rlbench:
   task_name: 'pick_up'
   tasks: [pick_up]
-  demos: 5
+  demos: 8
   demo_path: /home/user/School/peract_l2r/data
-  episode_length: 30
+  episode_length: 100
   cameras: [overhead, left_shoulder, right_shoulder, wrist]
   # cameras: [front]
   camera_resolution: [128, 128]
@@ -31,7 +31,7 @@ framework:
   tensorboard_logging: False
   csv_logging: True
   training_iterations: 100001
-  logdir: '/home/user/School/peract_l2r/logs/kitchen_2'
+  logdir: '/home/user/School/peract_l2r/logs/model_2'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

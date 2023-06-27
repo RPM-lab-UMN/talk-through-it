@@ -135,7 +135,7 @@ class InteractiveEnv():
         if not os.path.exists(dir):
             os.makedirs(dir)
 
-    def save_demo(self, demo, example_path, obs_config, variation=0):
+    def save_demo(self, demo, example_path, obs_config, descriptions, variation=0):
 
         # Save image data first, and then None the image data, and pickle
         left_shoulder_rgb_path = os.path.join(
@@ -196,33 +196,37 @@ class InteractiveEnv():
             if obs_config.left_shoulder_camera.depth:
                 left_shoulder_depth = rlbench_utils.float_array_to_rgb_image(
                     obs.left_shoulder_depth, scale_factor=DEPTH_SCALE)
-                left_shoulder_mask = Image.fromarray(
-                    (obs.left_shoulder_mask * 255).astype(np.uint8))
                 right_shoulder_depth = rlbench_utils.float_array_to_rgb_image(
                     obs.right_shoulder_depth, scale_factor=DEPTH_SCALE)
-                right_shoulder_mask = Image.fromarray(
-                    (obs.right_shoulder_mask * 255).astype(np.uint8))
                 overhead_depth = rlbench_utils.float_array_to_rgb_image(
                     obs.overhead_depth, scale_factor=DEPTH_SCALE)
-                overhead_mask = Image.fromarray(
-                    (obs.overhead_mask * 255).astype(np.uint8))
                 wrist_depth = rlbench_utils.float_array_to_rgb_image(
                     obs.wrist_depth, scale_factor=DEPTH_SCALE)
-                wrist_mask = Image.fromarray((obs.wrist_mask * 255).astype(np.uint8))
-                front_depth = rlbench_utils.float_array_to_rgb_image(
-                    obs.front_depth, scale_factor=DEPTH_SCALE)
-                front_mask = Image.fromarray((obs.front_mask * 255).astype(np.uint8))
+                # front_depth = rlbench_utils.float_array_to_rgb_image(
+                #     obs.front_depth, scale_factor=DEPTH_SCALE)
 
                 left_shoulder_depth.save(os.path.join(left_shoulder_depth_path, IMAGE_FORMAT % i))
-                left_shoulder_mask.save(os.path.join(left_shoulder_mask_path, IMAGE_FORMAT % i))
                 right_shoulder_depth.save(os.path.join(right_shoulder_depth_path, IMAGE_FORMAT % i))
-                right_shoulder_mask.save(os.path.join(right_shoulder_mask_path, IMAGE_FORMAT % i))
                 overhead_depth.save(os.path.join(overhead_depth_path, IMAGE_FORMAT % i))
-                overhead_mask.save(os.path.join(overhead_mask_path, IMAGE_FORMAT % i))
                 wrist_depth.save(os.path.join(wrist_depth_path, IMAGE_FORMAT % i))
+                # front_depth.save(os.path.join(front_depth_path, IMAGE_FORMAT % i))
+
+            # all masks
+            if obs_config.left_shoulder_camera.mask:
+                left_shoulder_mask = Image.fromarray(
+                    (obs.left_shoulder_mask * 255).astype(np.uint8))
+                right_shoulder_mask = Image.fromarray(
+                    (obs.right_shoulder_mask * 255).astype(np.uint8))
+                overhead_mask = Image.fromarray(
+                    (obs.overhead_mask * 255).astype(np.uint8))
+                wrist_mask = Image.fromarray((obs.wrist_mask * 255).astype(np.uint8))
+                # front_mask = Image.fromarray((obs.front_mask * 255).astype(np.uint8))
+
+                left_shoulder_mask.save(os.path.join(left_shoulder_mask_path, IMAGE_FORMAT % i))
+                right_shoulder_mask.save(os.path.join(right_shoulder_mask_path, IMAGE_FORMAT % i))
+                overhead_mask.save(os.path.join(overhead_mask_path, IMAGE_FORMAT % i))
                 wrist_mask.save(os.path.join(wrist_mask_path, IMAGE_FORMAT % i))
-                front_depth.save(os.path.join(front_depth_path, IMAGE_FORMAT % i))
-                front_mask.save(os.path.join(front_mask_path, IMAGE_FORMAT % i))
+                # front_mask.save(os.path.join(front_mask_path, IMAGE_FORMAT % i))
 
             # We save the images separately, so set these to None for pickling.
             obs.left_shoulder_rgb = None
@@ -252,6 +256,9 @@ class InteractiveEnv():
 
         with open(os.path.join(example_path, VARIATION_NUMBER), 'wb') as f:
             pickle.dump(variation, f)
+
+        with open(os.path.join(example_path, VARIATION_DESCRIPTIONS), 'wb') as f:
+            pickle.dump(descriptions, f)
 
 
     def record_episodes(self, weight):
@@ -290,11 +297,12 @@ class InteractiveEnv():
         # replace the language goal with user input
         command = ''
         demo = []
+        variation_descriptions = ['pick up the blue cup']
         while command != 'quit':
             command = input("Enter a command: ")
             if command == 'reset':
                 # write the demo to file
-                self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config)
+                self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config, variation_descriptions)
                 demo = []
                 # update the episode directory
                 episode_idx += 1

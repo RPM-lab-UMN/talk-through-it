@@ -12,7 +12,10 @@ def _is_stopped(demo, i, obs, stopped_buffer, delta=0.1):
             (obs.gripper_open == demo[i + 1].gripper_open and
              obs.gripper_open == demo[i - 1].gripper_open and
              demo[i - 2].gripper_open == demo[i - 1].gripper_open))
-    small_delta = np.allclose(obs.joint_velocities, 0, atol=delta)
+    if obs.joint_velocities is None:
+        small_delta = True
+    else:
+        small_delta = np.allclose(obs.joint_velocities, 0, atol=delta)
     stopped = (stopped_buffer <= 0 and small_delta and
                (not next_is_not_final) and gripper_state_no_change)
     return stopped
