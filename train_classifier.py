@@ -1,9 +1,11 @@
+from calendar import c
 from agents.command_classifier import CommandClassifier
 import torch
 import torch.utils.data as data
 import numpy as np
 import os
 from helpers.clip.core.clip import build_model, load_clip, tokenize
+import pandas as pd
 
 
 class CommandDataset(data.Dataset):
@@ -23,23 +25,6 @@ class CommandDataset(data.Dataset):
 
     def __len__(self):
         return len(self.commands)
-
-def generate_agnostic_commands():
-    text1 = ['move ']
-    text2 = ['a tiny bit ', 'a little ', '', 'a lot ']
-    text3 = ['left ', 'right ', 'forward ', 'backward ', 'up ', 'down ', 
-             'left and forward ', 'left and backward ', 'left and up ', 'left and down ',
-             'right and forward ', 'right and backward ', 'right and up ', 'right and down ',
-             'forward and up ', 'forward and down ', 'backward and up ', 'backward and down ']
-    text4 = ['slowly', '', 'quickly']
-    commands = []
-    for t1 in text1:
-        for t2 in text2:
-            for t3 in text3:
-                for t4 in text4:
-                    commands.append(t1+t2+t3+t4)
-
-    return commands
 
 def generate_commands():
     # move above task
@@ -61,8 +46,13 @@ def generate_commands():
 
 def main():
     device = 'cuda:0'
-    # generate all the possible agnostic commands
-    commands0 = generate_agnostic_commands()
+    # load the agnostic commands from csv file
+    csv_path = os.path.join(os.getcwd(), 'commands.csv')
+    df = pd.read_csv(csv_path)
+    commands0 = df['command'].tolist()
+    commands0.append('move back')
+    commands0.append('keep moving')
+    # generate object commands
     commands1 = generate_commands()
     # convert commands to clip embeddings
     model, _ = load_clip('RN50', jit=False, device=device)

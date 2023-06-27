@@ -142,7 +142,7 @@ def eval_seed(train_cfg,
     cwd = os.path.dirname(os.path.realpath(__file__))
     print("cwd:", cwd)
     l2a_path = os.path.join(cwd, 'l2a.pt')
-    classifier = CommandClassifier(input_size=1024, l2a_weights=l2a_path).to(env_device)
+    classifier = CommandClassifier(input_size=1024, l2a_weights=l2a_path, device=env_device).to(env_device)
     # load classifier weights
     classifier_path = os.path.join(cwd, 'text_classifier.pt')
     classifier.load_state_dict(torch.load(classifier_path))

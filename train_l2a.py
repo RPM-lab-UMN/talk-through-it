@@ -85,6 +85,7 @@ def get_dataset(values, directions, speeds, clip_model):
                             continue
                         elif 'right' in d2:
                             continue
+                        label[i1] = -dist
                     elif 'right' in d1:
                         i1 = 0
                         i2 = 1
@@ -93,6 +94,7 @@ def get_dataset(values, directions, speeds, clip_model):
                             continue
                         elif 'right' in d2:
                             continue
+                        label[i1] = dist
                     if 'forward' in d1:
                         i1 = 1
                         i2 = 0
@@ -101,6 +103,7 @@ def get_dataset(values, directions, speeds, clip_model):
                             continue
                         elif 'backward' in d2:
                             continue
+                        label[i1] = dist
                     elif 'backward' in d1:
                         i1 = 1
                         i2 = 0
@@ -109,6 +112,7 @@ def get_dataset(values, directions, speeds, clip_model):
                             continue
                         elif 'backward' in d2:
                             continue
+                        label[i1] = -dist
                     if 'up' in d1:
                         i1 = 2
                         i2 = 0
@@ -117,6 +121,7 @@ def get_dataset(values, directions, speeds, clip_model):
                             continue
                         elif 'down' in d2:
                             continue
+                        label[i1] = dist
                     elif 'down' in d1:
                         i1 = 2
                         i2 = 0
@@ -125,7 +130,7 @@ def get_dataset(values, directions, speeds, clip_model):
                             continue
                         elif 'down' in d2:
                             continue
-                    label[i1] = -dist
+                        label[i1] = -dist
                     if 'a little' in v1:
                         label = label / 2
                     elif 'a lot' in v1:
@@ -175,6 +180,15 @@ def get_dataset(values, directions, speeds, clip_model):
     labels.append(np.array([0, 0, 0, 0, 1], dtype=np.float32))
     commands.append('close the gripper')
     labels.append(np.array([0, 0, 0, 0, 0], dtype=np.float32))
+
+    # save to csv file
+    with open('commands.csv', 'w') as f:
+        # write header
+        f.write('command, x, y, z, v, g\n')
+        for i in range(len(commands)):
+            # write x y and z values with 1 decimal place
+            f.write(commands[i] + ',' + 
+                    ','.join(['{:.1f}'.format(x) for x in labels[i].tolist()]) + '\n')
 
     # generate all combinations of command and previous command
     commands2 = commands.copy()
@@ -254,14 +268,14 @@ def get_dataset(values, directions, speeds, clip_model):
         combo_commands.append('move back')
                     
     # save to csv file
-    with open('commands.csv', 'w') as f:
-        # write header
-        f.write('xp, yp, zp, vp, gp, command, x, y, z, v, g\n')
-        for i in range(len(combo_commands)):
-            # write x y and z values with 1 decimal place
-            f.write(','.join(['{:.1f}'.format(x) for x in labels_p[i].tolist()]) + 
-                    ',' + combo_commands[i] + ',' + 
-                    ','.join(['{:.1f}'.format(x) for x in labels2[i].tolist()]) + '\n')
+    # with open('commands.csv', 'w') as f:
+    #     # write header
+    #     f.write('xp, yp, zp, vp, gp, command, x, y, z, v, g\n')
+    #     for i in range(len(combo_commands)):
+    #         # write x y and z values with 1 decimal place
+    #         f.write(','.join(['{:.1f}'.format(x) for x in labels_p[i].tolist()]) + 
+    #                 ',' + combo_commands[i] + ',' + 
+    #                 ','.join(['{:.1f}'.format(x) for x in labels2[i].tolist()]) + '\n')
 
     return samples
 
@@ -293,6 +307,7 @@ loss_fn = torch.nn.MSELoss()
 train_losses = []
 l2a.train()
 best_loss = 1e9
+epoch_loss = 0
 for epoch in range(epochs):
     # cut learning rate after n epochs
     if epoch == 25:
@@ -316,14 +331,17 @@ for epoch in range(epochs):
         loss.backward(retain_graph = True)
         # loss.backward()
         optimizer.step()
+        # add loss to epoch loss
+        epoch_loss += loss.item()
     # print train loss
-    print(f'Epoch: {epoch + 1}/{epochs}, Train Loss: {loss.item():.4f}')
+    print(f'Epoch: {epoch + 1}/{epochs}, Train Loss: {epoch_loss:.4f}')
     # save train loss
-    train_losses.append(loss.item())
+    train_losses.append(epoch_loss)
     # save the model if best loss
-    if loss.item() < best_loss:
-        best_loss = loss.item()
+    if epoch_loss < best_loss:
+        best_loss = epoch_loss
         torch.save(l2a.state_dict(), 'l2a.pt')
+    epoch_loss = 0
 
 # plot losses
 plt.plot(train_losses, label='train')
