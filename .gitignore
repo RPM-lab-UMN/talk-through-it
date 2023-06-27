@@ -3,6 +3,6 @@ data*
 outputs/*
 logs/*
 interactive_test.py
-*.pt
 .hydra
 *.log
+text_classifier.pt

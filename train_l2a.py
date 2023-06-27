@@ -51,8 +51,8 @@ def get_dataset(values, directions, speeds, clip_model):
                 elif 'a tiny bit' in v:
                     label = label / 10
                 # divide by sqrt 2 if two directions
-                if 'and' in d:
-                    label = label / 2**0.5
+                # if 'and' in d:
+                #     label = label / 2**0.5
                 # set the speed label
                 label[3] = dist
                 if 'slowly' in s:
@@ -66,6 +66,106 @@ def get_dataset(values, directions, speeds, clip_model):
                 commands.append(command)
                 labels.append(label)
                 i += 1
+
+    # append command for 'move a lot backward and a little up'
+    for d1 in directions:
+        for d2 in directions:
+            for v1 in values:
+                for v2 in values:
+                    # generate command
+                    command = 'move ' + v1 + d1 + ' and ' + v2 + d2
+                    # generate the label
+                    label = np.array([0, 0, 0, 0, 0], dtype=np.float32)
+                    # first part
+                    if 'left' in d1:
+                        i1 = 0
+                        i2 = 1
+                        i3 = 2
+                        if 'left' in d2:
+                            continue
+                        elif 'right' in d2:
+                            continue
+                    elif 'right' in d1:
+                        i1 = 0
+                        i2 = 1
+                        i3 = 2
+                        if 'left' in d2:
+                            continue
+                        elif 'right' in d2:
+                            continue
+                    if 'forward' in d1:
+                        i1 = 1
+                        i2 = 0
+                        i3 = 2
+                        if 'forward' in d2:
+                            continue
+                        elif 'backward' in d2:
+                            continue
+                    elif 'backward' in d1:
+                        i1 = 1
+                        i2 = 0
+                        i3 = 2
+                        if 'forward' in d2:
+                            continue
+                        elif 'backward' in d2:
+                            continue
+                    if 'up' in d1:
+                        i1 = 2
+                        i2 = 0
+                        i3 = 1
+                        if 'up' in d2:
+                            continue
+                        elif 'down' in d2:
+                            continue
+                    elif 'down' in d1:
+                        i1 = 2
+                        i2 = 0
+                        i3 = 1
+                        if 'up' in d2:
+                            continue
+                        elif 'down' in d2:
+                            continue
+                    label[i1] = -dist
+                    if 'a little' in v1:
+                        label = label / 2
+                    elif 'a lot' in v1:
+                        label = label * 2
+                    elif 'a tiny bit' in v1:
+                        label = label / 10
+
+                    # second part
+                    if 'left' in d2:
+                        label[0] = -dist
+                    elif 'right' in d2:
+                        label[0] = dist
+                    if 'forward' in d2:
+                        label[1] = dist
+                    elif 'backward' in d2:
+                        label[1] = -dist
+                    if 'up' in d2:
+                        label[2] = dist
+                    elif 'down' in d2:
+                        label[2] = -dist
+                    # modify label based on value
+                    if 'a little' in v2:
+                        label[i2] = label[i2] / 2
+                        label[i3] = label[i3] / 2
+                    elif 'a lot' in v2:
+                        label[i2] = label[i2] * 2
+                        label[i3] = label[i3] * 2
+                    elif 'a tiny bit' in v2:
+                        label[i2] = label[i2] / 10
+                        label[i3] = label[i3] / 10
+                    # set the speed label
+                    label[3] = dist
+                    # alternate gripper label
+                    if i % 2 == 0:
+                        label[4] = 1
+
+                    # append command and label
+                    commands.append(command)
+                    labels.append(label)
+                    i += 1
 
     # append stop command
     commands.append('stop')
@@ -167,10 +267,7 @@ def get_dataset(values, directions, speeds, clip_model):
 
 # generate training commands and labels
 values = ['', 'a little ', 'a lot ', 'a tiny bit ']
-directions = ['left', 'right', 'forward', 'backward', 'up', 'down', 'left and forward', 
-              'left and backward', 'left and up', 'left and down', 'right and forward',
-              'right and backward', 'right and up', 'right and down', 'forward and up',
-              'forward and down', 'backward and up', 'backward and down']
+directions = ['left', 'right', 'forward', 'backward', 'up', 'down']
 speeds = ['', ' slowly', ' quickly']
 # initialize CLIP model
 device = 'cuda:1'
