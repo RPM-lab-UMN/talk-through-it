@@ -6,3 +6,4 @@ interactive_test.py
 .hydra
 *.log
 text_classifier.pt
+manual_backup

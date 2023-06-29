@@ -5,9 +5,13 @@ ddp:
   num_devices: 1
 
 rlbench:
-  task_name: 'pick_up'
-  tasks: [pick_up]
-  demos: 16
+  # task_name: 'pick_up'
+  # tasks: [pick_up]
+  # task_name: 'move_front'
+  # tasks: [move_front]
+  task_name: 'multi'
+  tasks: [pick_up, push_dispenser]
+  demos: 8
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 100
   cameras: [overhead, left_shoulder, right_shoulder, wrist]
@@ -31,7 +35,7 @@ framework:
   tensorboard_logging: False
   csv_logging: True
   training_iterations: 100001
-  logdir: '/home/user/School/peract_l2r/logs/model_2'
+  logdir: '/home/user/School/peract_l2r/logs/multi_1'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

@@ -189,6 +189,7 @@ class CustomRLBenchEnv(RLBenchEnv):
             obs = demo[-1]
             if reward >= 1:
                 success = True
+                print("success")
                 reward *= self._reward_scale
             else:
                 reward = 0.0

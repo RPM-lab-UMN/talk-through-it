@@ -288,25 +288,39 @@ class InteractiveEnv():
         variation = 0
         eval_demo_seed = 1000 # TODO
         obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+        gripper_state_prev = obs['low_dim_state'][0]
         prev_action = torch.zeros((1, 5)).to(self.env_device)
         prev_action[0, -1] = 1
         # create the episode folder
-        episode_root = '/home/user/School/peract_l2r/data/pick_up/all_variations/episodes/'
-        episode_idx = 0
+        # episode_root = '/home/user/School/peract_l2r/data/pick_up/all_variations/episodes/'
+        episode_root = '/home/user/School/peract_l2r/data/push_dispenser/all_variations/episodes/'
+        episode_idx = 0 # TODO start where you left off
         episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
         # replace the language goal with user input
         command = ''
         demo = []
-        variation_descriptions = ['pick up the blue cup']
+        variation_descriptions = ['push the dispenser']
         while command != 'quit':
             command = input("Enter a command: ")
-            if command == 'reset':
+            if command == 'start':
+                # clear the demo
+                demo = []
+                continue
+            if command == 'save':
                 # write the demo to file
                 self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config, variation_descriptions)
                 demo = []
                 # update the episode directory
                 episode_idx += 1
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
+                eval_demo_seed += 1
+                obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+                prev_action = torch.zeros((1, 5)).to(self.env_device)
+                prev_action[0, -1] = 1
+                continue
+            if command == 'reset':
+                demo = []
+                # update the episode directory
                 eval_demo_seed += 1
                 obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
                 prev_action = torch.zeros((1, 5)).to(self.env_device)
@@ -327,6 +341,8 @@ class InteractiveEnv():
 
                 act_result = self.agent.act(0, prepped_data,
                                         deterministic=eval)
+                act_result.action[-2] = gripper_state_prev
+                # edit act result to maintain gripper state
                 transition, demo_piece = env.record_step(act_result)
             else:
                 # use l2a model
@@ -335,6 +351,8 @@ class InteractiveEnv():
                 transition, demo_piece = env.record_step(action=action)
             env.env._scene.step()
             obs = dict(transition.observation)
+            # set gripper state
+            gripper_state_prev = obs['low_dim_state'][0]
 
             # extend the demo
             demo.extend(demo_piece)
