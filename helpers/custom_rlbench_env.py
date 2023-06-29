@@ -354,6 +354,8 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
         self._episode_index += 1
         self._recorded_images.clear()
         return self._previous_obs_dict
+    
+
 
     def register_callback(self, func):
         self._task._scene.register_step_callback(func)
@@ -450,4 +452,20 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
         self._episode_index += 1
         self._recorded_images.clear()
 
+        return self._previous_obs_dict
+    
+    def reset_to_seed(self, variation, seed, interactive=False):
+        if self._episodes_this_task == self._swap_task_every:
+            self._set_new_task()
+            self._episodes_this_task = 0
+        self._episodes_this_task += 1
+        # self._lang_goal = self._task.get_task_descriptions()[0]
+
+        self._i = 0
+        self._task.set_variation(variation)
+        self._previous_obs_dict = super(CustomMultiTaskRLBenchEnv, self).reset(seed, interactive)
+        self._record_current_episode = (
+                self.eval and self._episode_index % self._record_every_n == 0)
+        self._episode_index += 1
+        self._recorded_images.clear()
         return self._previous_obs_dict
