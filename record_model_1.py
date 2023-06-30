@@ -35,16 +35,19 @@ import pickle
 from rlbench.backend.const import *
 from PIL import Image
 from rlbench.demo import Demo
+import readchar
 
 class InteractiveEnv():
     def __init__(self, agent: Agent,
                  weightsdir: str = None,
                  classifier: CommandClassifier = None,
-                 env_device: str = 'cuda:0'):
+                 env_device: str = 'cuda:0',
+                 record_seed: int = 0):
         self.agent = agent
         self.weightsdir = weightsdir
         self.classifier = classifier
         self.env_device = env_device
+        self.record_seed = record_seed
 
     def start(self, weight,
               env_config):
@@ -273,7 +276,6 @@ class InteractiveEnv():
         with open(os.path.join(example_path, VARIATION_DESCRIPTIONS), 'wb') as f:
             pickle.dump(descriptions, f)
 
-
     def record_episodes(self, weight):
 
         self.agent.build(training=False, device=self.env_device)
@@ -299,15 +301,17 @@ class InteractiveEnv():
 
         # reset the task
         variation = 0
-        eval_demo_seed = 1000 # TODO
-        obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+        obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
         gripper_state_prev = obs['low_dim_state'][0]
         prev_action = torch.zeros((1, 5)).to(self.env_device)
         prev_action[0, -1] = 1
         # create the episode folder
         # episode_root = '/home/user/School/peract_l2r/data/pick_up/all_variations/episodes/'
-        episode_root = '/home/user/School/peract_l2r/data/push_dispenser/all_variations/episodes/'
+        episode_root = '/home/user/School/peract_l2r/data/fill_cup/all_variations/episodes/'
         episode_idx = 0 # TODO start where you left off
+        while os.path.exists(os.path.join(episode_root, 'episode' + str(episode_idx))):
+            episode_idx += 1
+            self.record_seed += 1
         episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
         # replace the language goal with user input
         command = ''
@@ -326,16 +330,16 @@ class InteractiveEnv():
                 # update the episode directory
                 episode_idx += 1
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
-                eval_demo_seed += 1
-                obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+                self.record_seed += 1
+                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
                 prev_action = torch.zeros((1, 5)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             if command == 'reset':
                 demo = []
                 # update the episode directory
-                eval_demo_seed += 1
-                obs = env.reset_to_seed(variation, eval_demo_seed, interactive=True)
+                self.record_seed += 1
+                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
                 prev_action = torch.zeros((1, 5)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
@@ -352,7 +356,8 @@ class InteractiveEnv():
                 # set env time back to 0
                 env._i = 0 
                 obs_history = {k: [np.array(v, dtype=self._get_type(v))] * timesteps for k, v in obs.items()}
-                for _ in range(6):
+                # for _ in range(6):
+                while True:
                     prepped_data = {k:torch.tensor([v], device=self.env_device) for k, v in obs_history.items()}
 
                     act_result = self.agent.act(0, prepped_data,
@@ -360,26 +365,29 @@ class InteractiveEnv():
                     # edit act result to maintain gripper state
                     # act_result.action[-2] = gripper_state_prev
                     transition, demo_piece = env.record_step(act_result)
+                    demo.extend(demo_piece)
                     # print the timestep from low_dim_state
                     # print(transition.observation['low_dim_state'][-1])
 
                     for k in obs_history.keys():
                         obs_history[k].append(transition.observation[k])
                         obs_history[k].pop(0)
-                    # TODO ask user to continue or break
-
-
+                    # ask user to continue or break
+                    print('Press b to break, any other key to continue')
+                    key = readchar.readkey()
+                    if key == 'b':
+                        break
             else:
                 # use l2a model
                 text_embed = self.classifier.sentence_emb
                 action, prev_action = self.classifier.l2a.get_action(prev_action, text_embed, obs)
                 transition, demo_piece = env.record_step(action=action)
+                demo.extend(demo_piece)
             env.env._scene.step()
             obs = dict(transition.observation)
             # record gripper state
             gripper_state_prev = obs['low_dim_state'][0]
             # extend the demo
-            demo.extend(demo_piece)
 
 def eval_seed(train_cfg,
               eval_cfg,
@@ -412,7 +420,7 @@ def eval_seed(train_cfg,
         logging.info("No weights to evaluate. Results are already available in eval_data.csv")
         sys.exit(0)
 
-    interactive_env = InteractiveEnv(agent=agent, weightsdir=weightsdir, classifier=classifier, env_device=env_device)
+    interactive_env = InteractiveEnv(agent=agent, weightsdir=weightsdir, classifier=classifier, env_device=env_device, record_seed=eval_cfg.framework.record_seed)
     interactive_env.start(weight=weight_folders[0],
                           env_config=env_config)
 

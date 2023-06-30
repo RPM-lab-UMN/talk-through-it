@@ -430,7 +430,7 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
             action = act_result.action
         success = False
         obs = self._previous_obs_dict  # in case action fails.
-
+        demo = []
         try:
             demo, reward, terminal = self._task.record_step(action)
             obs = demo[-1]

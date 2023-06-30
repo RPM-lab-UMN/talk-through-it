@@ -31,8 +31,9 @@ framework:
     # eval_type: 'missing'
     # eval_type: 'last'
     eval_type: 14000
-    interactive_weight: 14000
     eval_save_metrics: True
+    interactive_weight: 14000
+    record_seed: 1000
 
 cinematic_recorder:
     enabled: False
