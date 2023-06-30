@@ -29,7 +29,7 @@ from torch.multiprocessing import Process, Manager
 import torch.multiprocessing
 torch.multiprocessing.set_sharing_strategy('file_system')
 from clip import tokenize
-from helpers.custom_rlbench_env import CustomRLBenchEnv
+from helpers.custom_rlbench_env import CustomRLBenchEnv, CustomMultiTaskRLBenchEnv
 from yarr.agents.agent import Agent
 import pickle
 from rlbench.backend.const import *
@@ -48,17 +48,30 @@ class InteractiveEnv():
 
     def start(self, weight,
               env_config):
-
-        eval_env = CustomRLBenchEnv(
-            task_class=env_config[0],
-            observation_config=env_config[1],
-            action_mode=env_config[2],
-            dataset_root=env_config[3],
-            episode_length=env_config[4],
-            headless=env_config[5],
-            include_lang_goal_in_obs=env_config[6],
-            time_in_state=env_config[7],
-            record_every_n=env_config[8])
+        multi_task = isinstance(env_config[0], list)
+        if multi_task:
+            eval_env = CustomMultiTaskRLBenchEnv(
+                task_classes=env_config[0],
+                observation_config=env_config[1],
+                action_mode=env_config[2],
+                dataset_root=env_config[3],
+                episode_length=env_config[4],
+                headless=env_config[5],
+                swap_task_every=env_config[6],
+                include_lang_goal_in_obs=env_config[7],
+                time_in_state=env_config[8],
+                record_every_n=env_config[9])
+        else:
+            eval_env = CustomRLBenchEnv(
+                task_class=env_config[0],
+                observation_config=env_config[1],
+                action_mode=env_config[2],
+                dataset_root=env_config[3],
+                episode_length=env_config[4],
+                headless=env_config[5],
+                include_lang_goal_in_obs=env_config[6],
+                time_in_state=env_config[7],
+                record_every_n=env_config[8])
 
         self.eval_env = eval_env
         self.record_episodes(weight)
@@ -336,14 +349,26 @@ class InteractiveEnv():
                 obs['lang_goal_tokens'] = tokens[0]
                 self.agent.reset()
                 timesteps = 1
+                # set env time back to 0
+                env._i = 0 
                 obs_history = {k: [np.array(v, dtype=self._get_type(v))] * timesteps for k, v in obs.items()}
-                prepped_data = {k:torch.tensor([v], device=self.env_device) for k, v in obs_history.items()}
+                for _ in range(6):
+                    prepped_data = {k:torch.tensor([v], device=self.env_device) for k, v in obs_history.items()}
 
-                act_result = self.agent.act(0, prepped_data,
-                                        deterministic=eval)
-                act_result.action[-2] = gripper_state_prev
-                # edit act result to maintain gripper state
-                transition, demo_piece = env.record_step(act_result)
+                    act_result = self.agent.act(0, prepped_data,
+                                            deterministic=eval)
+                    # edit act result to maintain gripper state
+                    # act_result.action[-2] = gripper_state_prev
+                    transition, demo_piece = env.record_step(act_result)
+                    # print the timestep from low_dim_state
+                    # print(transition.observation['low_dim_state'][-1])
+
+                    for k in obs_history.keys():
+                        obs_history[k].append(transition.observation[k])
+                        obs_history[k].pop(0)
+                    # TODO ask user to continue or break
+
+
             else:
                 # use l2a model
                 text_embed = self.classifier.sentence_emb
@@ -351,19 +376,16 @@ class InteractiveEnv():
                 transition, demo_piece = env.record_step(action=action)
             env.env._scene.step()
             obs = dict(transition.observation)
-            # set gripper state
+            # record gripper state
             gripper_state_prev = obs['low_dim_state'][0]
-
             # extend the demo
             demo.extend(demo_piece)
 
 def eval_seed(train_cfg,
               eval_cfg,
               logdir,
-              cams,
               env_device,
               multi_task,
-              seed,
               env_config) -> None:
 
     tasks = eval_cfg.rlbench.tasks
@@ -472,9 +494,8 @@ def main(eval_cfg: DictConfig) -> None:
     eval_seed(train_cfg,
               eval_cfg,
               logdir,
-              eval_cfg.rlbench.cameras,
               env_device,
-              multi_task, start_seed,
+              multi_task,
               env_config)
 
 if __name__ == '__main__':

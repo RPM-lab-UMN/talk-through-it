@@ -28,10 +28,10 @@ framework:
     # eval_from_eps_number: 1000
     eval_from_eps_number: 0
     eval_episodes: 10
-    eval_type: 'missing'
+    # eval_type: 'missing'
     # eval_type: 'last'
-    # eval_type: 60000
-    interactive_weight: 90000
+    eval_type: 14000
+    interactive_weight: 14000
     eval_save_metrics: True
 
 cinematic_recorder:
