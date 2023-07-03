@@ -39,11 +39,13 @@ import readchar
 
 class InteractiveEnv():
     def __init__(self, agent: Agent,
+                 cfg,
                  weightsdir: str = None,
                  classifier: CommandClassifier = None,
                  env_device: str = 'cuda:0',
                  record_seed: int = 0):
         self.agent = agent
+        self.cfg = cfg
         self.weightsdir = weightsdir
         self.classifier = classifier
         self.env_device = env_device
@@ -316,7 +318,7 @@ class InteractiveEnv():
         # replace the language goal with user input
         command = ''
         demo = []
-        variation_descriptions = ['push the dispenser']
+        variation_descriptions = self.cfg.record.lang_goal
         while command != 'quit':
             command = input("Enter a command: ")
             if command == 'start':
@@ -420,7 +422,7 @@ def eval_seed(train_cfg,
         logging.info("No weights to evaluate. Results are already available in eval_data.csv")
         sys.exit(0)
 
-    interactive_env = InteractiveEnv(agent=agent, weightsdir=weightsdir, classifier=classifier, env_device=env_device, record_seed=eval_cfg.framework.record_seed)
+    interactive_env = InteractiveEnv(agent=agent, cfg=eval_cfg, weightsdir=weightsdir, classifier=classifier, env_device=env_device, record_seed=eval_cfg.framework.record_seed)
     interactive_env.start(weight=weight_folders[0],
                           env_config=env_config)
 
