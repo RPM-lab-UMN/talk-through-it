@@ -2,15 +2,16 @@ method:
     name: "PERACT_BC"
 
 rlbench:
-    # task_name: 'multi'
+    task_name: 'multi'
     # task_name: 'move_front'
     # tasks: [move_front]
+    tasks: [move_front, move_above_pot]
     # task_name: 'pick_up'
     # tasks: [pick_up]
-    task_name: 'fill_cup'
-    tasks: [fill_cup]
+    # task_name: 'fill_cup'
+    # tasks: [fill_cup]
     demo_path: /home/user/School/peract_l2r/data
-    episode_length: 15
+    episode_length: 5
     cameras: [overhead, left_shoulder, right_shoulder, wrist]
     camera_resolution: [128, 128]
     scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
@@ -21,14 +22,14 @@ rlbench:
 
 framework:
     gpu: 1
-    logdir: '/home/user/School/peract_l2r/logs/model_3'
+    logdir: '/home/user/School/peract_l2r/logs/multi_model_1'
     start_seed: 0
     record_every_n: 5
 
     eval_envs: 1
-    # eval_from_eps_number: 1000
-    eval_from_eps_number: 0
-    eval_episodes: 10
+    eval_from_eps_number: 1000
+    # eval_from_eps_number: 0
+    eval_episodes: 20
     eval_type: 'missing'
     # eval_type: 'last'
     # eval_type: 48000

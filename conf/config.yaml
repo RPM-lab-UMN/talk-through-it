@@ -9,9 +9,9 @@ rlbench:
   # tasks: [pick_up]
   # task_name: 'move_front'
   # tasks: [move_front]
-  task_name: 'fill_cup'
-  tasks: [fill_cup]
-  demos: 8
+  task_name: 'multi'
+  tasks: [move_front, move_above_pot]
+  demos: 64
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 100
   cameras: [overhead, left_shoulder, right_shoulder, wrist]
@@ -35,7 +35,7 @@ framework:
   tensorboard_logging: False
   csv_logging: True
   training_iterations: 100001
-  logdir: '/home/user/School/peract_l2r/logs/model_3'
+  logdir: '/home/user/School/peract_l2r/logs/multi_model_1'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

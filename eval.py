@@ -130,6 +130,7 @@ def eval_seed(train_cfg,
 
     # evaluate several checkpoints in parallel
     # NOTE: in multi-task settings, each task is evaluated serially, which makes everything slow!
+    # TODO multi task seems to evaluate each weight twice
     split_n = utils.split_list(num_weights_to_eval, eval_cfg.framework.eval_envs)
     for split in split_n:
         processes = []
