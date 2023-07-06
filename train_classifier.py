@@ -41,6 +41,9 @@ def generate_commands():
 
     commands.append('move in front of the blue cup')
     commands.append('move in front of the dispenser')
+    commands.append('move above the left edge of the pot')
+    commands.append('move above the left edge of the left burner')
+    commands.append('move above the left edge of the right burner')
 
     return commands
 

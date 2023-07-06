@@ -5,7 +5,7 @@ rlbench:
     task_name: 'multi'
     # task_name: 'move_front'
     # tasks: [move_front]
-    tasks: [move_front, move_above_pot]
+    tasks: [move_above_pot, move_front]
     # task_name: 'pick_up'
     # tasks: [pick_up]
     # task_name: 'fill_cup'
@@ -34,7 +34,7 @@ framework:
     # eval_type: 'last'
     # eval_type: 48000
     eval_save_metrics: True
-    interactive_weight: 14000
+    interactive_weight: 56000
     record_seed: 1000
 
 record:

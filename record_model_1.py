@@ -303,7 +303,13 @@ class InteractiveEnv():
 
         # reset the task
         variation = 0
-        obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
+        while True:
+            try:
+                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
+            except Exception as e:
+                self.record_seed += 1
+                continue
+            break
         gripper_state_prev = obs['low_dim_state'][0]
         prev_action = torch.zeros((1, 5)).to(self.env_device)
         prev_action[0, -1] = 1
@@ -375,6 +381,7 @@ class InteractiveEnv():
                         obs_history[k].append(transition.observation[k])
                         obs_history[k].pop(0)
                     # ask user to continue or break
+                    break # TODO configure this
                     print('Press b to break, any other key to continue')
                     key = readchar.readkey()
                     if key == 'b':

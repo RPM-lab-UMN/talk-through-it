@@ -509,10 +509,10 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
         return self._previous_obs_dict
     
     def reset_to_seed(self, variation, seed, interactive=False):
-        if self._episodes_this_task == self._swap_task_every:
-            self._set_new_task()
-            self._episodes_this_task = 0
-        self._episodes_this_task += 1
+        # if self._episodes_this_task == self._swap_task_every:
+        #     self._set_new_task()
+        #     self._episodes_this_task = 0
+        # self._episodes_this_task += 1
         # self._lang_goal = self._task.get_task_descriptions()[0]
 
         self._i = 0
