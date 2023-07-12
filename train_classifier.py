@@ -38,13 +38,17 @@ def generate_commands():
                 if t2 == '' and t3 == 'object':
                     continue
                 commands.append(t1 + t2 + t3)
-
+    # move front commands
     commands.append('move in front of the blue cup')
     commands.append('move in front of the dispenser')
+    commands.append('move in front of the apple')
+    commands.append('move in front of the fridge handle')
+
+    # move above commands
     commands.append('move above the left edge of the pot')
     commands.append('move above the left edge of the left burner')
     commands.append('move above the left edge of the right burner')
-
+    commands.append('move above the plate')
     return commands
 
 def main():
