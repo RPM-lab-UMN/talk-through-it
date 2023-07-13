@@ -47,7 +47,7 @@ crop_augmentation: True
 transform_augmentation:
   apply_se3: True
   aug_xyz: [0.125, 0.125, 0.125]
-  aug_rpy: [0.0, 0.0, 45.0]
+  aug_rpy: [0.0, 0.0, 0.0]
   aug_rot_resolution: ${method.rotation_resolution}
 
 demo_augmentation: True

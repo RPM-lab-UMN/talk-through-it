@@ -10,7 +10,7 @@ rlbench:
   # task_name: 'move_front'
   # tasks: [move_front]
   task_name: 'multi'
-  tasks: [kitchen_move_front, kitchen_move_above]
+  tasks: [kitchen_move_above, kitchen_move_front]
   demos: 64
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 100
@@ -19,6 +19,9 @@ rlbench:
   camera_resolution: [128, 128]
   scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
   include_lang_goal_in_obs: True
+  fine_tune_tasks: ['kitchen_open_fridge', 'kitchen_move_above', 'kitchen_move_front']
+  fine_tune_demos: [1, 64, 64]
+  fine_tune_weight: 66000
 
 replay:
   batch_size: 4

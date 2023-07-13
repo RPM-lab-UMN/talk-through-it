@@ -6,7 +6,7 @@ import numpy as np
 import os
 from helpers.clip.core.clip import build_model, load_clip, tokenize
 import pandas as pd
-
+import pickle
 
 class CommandDataset(data.Dataset):
     def __init__(self, commands0, commands1):
@@ -78,6 +78,11 @@ def main():
         token_tensor = torch.from_numpy(tokens).to(device)
         sentence_emb, token_embs = clip_model.encode_text_with_embeddings(token_tensor)
         embeddings1.append(sentence_emb.detach().cpu().numpy())
+
+    # all embeddings in one array
+    embeddings = np.concatenate((embeddings0, embeddings1), axis=0).squeeze()
+    # save embeddings to npy
+    np.save('embeddings.npy', embeddings)
 
     # create a dataset from the embeddings
     dataset = CommandDataset(embeddings0, embeddings1)

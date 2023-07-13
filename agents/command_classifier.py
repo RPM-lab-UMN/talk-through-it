@@ -1,7 +1,13 @@
+import os
+# add parent to path
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import torch.nn as nn
 from helpers.clip.core.clip import build_model, load_clip
 import torch
 from agents.l2a import L2A
+import numpy as np
+from clip import tokenize
 
 class CommandClassifier(nn.Module):
     def __init__(self, l2a_weights, input_size=512, device='cuda:1'):
@@ -26,6 +32,9 @@ class CommandClassifier(nn.Module):
         self.l2a = L2A(h1=1029).to(device)
         self.l2a.load_state_dict(torch.load(l2a_weights))
 
+        # load the embeddings
+        self.train_embeddings = torch.tensor(np.load('embeddings.npy')).to(device)
+
     def forward(self, x):
         x = self.fc1(x)
         x = self.relu(x)
@@ -45,3 +54,22 @@ class CommandClassifier(nn.Module):
         # change to 0 or 1 scalar value
         out = torch.argmax(out, dim=1)
         return out
+    
+    def similarity(self, embedding):
+        # find the largest cosine similarty between the embedding and the train embeddings
+        cos = nn.CosineSimilarity(dim=1)
+        similarities = cos(embedding, self.train_embeddings)
+        return torch.max(similarities)
+
+if __name__ == "__main__":
+    device = 'cuda:0'
+    # create a command classifier
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    l2a_path = os.path.join(cwd, '../l2a.pt')
+    model = CommandClassifier(input_size=1024, l2a_weights=l2a_path, device=device).to(device)
+    command = 'go above the plate'
+    tokens = tokenize([command]).numpy()
+    token_tensor = torch.from_numpy(tokens).to(model.device)
+    sentence_emb, token_embs = model.clip_model.encode_text_with_embeddings(token_tensor)
+    sentence_emb = sentence_emb.float()
+    print(model.similarity(sentence_emb)) # say 0.95 is threshold
