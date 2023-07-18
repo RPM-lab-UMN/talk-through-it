@@ -201,14 +201,14 @@ class InteractiveEnv():
             # all rgbs
             left_shoulder_rgb = Image.fromarray(obs.left_shoulder_rgb)
             right_shoulder_rgb = Image.fromarray(obs.right_shoulder_rgb)
-            overhead_rgb = Image.fromarray(obs.overhead_rgb)
+            # overhead_rgb = Image.fromarray(obs.overhead_rgb)
             wrist_rgb = Image.fromarray(obs.wrist_rgb)
-            # front_rgb = Image.fromarray(obs.front_rgb)
+            front_rgb = Image.fromarray(obs.front_rgb)
             left_shoulder_rgb.save(os.path.join(left_shoulder_rgb_path, IMAGE_FORMAT % i))
             right_shoulder_rgb.save(os.path.join(right_shoulder_rgb_path, IMAGE_FORMAT % i))
-            overhead_rgb.save(os.path.join(overhead_rgb_path, IMAGE_FORMAT % i))
+            # overhead_rgb.save(os.path.join(overhead_rgb_path, IMAGE_FORMAT % i))
             wrist_rgb.save(os.path.join(wrist_rgb_path, IMAGE_FORMAT % i))
-            # front_rgb.save(os.path.join(front_rgb_path, IMAGE_FORMAT % i))
+            front_rgb.save(os.path.join(front_rgb_path, IMAGE_FORMAT % i))
 
             # all depths
             if obs_config.left_shoulder_camera.depth:
@@ -216,18 +216,18 @@ class InteractiveEnv():
                     obs.left_shoulder_depth, scale_factor=DEPTH_SCALE)
                 right_shoulder_depth = rlbench_utils.float_array_to_rgb_image(
                     obs.right_shoulder_depth, scale_factor=DEPTH_SCALE)
-                overhead_depth = rlbench_utils.float_array_to_rgb_image(
-                    obs.overhead_depth, scale_factor=DEPTH_SCALE)
+                # overhead_depth = rlbench_utils.float_array_to_rgb_image(
+                #     obs.overhead_depth, scale_factor=DEPTH_SCALE)
                 wrist_depth = rlbench_utils.float_array_to_rgb_image(
                     obs.wrist_depth, scale_factor=DEPTH_SCALE)
-                # front_depth = rlbench_utils.float_array_to_rgb_image(
-                #     obs.front_depth, scale_factor=DEPTH_SCALE)
+                front_depth = rlbench_utils.float_array_to_rgb_image(
+                    obs.front_depth, scale_factor=DEPTH_SCALE)
 
                 left_shoulder_depth.save(os.path.join(left_shoulder_depth_path, IMAGE_FORMAT % i))
                 right_shoulder_depth.save(os.path.join(right_shoulder_depth_path, IMAGE_FORMAT % i))
-                overhead_depth.save(os.path.join(overhead_depth_path, IMAGE_FORMAT % i))
+                # overhead_depth.save(os.path.join(overhead_depth_path, IMAGE_FORMAT % i))
                 wrist_depth.save(os.path.join(wrist_depth_path, IMAGE_FORMAT % i))
-                # front_depth.save(os.path.join(front_depth_path, IMAGE_FORMAT % i))
+                front_depth.save(os.path.join(front_depth_path, IMAGE_FORMAT % i))
 
             # all masks
             if obs_config.left_shoulder_camera.mask:
@@ -235,16 +235,16 @@ class InteractiveEnv():
                     (obs.left_shoulder_mask * 255).astype(np.uint8))
                 right_shoulder_mask = Image.fromarray(
                     (obs.right_shoulder_mask * 255).astype(np.uint8))
-                overhead_mask = Image.fromarray(
-                    (obs.overhead_mask * 255).astype(np.uint8))
+                # overhead_mask = Image.fromarray(
+                #     (obs.overhead_mask * 255).astype(np.uint8))
                 wrist_mask = Image.fromarray((obs.wrist_mask * 255).astype(np.uint8))
-                # front_mask = Image.fromarray((obs.front_mask * 255).astype(np.uint8))
+                front_mask = Image.fromarray((obs.front_mask * 255).astype(np.uint8))
 
                 left_shoulder_mask.save(os.path.join(left_shoulder_mask_path, IMAGE_FORMAT % i))
                 right_shoulder_mask.save(os.path.join(right_shoulder_mask_path, IMAGE_FORMAT % i))
-                overhead_mask.save(os.path.join(overhead_mask_path, IMAGE_FORMAT % i))
+                # overhead_mask.save(os.path.join(overhead_mask_path, IMAGE_FORMAT % i))
                 wrist_mask.save(os.path.join(wrist_mask_path, IMAGE_FORMAT % i))
-                # front_mask.save(os.path.join(front_mask_path, IMAGE_FORMAT % i))
+                front_mask.save(os.path.join(front_mask_path, IMAGE_FORMAT % i))
 
             # We save the images separately, so set these to None for pickling.
             obs.left_shoulder_rgb = None
@@ -315,21 +315,23 @@ class InteractiveEnv():
         prev_action[0, -1] = 1
         # create the episode folder
         # episode_root = '/home/user/School/peract_l2r/data/pick_up/all_variations/episodes/'
-        episode_root = '/home/user/School/peract_l2r/data/fill_cup/all_variations/episodes/'
-        episode_idx = 0 # TODO start where you left off
+        episode_root = '/home/user/School/peract_l2r/data/open_drawer/all_variations/episodes/' # TODO parameter
+        episode_idx = 0
         while os.path.exists(os.path.join(episode_root, 'episode' + str(episode_idx))):
             episode_idx += 1
             self.record_seed += 1
         episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
-        # replace the language goal with user input
         command = ''
         demo = []
-        variation_descriptions = self.cfg.record.lang_goal
+        # TODO replace the language goal with user input
+        # variation_descriptions = self.cfg.record.lang_goal
         while command != 'quit':
             command = input("Enter a command: ")
             if command == 'start':
                 # clear the demo
                 demo = []
+                # prompt for language goal
+                variation_descriptions = [input("Enter a language goal: ")]
                 continue
             if command == 'save':
                 # write the demo to file

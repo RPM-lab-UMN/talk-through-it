@@ -272,7 +272,7 @@ def fill_multi_task_replay(cfg: DictConfig,
                            rank: int,
                            replay: ReplayBuffer,
                            tasks: List[str],
-                           num_demos: int,
+                           num_demos_list,
                            demo_augmentation: bool,
                            demo_augmentation_every_n: int,
                            cameras: List[str],
@@ -300,6 +300,7 @@ def fill_multi_task_replay(cfg: DictConfig,
     for split in split_n:
         for e_idx, task_idx in enumerate(split):
             task = tasks[int(task_idx)]
+            num_demos = num_demos_list[int(task_idx)]
             model_device = torch.device('cuda:%s' % (e_idx % torch.cuda.device_count()))
             p = Process(target=fill_replay, args=(cfg,
                                                   obs_config,

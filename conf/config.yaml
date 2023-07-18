@@ -1,6 +1,6 @@
 ddp:
   master_addr: "localhost"
-  master_port: "29500"
+  master_port: "29502"
   visualize_port: "29501"
   num_devices: 1
 
@@ -10,18 +10,20 @@ rlbench:
   # task_name: 'move_front'
   # tasks: [move_front]
   task_name: 'multi'
-  tasks: [kitchen_move_above, kitchen_move_front]
-  demos: 64
+  # task_name: 'open_drawer_motions'
+  tasks: [open_drawer_motions, slide_block_motions]
+  demos: [48, 64]
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 100
-  cameras: [overhead, left_shoulder, right_shoulder, wrist]
+  cameras: [front, left_shoulder, right_shoulder, wrist]
   # cameras: [front]
   camera_resolution: [128, 128]
-  scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
+  # scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
+  scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
   include_lang_goal_in_obs: True
-  fine_tune_tasks: ['kitchen_open_fridge', 'kitchen_move_above', 'kitchen_move_front']
-  fine_tune_demos: [1, 64, 64]
-  fine_tune_weight: 66000
+  # fine_tune_tasks: ['kitchen_open_fridge', 'kitchen_move_above', 'kitchen_move_front']
+  # fine_tune_demos: [1, 64, 64]
+  # fine_tune_weight: 66000
 
 replay:
   batch_size: 4
@@ -33,12 +35,15 @@ replay:
   max_parallel_processes: 32
 
 framework:
+  gpu: 1
   log_freq: 100
   save_freq: 2000
   tensorboard_logging: False
   csv_logging: True
   training_iterations: 100001
-  logdir: '/home/user/School/peract_l2r/logs/multi_model_1_2'
+  logdir: '/home/user/School/peract_l2r/logs/multi_motions_1'
+  use_start_weight: False
+  start_weight: '/home/user/School/peract_l2r/logs/open_drawer_motions/open_drawer_motions/PERACT_BC/seed0/weights/82000'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

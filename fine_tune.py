@@ -82,13 +82,6 @@ def main(cfg: DictConfig) -> None:
                        world_size,),
                  nprocs=world_size,
                  join=True)
-        # run_seed_fn.run_seed(0,
-        #                     cfg,
-        #                     obs_config,
-        #                     cfg.rlbench.cameras,
-        #                     multi_task,
-        #                     seed,
-        #                     world_size,)
         
 if __name__ == "__main__":
     main()

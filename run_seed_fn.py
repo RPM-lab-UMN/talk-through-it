@@ -62,10 +62,15 @@ def run_seed(rank,
     weightsdir = os.path.join(cwd, 'seed%d' % seed, 'weights')
     logdir = os.path.join(cwd, 'seed%d' % seed)
 
+    if cfg.framework.use_start_weight:
+        start_weight = cfg.framework.start_weight
+    else:
+        start_weight = None
+
     train_runner = OfflineTrainRunner(
         agent=agent,
         wrapped_replay_buffer=wrapped_replay,
-        train_device=rank,
+        train_device=cfg.framework.gpu,
         stat_accumulator=stat_accum,
         iterations=cfg.framework.training_iterations,
         logdir=logdir,
@@ -78,7 +83,8 @@ def run_seed(rank,
         csv_logging=cfg.framework.csv_logging,
         load_existing_weights=cfg.framework.load_existing_weights,
         rank=rank,
-        world_size=world_size)
+        world_size=world_size,
+        start_weight=start_weight)
 
     train_runner.start()
 

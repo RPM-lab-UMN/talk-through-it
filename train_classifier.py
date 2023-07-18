@@ -49,6 +49,12 @@ def generate_commands():
     commands.append('move above the left edge of the left burner')
     commands.append('move above the left edge of the right burner')
     commands.append('move above the plate')
+
+    # open drawer motions
+    commands.append('move in front of the top handle')
+    commands.append('move in front of the middle handle')
+    commands.append('move in front of the bottom handle')
+
     return commands
 
 def main():
