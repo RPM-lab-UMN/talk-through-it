@@ -55,6 +55,16 @@ def generate_commands():
     commands.append('move in front of the middle handle')
     commands.append('move in front of the bottom handle')
 
+    # slide block motions
+    text = ['move in front of the block',
+            'move left of the block',
+            'move right of the block',
+            'move behind the block']
+    commands.extend(text)
+
+    # sweep to dustpan motions
+    commands.append('move in front of the broom')
+
     return commands
 
 def main():

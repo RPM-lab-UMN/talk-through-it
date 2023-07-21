@@ -61,7 +61,7 @@ class InteractiveEnv():
                 action_mode=env_config[2],
                 dataset_root=env_config[3],
                 episode_length=env_config[4],
-                headless=env_config[5],
+                headless=False,
                 swap_task_every=env_config[6],
                 include_lang_goal_in_obs=env_config[7],
                 time_in_state=env_config[8],
@@ -73,7 +73,7 @@ class InteractiveEnv():
                 action_mode=env_config[2],
                 dataset_root=env_config[3],
                 episode_length=env_config[4],
-                headless=env_config[5],
+                headless=False,
                 include_lang_goal_in_obs=env_config[6],
                 time_in_state=env_config[7],
                 record_every_n=env_config[8])
@@ -311,7 +311,7 @@ class InteractiveEnv():
                 continue
             break
         gripper_state_prev = obs['low_dim_state'][0]
-        prev_action = torch.zeros((1, 5)).to(self.env_device)
+        prev_action = torch.zeros((1, 6)).to(self.env_device)
         prev_action[0, -1] = 1
         # create the episode folder
         # episode_root = '/home/user/School/peract_l2r/data/pick_up/all_variations/episodes/'
@@ -323,17 +323,17 @@ class InteractiveEnv():
         episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
         command = ''
         demo = []
-        # TODO replace the language goal with user input
-        # variation_descriptions = self.cfg.record.lang_goal
-        while command != 'quit':
+        while True:
             command = input("Enter a command: ")
-            if command == 'start':
+            if command == 'quit':
+                break
+            elif command == 'start':
                 # clear the demo
                 demo = []
                 # prompt for language goal
                 variation_descriptions = [input("Enter a language goal: ")]
                 continue
-            if command == 'save':
+            elif command == 'save':
                 # write the demo to file
                 self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config, variation_descriptions)
                 demo = []
@@ -342,15 +342,15 @@ class InteractiveEnv():
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
                 self.record_seed += 1
                 obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
-                prev_action = torch.zeros((1, 5)).to(self.env_device)
+                prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
-            if command == 'reset':
+            elif command == 'reset': # TODO command to change to the next task
                 demo = []
                 # update the episode directory
                 self.record_seed += 1
                 obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
-                prev_action = torch.zeros((1, 5)).to(self.env_device)
+                prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             # tokenize the command
@@ -392,7 +392,7 @@ class InteractiveEnv():
                 # use l2a model
                 text_embed = self.classifier.sentence_emb
                 action, prev_action = self.classifier.l2a.get_action(prev_action, text_embed, obs)
-                transition, demo_piece = env.record_step(action=action)
+                transition, demo_piece = env.record_step(action=action) # TODO scale action and retry if exception occurs
                 demo.extend(demo_piece)
             env.env._scene.step()
             obs = dict(transition.observation)

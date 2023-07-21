@@ -30,7 +30,7 @@ def get_dataset(values, directions, speeds, clip_model):
                 # generate command
                 command = 'move ' + v + d + s
                 # generate the label
-                label = np.array([0, 0, 0, 0, 0], dtype=np.float32)
+                label = np.array([0, 0, 0, 0, 0, 0], dtype=np.float32)
                 if 'left' in d:
                     label[0] = -dist
                 elif 'right' in d:
@@ -61,7 +61,7 @@ def get_dataset(values, directions, speeds, clip_model):
                     label[3] = dist * 2
                 # alternate gripper label
                 if i % 2 == 0:
-                    label[4] = 1
+                    label[-1] = 1
                 # append command and label
                 commands.append(command)
                 labels.append(label)
@@ -75,7 +75,7 @@ def get_dataset(values, directions, speeds, clip_model):
                     # generate command
                     command = 'move ' + v1 + d1 + ' and ' + v2 + d2
                     # generate the label
-                    label = np.array([0, 0, 0, 0, 0], dtype=np.float32)
+                    label = np.array([0, 0, 0, 0, 0, 0], dtype=np.float32)
                     # first part
                     if 'left' in d1:
                         i1 = 0
@@ -165,26 +165,45 @@ def get_dataset(values, directions, speeds, clip_model):
                     label[3] = dist
                     # alternate gripper label
                     if i % 2 == 0:
-                        label[4] = 1
+                        label[-1] = 1
 
                     # append command and label
                     commands.append(command)
                     labels.append(label)
                     i += 1
 
+    # append commands for rotate clockwise and counterclockwise
+    directions = ['clockwise', 'counterclockwise']
+    for d in directions:
+        for v in values:
+            commands.append('rotate ' + v + d)
+            label = np.array([0, 0, 0, 0, 90, 0], dtype=np.float32)
+            if 'a little' in v:
+                label = label / 2
+            elif 'a lot' in v:
+                label = label * 2
+            elif 'a tiny bit' in v:
+                label = label / 10
+            if 'counterclockwise' in d:
+                label = -label
+            if i % 2 == 0:
+                label[-1] = 1
+            labels.append(label)
+            i += 1
+
     # append stop command
     commands.append('stop')
-    labels.append(np.array([0, 0, 0, 0, 0], dtype=np.float32))
+    labels.append(np.array([0, 0, 0, 0, 0, 0], dtype=np.float32))
     # append gripper commands
     commands.append('open the gripper')
-    labels.append(np.array([0, 0, 0, 0, 1], dtype=np.float32))
+    labels.append(np.array([0, 0, 0, 0, 0, 1], dtype=np.float32))
     commands.append('close the gripper')
-    labels.append(np.array([0, 0, 0, 0, 0], dtype=np.float32))
+    labels.append(np.array([0, 0, 0, 0, 0, 0], dtype=np.float32))
 
     # save to csv file
     with open('commands.csv', 'w') as f:
         # write header
-        f.write('command, x, y, z, v, g\n')
+        f.write('command, x, y, z, v, r, g\n')
         for i in range(len(commands)):
             # write x y and z values with 1 decimal place
             f.write(commands[i] + ',' + 
@@ -211,7 +230,7 @@ def get_dataset(values, directions, speeds, clip_model):
                 labels2.append(labels[i])
             elif commands2[j] == 'move back':
                 label = -labels[i]
-                label[3:] *= -1
+                label[4:] *= -1
                 samples.append((labels[i], text_features[j], label))
                 labels_p.append(labels[i])
                 labels2.append(label)
@@ -235,10 +254,12 @@ def get_dataset(values, directions, speeds, clip_model):
         z = np.random.uniform(-dist, dist) * 2
         # random v
         v = np.random.uniform(0, dist) * 2
+        # random r
+        r = np.random.randint(-180, 180)
         # random g
         g = np.random.randint(0, 2)
         # create label
-        label = np.array([x, y, z, v, g], dtype=np.float32)
+        label = np.array([x, y, z, v, r, g], dtype=np.float32)
         # create sample
         samples.append((label, text_features[-2], label))
         labels_p.append(label)
@@ -255,10 +276,12 @@ def get_dataset(values, directions, speeds, clip_model):
         z = np.random.uniform(-dist, dist) * 2
         # random v
         v = np.random.uniform(0, dist) * 2
+        # random r
+        r = np.random.randint(-180, 180)
         # random g
         g = np.random.randint(0, 2)
         # create label
-        label = np.array([x, y, z, v, g], dtype=np.float32)
+        label = np.array([x, y, z, v, r, g], dtype=np.float32)
         # create sample
         label2 = -label.copy()
         label2[3:] *= -1
@@ -297,7 +320,7 @@ train_dataset = LangDataset(samples)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=512, shuffle=True)
 
 # initialize MLP model
-l2a = L2A(h1 = 1029).to(device)
+l2a = L2A(h1 = 1030).to(device)
 
 # training loop
 epochs = 30
