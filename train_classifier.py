@@ -65,6 +65,18 @@ def generate_commands():
     # sweep to dustpan motions
     commands.append('move in front of the broom')
 
+    # meat off grill motions
+    text = ['move above the chicken',
+            'move above the steak',]
+    commands.extend(text)
+
+    # turn tap motions
+    text = ['move right tap',
+            'move left tap']
+    commands.extend(text)
+
+    # TODO more tasks
+
     return commands
 
 def main():

@@ -323,6 +323,8 @@ class InteractiveEnv():
         episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
         command = ''
         demo = []
+        task_idx = 0
+        max_task_idx = len(self.cfg.rlbench.tasks)
         while True:
             command = input("Enter a command: ")
             if command == 'quit':
@@ -349,6 +351,14 @@ class InteractiveEnv():
                 demo = []
                 # update the episode directory
                 self.record_seed += 1
+                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
+                prev_action = torch.zeros((1, 6)).to(self.env_device)
+                prev_action[0, -1] = 1
+                continue
+            elif command == 'set':
+                task_idx += 1
+                env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
+                demo = []
                 obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
