@@ -7,6 +7,7 @@ import os
 from helpers.clip.core.clip import build_model, load_clip, tokenize
 import pandas as pd
 import pickle
+from rlbench.const import colors
 
 class CommandDataset(data.Dataset):
     def __init__(self, commands0, commands1):
@@ -71,11 +72,64 @@ def generate_commands():
     commands.extend(text)
 
     # turn tap motions
-    text = ['move right tap',
-            'move left tap']
+    text = ['move to the right tap',
+            'move to the left tap']
     commands.extend(text)
 
-    # TODO more tasks
+    # put in drawer motions
+    text = ['move above the block']
+    commands.extend(text)
+
+    # close jar motions
+    text = ['move above the lid']
+    for c in colors:
+        text.append(f'move above the {c} jar')
+    commands.extend(text)
+
+    # drag stick motions
+    text = ['move above the stick']
+
+    # stack blocks motions
+    text = ['move above the platform']
+    for c in colors:
+        text.append(f'move above the left {c} block')
+        text.append(f'move above the right {c} block')
+    commands.extend(text)
+
+    # screw bulb motions
+    text = ['move above the lamp']
+    for c in colors:
+        text.append(f'move above the {c} bulb')
+
+    # put in safe motions
+    text = ['move in front of the money',
+            'move in front of the top shelf',
+            'move in front of the middle shelf',
+            'move in front of the bottom shelf']
+    commands.extend(text)
+
+    # place wine motions
+    text = ['move in front of the bottle',
+            'move in front of the near side of the rack',
+            'move in front of the far side of the rack',
+            'move in front of the middle of the rack']
+    commands.extend(text)
+
+    # put in cupboard motions
+    text = ['move in front of the cupboard']
+    groceries = [
+        'crackers',
+        'chocolate jello',
+        'strawberry jello',
+        'soup',
+        'tuna',
+        'spam',
+        'coffee',
+        'mustard',
+        'sugar']
+    for g in groceries:
+        text.append(f'move above the {g}')
+    commands.extend(text)
 
     return commands
 

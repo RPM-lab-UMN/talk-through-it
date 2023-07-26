@@ -14,7 +14,7 @@ rlbench:
   tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
           meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
           close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
-          light_bulb_in_motions, place_wine_at_rack_motions, put_money_in_safe_motions]
+          light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions]
   demos: [64, 64, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 100

@@ -343,23 +343,24 @@ class InteractiveEnv():
                 episode_idx += 1
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
                 self.record_seed += 1
-                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
+                obs = env.reset_to_seed(variation, self.record_seed)
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
-            elif command == 'reset': # TODO command to change to the next task
+            elif command == 'reset':
                 demo = []
                 # update the episode directory
                 self.record_seed += 1
-                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
+                # env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
+                obs = env.reset_to_seed(variation, self.record_seed)
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
-            elif command == 'set':
+            elif command == 'set': # TODO command to change variation
                 task_idx += 1
                 env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
                 demo = []
-                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
+                obs = env.reset_to_seed(variation, self.record_seed)
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
