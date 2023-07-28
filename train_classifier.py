@@ -131,6 +131,44 @@ def generate_commands():
         text.append(f'move above the {g}')
     commands.extend(text)
 
+    # sort shape
+    text = []
+    shapes = [
+        'cube',
+        'cylinder',
+        'prism',
+        'star',
+        'moon',
+    ]
+    for s in shapes:
+        text.append(f'move above the {s}')
+        text.append(f'move above the {s} hole')
+    commands.extend(text)
+
+    # push buttons
+    text = []
+    for c in colors:
+        text.append(f'move above the {c} button')
+    commands.extend(text)
+
+    # insert peg
+    text = ['move above the square ring']
+    for c in colors:
+        text.append(f'move above the {c} peg')
+    commands.extend(text)
+
+    # stack cups
+    text = []
+    for c in colors:
+        text.append(f'move above the {c} cup')
+        text.append(f'move a lot above the {c} cup')
+    commands.extend(text)
+
+    # place cups
+    text = ['move above the left cup',
+            'move left of the rack']
+    commands.extend(text)
+
     return commands
 
 def main():

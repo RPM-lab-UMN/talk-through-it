@@ -8,7 +8,9 @@ rlbench:
     tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
           meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
           close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
-          light_bulb_in_motions, place_wine_at_rack_motions, put_money_in_safe_motions]
+          light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions,
+          put_groceries_in_cupboard_motions, place_shape_motions, push_buttons_motions,
+          insert_onto_square_peg_motions]
     # task_name: 'pick_up'
     # tasks: [pick_up]
     # task_name: 'fill_cup'
@@ -26,7 +28,7 @@ rlbench:
 
 framework:
     gpu: 0
-    logdir: '/home/user/School/peract_l2r/logs/multi_motions_4'
+    logdir: '/home/user/School/peract_l2r/logs/multi_motions_5'
     start_seed: 0
     record_every_n: 5
 
@@ -38,7 +40,7 @@ framework:
     # eval_type: 'last'
     # eval_type: 52000
     eval_save_metrics: True
-    interactive_weight: 74000
+    interactive_weight: 120000
     record_seed: 1000
 
 cinematic_recorder:

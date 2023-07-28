@@ -347,7 +347,7 @@ class InteractiveEnv():
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
-            elif command == 'reset':
+            elif command == 'reset': # TODO don't change tasks
                 demo = []
                 # update the episode directory
                 self.record_seed += 1

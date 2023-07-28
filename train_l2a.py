@@ -60,6 +60,7 @@ def get_dataset(values, directions, speeds, clip_model):
                 elif 'quickly' in s:
                     label[3] = dist * 2
                 # alternate gripper label
+                # TODO double instead of alternating
                 if i % 2 == 0:
                     label[-1] = 1
                 # append command and label

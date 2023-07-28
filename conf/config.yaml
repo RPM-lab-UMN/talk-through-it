@@ -14,8 +14,14 @@ rlbench:
   tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
           meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
           close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
-          light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions]
-  demos: [64, 64, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+          light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions,
+          put_groceries_in_cupboard_motions, place_shape_motions, push_buttons_motions,
+          insert_onto_square_peg_motions]
+  demos: [64, 64, 100, 
+          100, 100, 100, 
+          100, 100, 100, 
+          100, 100, 100,
+          100, 100, 100, 100]
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 100
   cameras: [front, left_shoulder, right_shoulder, wrist]
@@ -43,8 +49,8 @@ framework:
   save_freq: 2000
   tensorboard_logging: False
   csv_logging: True
-  training_iterations: 100001
-  logdir: '/home/user/School/peract_l2r/logs/multi_motions_4'
+  training_iterations: 120001
+  logdir: '/home/user/School/peract_l2r/logs/multi_motions_5'
   use_start_weight: False
   start_weight: '/home/user/School/peract_l2r/logs/open_drawer_motions/open_drawer_motions/PERACT_BC/seed0/weights/82000'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
