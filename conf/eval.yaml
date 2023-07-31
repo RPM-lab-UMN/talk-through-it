@@ -35,12 +35,12 @@ framework:
     eval_envs: 4
     eval_from_eps_number: 1000
     # eval_from_eps_number: 0
-    eval_episodes: 20
+    eval_episodes: 40
     eval_type: 'missing'
     # eval_type: 'last'
     # eval_type: 52000
     eval_save_metrics: True
-    interactive_weight: 120000
+    interactive_weight: 52000
     record_seed: 1000
 
 cinematic_recorder:

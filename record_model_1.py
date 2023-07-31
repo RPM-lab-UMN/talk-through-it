@@ -356,10 +356,21 @@ class InteractiveEnv():
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
-            elif command == 'set': # TODO command to change variation
+            elif command == 'set':
+                variation = 0
                 task_idx += 1
                 env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
                 demo = []
+                obs = env.reset_to_seed(variation, self.record_seed)
+                prev_action = torch.zeros((1, 6)).to(self.env_device)
+                prev_action[0, -1] = 1
+                continue
+            elif command == 'var':
+                variation += 1
+                # get number of variations in task
+                num_variations = env._task.variation_count()
+                if variation >= num_variations:
+                    variation = 0
                 obs = env.reset_to_seed(variation, self.record_seed)
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
@@ -384,7 +395,7 @@ class InteractiveEnv():
                     act_result = self.agent.act(0, prepped_data,
                                             deterministic=eval)
                     # edit act result to maintain gripper state
-                    # act_result.action[-2] = gripper_state_prev
+                    act_result.action[-2] = gripper_state_prev
                     transition, demo_piece = env.record_step(act_result)
                     demo.extend(demo_piece)
                     # print the timestep from low_dim_state

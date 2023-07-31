@@ -160,7 +160,7 @@ def generate_commands():
     # stack cups
     text = []
     for c in colors:
-        text.append(f'move above the {c} cup')
+        text.append(f'move above the left edge of the {c} cup')
         text.append(f'move a lot above the {c} cup')
     commands.extend(text)
 
