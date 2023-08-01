@@ -375,6 +375,7 @@ class InteractiveEnv():
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
+            # TODO k for log as keypoint
             # tokenize the command
             env._lang_goal = command
             tokens = tokenize([command]).numpy()
