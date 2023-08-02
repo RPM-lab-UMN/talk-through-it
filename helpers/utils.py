@@ -244,8 +244,7 @@ def extract_obs(obs: Observation,
     obs_dict = vars(obs)
     obs_dict = {k: v for k, v in obs_dict.items() if v is not None}
     robot_state = np.array([
-        obs.gripper_open,
-        *obs.gripper_joint_positions])
+        obs.gripper_open])
     # remove low-level proprioception variables that are not needed
     obs_dict = {k: v for k, v in obs_dict.items()
                 if k not in REMOVE_KEYS}

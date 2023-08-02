@@ -1,3 +1,4 @@
+from asyncio import create_task
 import gc
 import logging
 import os
@@ -153,7 +154,7 @@ class InteractiveEnv():
         if not os.path.exists(dir):
             os.makedirs(dir)
 
-    def save_demo(self, demo, example_path, obs_config, descriptions, variation=0):
+    def save_demo(self, demo, example_path, obs_config, descriptions, variation=0, keypoints=[]):
 
         # Save image data first, and then None the image data, and pickle
         left_shoulder_rgb_path = os.path.join(
@@ -277,6 +278,15 @@ class InteractiveEnv():
 
         with open(os.path.join(example_path, VARIATION_DESCRIPTIONS), 'wb') as f:
             pickle.dump(descriptions, f)
+        # also save variaiton descriptions as txt
+        with open(os.path.join(example_path, 'variation_descriptions.txt'), 'w') as f:
+            for description in descriptions:
+                f.write(description + '\n')
+
+        # save the keypoints as txt
+        with open(os.path.join(example_path, 'keypoints.txt'), 'w') as f:
+            for keypoint in keypoints:
+                f.write(str(keypoint) + '\n')
 
     def record_episodes(self, weight):
 
@@ -314,15 +324,20 @@ class InteractiveEnv():
         prev_action = torch.zeros((1, 6)).to(self.env_device)
         prev_action[0, -1] = 1
         # create the episode folder
-        # episode_root = '/home/user/School/peract_l2r/data/pick_up/all_variations/episodes/'
-        episode_root = '/home/user/School/peract_l2r/data/open_drawer/all_variations/episodes/' # TODO parameter
         episode_idx = 0
-        while os.path.exists(os.path.join(episode_root, 'episode' + str(episode_idx))):
-            episode_idx += 1
-            self.record_seed += 1
-        episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
+        episode_root = ''
+        def set_task_dir(task_name='open_drawer'):
+            global episode_root
+            episode_root = '/home/user/School/peract_l2r/data/' + task_name + '/all_variations/episodes/'
+            global episode_idx 
+            episode_idx = 0
+            while os.path.exists(os.path.join(episode_root, 'episode' + str(episode_idx))):
+                episode_idx += 1
+                self.record_seed += 1
+            return os.path.join(episode_root, 'episode' + str(episode_idx))
         command = ''
         demo = []
+        keypoints = []
         task_idx = 0
         max_task_idx = len(self.cfg.rlbench.tasks)
         while True:
@@ -332,13 +347,18 @@ class InteractiveEnv():
             elif command == 'start':
                 # clear the demo
                 demo = []
+                keypoints = []
+                # prompt for task name
+                task_name = input("Enter a task name: ")
+                episode_dir = set_task_dir(task_name)
                 # prompt for language goal
                 variation_descriptions = [input("Enter a language goal: ")]
                 continue
             elif command == 'save':
                 # write the demo to file
-                self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config, variation_descriptions)
+                self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config, variation_descriptions, keypoints=keypoints)
                 demo = []
+                keypoints = []
                 # update the episode directory
                 episode_idx += 1
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
@@ -349,6 +369,7 @@ class InteractiveEnv():
                 continue
             elif command == 'reset': # TODO don't change tasks
                 demo = []
+                keypoints = []
                 # update the episode directory
                 self.record_seed += 1
                 # env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
@@ -361,12 +382,15 @@ class InteractiveEnv():
                 task_idx += 1
                 env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
                 demo = []
+                keypoints = []
                 obs = env.reset_to_seed(variation, self.record_seed)
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             elif command == 'var':
                 variation += 1
+                demo = []
+                keypoints = []
                 # get number of variations in task
                 num_variations = env._task.variation_count()
                 if variation >= num_variations:
@@ -375,7 +399,10 @@ class InteractiveEnv():
                 prev_action = torch.zeros((1, 6)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
-            # TODO k for log as keypoint
+            elif command == 'k':
+                keypoints.append(len(demo)-1)
+                print('keypoints: ', keypoints)
+                continue
             # tokenize the command
             env._lang_goal = command
             tokens = tokenize([command]).numpy()

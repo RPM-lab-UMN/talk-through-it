@@ -342,7 +342,7 @@ def create_agent(cfg: DictConfig):
             iterations=cfg.method.transformer_iterations,
             voxel_size=vox_size,
             initial_dim = 3 + 3 + 1 + 3,
-            low_dim_size=4,
+            low_dim_size=LOW_DIM_SIZE,
             layer=depth,
             num_rotation_classes=num_rotation_classes if last else 0,
             num_grip_classes=2 if last else 0,
