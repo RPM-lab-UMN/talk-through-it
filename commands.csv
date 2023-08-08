@@ -1,468 +1,948 @@
-command, x, y, z, v, g, r
-move left,-10.0,0.0,0.0,10.0,0.0,1.0
-move left slowly,-10.0,0.0,0.0,5.0,0.0,0.0
-move left quickly,-10.0,0.0,0.0,20.0,0.0,1.0
-move a little left,-5.0,0.0,0.0,10.0,0.0,0.0
-move a little left slowly,-5.0,0.0,0.0,5.0,0.0,1.0
-move a little left quickly,-5.0,0.0,0.0,20.0,0.0,0.0
-move a lot left,-20.0,0.0,0.0,10.0,0.0,1.0
-move a lot left slowly,-20.0,0.0,0.0,5.0,0.0,0.0
-move a lot left quickly,-20.0,0.0,0.0,20.0,0.0,1.0
-move a tiny bit left,-1.0,0.0,0.0,10.0,0.0,0.0
-move a tiny bit left slowly,-1.0,0.0,0.0,5.0,0.0,1.0
-move a tiny bit left quickly,-1.0,0.0,0.0,20.0,0.0,0.0
-move right,10.0,0.0,0.0,10.0,0.0,1.0
-move right slowly,10.0,0.0,0.0,5.0,0.0,0.0
-move right quickly,10.0,0.0,0.0,20.0,0.0,1.0
-move a little right,5.0,0.0,0.0,10.0,0.0,0.0
-move a little right slowly,5.0,0.0,0.0,5.0,0.0,1.0
-move a little right quickly,5.0,0.0,0.0,20.0,0.0,0.0
-move a lot right,20.0,0.0,0.0,10.0,0.0,1.0
-move a lot right slowly,20.0,0.0,0.0,5.0,0.0,0.0
-move a lot right quickly,20.0,0.0,0.0,20.0,0.0,1.0
-move a tiny bit right,1.0,0.0,0.0,10.0,0.0,0.0
-move a tiny bit right slowly,1.0,0.0,0.0,5.0,0.0,1.0
-move a tiny bit right quickly,1.0,0.0,0.0,20.0,0.0,0.0
-move forward,0.0,10.0,0.0,10.0,0.0,1.0
-move forward slowly,0.0,10.0,0.0,5.0,0.0,0.0
-move forward quickly,0.0,10.0,0.0,20.0,0.0,1.0
-move a little forward,0.0,5.0,0.0,10.0,0.0,0.0
-move a little forward slowly,0.0,5.0,0.0,5.0,0.0,1.0
-move a little forward quickly,0.0,5.0,0.0,20.0,0.0,0.0
-move a lot forward,0.0,20.0,0.0,10.0,0.0,1.0
-move a lot forward slowly,0.0,20.0,0.0,5.0,0.0,0.0
-move a lot forward quickly,0.0,20.0,0.0,20.0,0.0,1.0
-move a tiny bit forward,0.0,1.0,0.0,10.0,0.0,0.0
-move a tiny bit forward slowly,0.0,1.0,0.0,5.0,0.0,1.0
-move a tiny bit forward quickly,0.0,1.0,0.0,20.0,0.0,0.0
-move backward,0.0,-10.0,0.0,10.0,0.0,1.0
-move backward slowly,0.0,-10.0,0.0,5.0,0.0,0.0
-move backward quickly,0.0,-10.0,0.0,20.0,0.0,1.0
-move a little backward,0.0,-5.0,0.0,10.0,0.0,0.0
-move a little backward slowly,0.0,-5.0,0.0,5.0,0.0,1.0
-move a little backward quickly,0.0,-5.0,0.0,20.0,0.0,0.0
-move a lot backward,0.0,-20.0,0.0,10.0,0.0,1.0
-move a lot backward slowly,0.0,-20.0,0.0,5.0,0.0,0.0
-move a lot backward quickly,0.0,-20.0,0.0,20.0,0.0,1.0
-move a tiny bit backward,0.0,-1.0,0.0,10.0,0.0,0.0
-move a tiny bit backward slowly,0.0,-1.0,0.0,5.0,0.0,1.0
-move a tiny bit backward quickly,0.0,-1.0,0.0,20.0,0.0,0.0
-move up,0.0,0.0,10.0,10.0,0.0,1.0
-move up slowly,0.0,0.0,10.0,5.0,0.0,0.0
-move up quickly,0.0,0.0,10.0,20.0,0.0,1.0
-move a little up,0.0,0.0,5.0,10.0,0.0,0.0
-move a little up slowly,0.0,0.0,5.0,5.0,0.0,1.0
-move a little up quickly,0.0,0.0,5.0,20.0,0.0,0.0
-move a lot up,0.0,0.0,20.0,10.0,0.0,1.0
-move a lot up slowly,0.0,0.0,20.0,5.0,0.0,0.0
-move a lot up quickly,0.0,0.0,20.0,20.0,0.0,1.0
-move a tiny bit up,0.0,0.0,1.0,10.0,0.0,0.0
-move a tiny bit up slowly,0.0,0.0,1.0,5.0,0.0,1.0
-move a tiny bit up quickly,0.0,0.0,1.0,20.0,0.0,0.0
-move down,0.0,0.0,-10.0,10.0,0.0,1.0
-move down slowly,0.0,0.0,-10.0,5.0,0.0,0.0
-move down quickly,0.0,0.0,-10.0,20.0,0.0,1.0
-move a little down,0.0,0.0,-5.0,10.0,0.0,0.0
-move a little down slowly,0.0,0.0,-5.0,5.0,0.0,1.0
-move a little down quickly,0.0,0.0,-5.0,20.0,0.0,0.0
-move a lot down,0.0,0.0,-20.0,10.0,0.0,1.0
-move a lot down slowly,0.0,0.0,-20.0,5.0,0.0,0.0
-move a lot down quickly,0.0,0.0,-20.0,20.0,0.0,1.0
-move a tiny bit down,0.0,0.0,-1.0,10.0,0.0,0.0
-move a tiny bit down slowly,0.0,0.0,-1.0,5.0,0.0,1.0
-move a tiny bit down quickly,0.0,0.0,-1.0,20.0,0.0,0.0
-move left and forward,-10.0,10.0,0.0,10.0,0.0,1.0
-move left and a little forward,-10.0,5.0,0.0,10.0,0.0,0.0
-move left and a lot forward,-10.0,20.0,0.0,10.0,0.0,1.0
-move left and a tiny bit forward,-10.0,1.0,0.0,10.0,0.0,0.0
-move a little left and forward,-5.0,10.0,0.0,10.0,0.0,1.0
-move a little left and a little forward,-5.0,5.0,0.0,10.0,0.0,0.0
-move a little left and a lot forward,-5.0,20.0,0.0,10.0,0.0,1.0
-move a little left and a tiny bit forward,-5.0,1.0,0.0,10.0,0.0,0.0
-move a lot left and forward,-20.0,10.0,0.0,10.0,0.0,1.0
-move a lot left and a little forward,-20.0,5.0,0.0,10.0,0.0,0.0
-move a lot left and a lot forward,-20.0,20.0,0.0,10.0,0.0,1.0
-move a lot left and a tiny bit forward,-20.0,1.0,0.0,10.0,0.0,0.0
-move a tiny bit left and forward,-1.0,10.0,0.0,10.0,0.0,1.0
-move a tiny bit left and a little forward,-1.0,5.0,0.0,10.0,0.0,0.0
-move a tiny bit left and a lot forward,-1.0,20.0,0.0,10.0,0.0,1.0
-move a tiny bit left and a tiny bit forward,-1.0,1.0,0.0,10.0,0.0,0.0
-move left and backward,-10.0,-10.0,0.0,10.0,0.0,1.0
-move left and a little backward,-10.0,-5.0,0.0,10.0,0.0,0.0
-move left and a lot backward,-10.0,-20.0,0.0,10.0,0.0,1.0
-move left and a tiny bit backward,-10.0,-1.0,0.0,10.0,0.0,0.0
-move a little left and backward,-5.0,-10.0,0.0,10.0,0.0,1.0
-move a little left and a little backward,-5.0,-5.0,0.0,10.0,0.0,0.0
-move a little left and a lot backward,-5.0,-20.0,0.0,10.0,0.0,1.0
-move a little left and a tiny bit backward,-5.0,-1.0,0.0,10.0,0.0,0.0
-move a lot left and backward,-20.0,-10.0,0.0,10.0,0.0,1.0
-move a lot left and a little backward,-20.0,-5.0,0.0,10.0,0.0,0.0
-move a lot left and a lot backward,-20.0,-20.0,0.0,10.0,0.0,1.0
-move a lot left and a tiny bit backward,-20.0,-1.0,0.0,10.0,0.0,0.0
-move a tiny bit left and backward,-1.0,-10.0,0.0,10.0,0.0,1.0
-move a tiny bit left and a little backward,-1.0,-5.0,0.0,10.0,0.0,0.0
-move a tiny bit left and a lot backward,-1.0,-20.0,0.0,10.0,0.0,1.0
-move a tiny bit left and a tiny bit backward,-1.0,-1.0,0.0,10.0,0.0,0.0
-move left and up,-10.0,0.0,10.0,10.0,0.0,1.0
-move left and a little up,-10.0,0.0,5.0,10.0,0.0,0.0
-move left and a lot up,-10.0,0.0,20.0,10.0,0.0,1.0
-move left and a tiny bit up,-10.0,0.0,1.0,10.0,0.0,0.0
-move a little left and up,-5.0,0.0,10.0,10.0,0.0,1.0
-move a little left and a little up,-5.0,0.0,5.0,10.0,0.0,0.0
-move a little left and a lot up,-5.0,0.0,20.0,10.0,0.0,1.0
-move a little left and a tiny bit up,-5.0,0.0,1.0,10.0,0.0,0.0
-move a lot left and up,-20.0,0.0,10.0,10.0,0.0,1.0
-move a lot left and a little up,-20.0,0.0,5.0,10.0,0.0,0.0
-move a lot left and a lot up,-20.0,0.0,20.0,10.0,0.0,1.0
-move a lot left and a tiny bit up,-20.0,0.0,1.0,10.0,0.0,0.0
-move a tiny bit left and up,-1.0,0.0,10.0,10.0,0.0,1.0
-move a tiny bit left and a little up,-1.0,0.0,5.0,10.0,0.0,0.0
-move a tiny bit left and a lot up,-1.0,0.0,20.0,10.0,0.0,1.0
-move a tiny bit left and a tiny bit up,-1.0,0.0,1.0,10.0,0.0,0.0
-move left and down,-10.0,0.0,-10.0,10.0,0.0,1.0
-move left and a little down,-10.0,0.0,-5.0,10.0,0.0,0.0
-move left and a lot down,-10.0,0.0,-20.0,10.0,0.0,1.0
-move left and a tiny bit down,-10.0,0.0,-1.0,10.0,0.0,0.0
-move a little left and down,-5.0,0.0,-10.0,10.0,0.0,1.0
-move a little left and a little down,-5.0,0.0,-5.0,10.0,0.0,0.0
-move a little left and a lot down,-5.0,0.0,-20.0,10.0,0.0,1.0
-move a little left and a tiny bit down,-5.0,0.0,-1.0,10.0,0.0,0.0
-move a lot left and down,-20.0,0.0,-10.0,10.0,0.0,1.0
-move a lot left and a little down,-20.0,0.0,-5.0,10.0,0.0,0.0
-move a lot left and a lot down,-20.0,0.0,-20.0,10.0,0.0,1.0
-move a lot left and a tiny bit down,-20.0,0.0,-1.0,10.0,0.0,0.0
-move a tiny bit left and down,-1.0,0.0,-10.0,10.0,0.0,1.0
-move a tiny bit left and a little down,-1.0,0.0,-5.0,10.0,0.0,0.0
-move a tiny bit left and a lot down,-1.0,0.0,-20.0,10.0,0.0,1.0
-move a tiny bit left and a tiny bit down,-1.0,0.0,-1.0,10.0,0.0,0.0
-move right and forward,10.0,10.0,0.0,10.0,0.0,1.0
-move right and a little forward,10.0,5.0,0.0,10.0,0.0,0.0
-move right and a lot forward,10.0,20.0,0.0,10.0,0.0,1.0
-move right and a tiny bit forward,10.0,1.0,0.0,10.0,0.0,0.0
-move a little right and forward,5.0,10.0,0.0,10.0,0.0,1.0
-move a little right and a little forward,5.0,5.0,0.0,10.0,0.0,0.0
-move a little right and a lot forward,5.0,20.0,0.0,10.0,0.0,1.0
-move a little right and a tiny bit forward,5.0,1.0,0.0,10.0,0.0,0.0
-move a lot right and forward,20.0,10.0,0.0,10.0,0.0,1.0
-move a lot right and a little forward,20.0,5.0,0.0,10.0,0.0,0.0
-move a lot right and a lot forward,20.0,20.0,0.0,10.0,0.0,1.0
-move a lot right and a tiny bit forward,20.0,1.0,0.0,10.0,0.0,0.0
-move a tiny bit right and forward,1.0,10.0,0.0,10.0,0.0,1.0
-move a tiny bit right and a little forward,1.0,5.0,0.0,10.0,0.0,0.0
-move a tiny bit right and a lot forward,1.0,20.0,0.0,10.0,0.0,1.0
-move a tiny bit right and a tiny bit forward,1.0,1.0,0.0,10.0,0.0,0.0
-move right and backward,10.0,-10.0,0.0,10.0,0.0,1.0
-move right and a little backward,10.0,-5.0,0.0,10.0,0.0,0.0
-move right and a lot backward,10.0,-20.0,0.0,10.0,0.0,1.0
-move right and a tiny bit backward,10.0,-1.0,0.0,10.0,0.0,0.0
-move a little right and backward,5.0,-10.0,0.0,10.0,0.0,1.0
-move a little right and a little backward,5.0,-5.0,0.0,10.0,0.0,0.0
-move a little right and a lot backward,5.0,-20.0,0.0,10.0,0.0,1.0
-move a little right and a tiny bit backward,5.0,-1.0,0.0,10.0,0.0,0.0
-move a lot right and backward,20.0,-10.0,0.0,10.0,0.0,1.0
-move a lot right and a little backward,20.0,-5.0,0.0,10.0,0.0,0.0
-move a lot right and a lot backward,20.0,-20.0,0.0,10.0,0.0,1.0
-move a lot right and a tiny bit backward,20.0,-1.0,0.0,10.0,0.0,0.0
-move a tiny bit right and backward,1.0,-10.0,0.0,10.0,0.0,1.0
-move a tiny bit right and a little backward,1.0,-5.0,0.0,10.0,0.0,0.0
-move a tiny bit right and a lot backward,1.0,-20.0,0.0,10.0,0.0,1.0
-move a tiny bit right and a tiny bit backward,1.0,-1.0,0.0,10.0,0.0,0.0
-move right and up,10.0,0.0,10.0,10.0,0.0,1.0
-move right and a little up,10.0,0.0,5.0,10.0,0.0,0.0
-move right and a lot up,10.0,0.0,20.0,10.0,0.0,1.0
-move right and a tiny bit up,10.0,0.0,1.0,10.0,0.0,0.0
-move a little right and up,5.0,0.0,10.0,10.0,0.0,1.0
-move a little right and a little up,5.0,0.0,5.0,10.0,0.0,0.0
-move a little right and a lot up,5.0,0.0,20.0,10.0,0.0,1.0
-move a little right and a tiny bit up,5.0,0.0,1.0,10.0,0.0,0.0
-move a lot right and up,20.0,0.0,10.0,10.0,0.0,1.0
-move a lot right and a little up,20.0,0.0,5.0,10.0,0.0,0.0
-move a lot right and a lot up,20.0,0.0,20.0,10.0,0.0,1.0
-move a lot right and a tiny bit up,20.0,0.0,1.0,10.0,0.0,0.0
-move a tiny bit right and up,1.0,0.0,10.0,10.0,0.0,1.0
-move a tiny bit right and a little up,1.0,0.0,5.0,10.0,0.0,0.0
-move a tiny bit right and a lot up,1.0,0.0,20.0,10.0,0.0,1.0
-move a tiny bit right and a tiny bit up,1.0,0.0,1.0,10.0,0.0,0.0
-move right and down,10.0,0.0,-10.0,10.0,0.0,1.0
-move right and a little down,10.0,0.0,-5.0,10.0,0.0,0.0
-move right and a lot down,10.0,0.0,-20.0,10.0,0.0,1.0
-move right and a tiny bit down,10.0,0.0,-1.0,10.0,0.0,0.0
-move a little right and down,5.0,0.0,-10.0,10.0,0.0,1.0
-move a little right and a little down,5.0,0.0,-5.0,10.0,0.0,0.0
-move a little right and a lot down,5.0,0.0,-20.0,10.0,0.0,1.0
-move a little right and a tiny bit down,5.0,0.0,-1.0,10.0,0.0,0.0
-move a lot right and down,20.0,0.0,-10.0,10.0,0.0,1.0
-move a lot right and a little down,20.0,0.0,-5.0,10.0,0.0,0.0
-move a lot right and a lot down,20.0,0.0,-20.0,10.0,0.0,1.0
-move a lot right and a tiny bit down,20.0,0.0,-1.0,10.0,0.0,0.0
-move a tiny bit right and down,1.0,0.0,-10.0,10.0,0.0,1.0
-move a tiny bit right and a little down,1.0,0.0,-5.0,10.0,0.0,0.0
-move a tiny bit right and a lot down,1.0,0.0,-20.0,10.0,0.0,1.0
-move a tiny bit right and a tiny bit down,1.0,0.0,-1.0,10.0,0.0,0.0
-move forward and left,-10.0,10.0,0.0,10.0,0.0,1.0
-move forward and a little left,-5.0,10.0,0.0,10.0,0.0,0.0
-move forward and a lot left,-20.0,10.0,0.0,10.0,0.0,1.0
-move forward and a tiny bit left,-1.0,10.0,0.0,10.0,0.0,0.0
-move a little forward and left,-10.0,5.0,0.0,10.0,0.0,1.0
-move a little forward and a little left,-5.0,5.0,0.0,10.0,0.0,0.0
-move a little forward and a lot left,-20.0,5.0,0.0,10.0,0.0,1.0
-move a little forward and a tiny bit left,-1.0,5.0,0.0,10.0,0.0,0.0
-move a lot forward and left,-10.0,20.0,0.0,10.0,0.0,1.0
-move a lot forward and a little left,-5.0,20.0,0.0,10.0,0.0,0.0
-move a lot forward and a lot left,-20.0,20.0,0.0,10.0,0.0,1.0
-move a lot forward and a tiny bit left,-1.0,20.0,0.0,10.0,0.0,0.0
-move a tiny bit forward and left,-10.0,1.0,0.0,10.0,0.0,1.0
-move a tiny bit forward and a little left,-5.0,1.0,0.0,10.0,0.0,0.0
-move a tiny bit forward and a lot left,-20.0,1.0,0.0,10.0,0.0,1.0
-move a tiny bit forward and a tiny bit left,-1.0,1.0,0.0,10.0,0.0,0.0
-move forward and right,10.0,10.0,0.0,10.0,0.0,1.0
-move forward and a little right,5.0,10.0,0.0,10.0,0.0,0.0
-move forward and a lot right,20.0,10.0,0.0,10.0,0.0,1.0
-move forward and a tiny bit right,1.0,10.0,0.0,10.0,0.0,0.0
-move a little forward and right,10.0,5.0,0.0,10.0,0.0,1.0
-move a little forward and a little right,5.0,5.0,0.0,10.0,0.0,0.0
-move a little forward and a lot right,20.0,5.0,0.0,10.0,0.0,1.0
-move a little forward and a tiny bit right,1.0,5.0,0.0,10.0,0.0,0.0
-move a lot forward and right,10.0,20.0,0.0,10.0,0.0,1.0
-move a lot forward and a little right,5.0,20.0,0.0,10.0,0.0,0.0
-move a lot forward and a lot right,20.0,20.0,0.0,10.0,0.0,1.0
-move a lot forward and a tiny bit right,1.0,20.0,0.0,10.0,0.0,0.0
-move a tiny bit forward and right,10.0,1.0,0.0,10.0,0.0,1.0
-move a tiny bit forward and a little right,5.0,1.0,0.0,10.0,0.0,0.0
-move a tiny bit forward and a lot right,20.0,1.0,0.0,10.0,0.0,1.0
-move a tiny bit forward and a tiny bit right,1.0,1.0,0.0,10.0,0.0,0.0
-move forward and up,0.0,10.0,10.0,10.0,0.0,1.0
-move forward and a little up,0.0,10.0,5.0,10.0,0.0,0.0
-move forward and a lot up,0.0,10.0,20.0,10.0,0.0,1.0
-move forward and a tiny bit up,0.0,10.0,1.0,10.0,0.0,0.0
-move a little forward and up,0.0,5.0,10.0,10.0,0.0,1.0
-move a little forward and a little up,0.0,5.0,5.0,10.0,0.0,0.0
-move a little forward and a lot up,0.0,5.0,20.0,10.0,0.0,1.0
-move a little forward and a tiny bit up,0.0,5.0,1.0,10.0,0.0,0.0
-move a lot forward and up,0.0,20.0,10.0,10.0,0.0,1.0
-move a lot forward and a little up,0.0,20.0,5.0,10.0,0.0,0.0
-move a lot forward and a lot up,0.0,20.0,20.0,10.0,0.0,1.0
-move a lot forward and a tiny bit up,0.0,20.0,1.0,10.0,0.0,0.0
-move a tiny bit forward and up,0.0,1.0,10.0,10.0,0.0,1.0
-move a tiny bit forward and a little up,0.0,1.0,5.0,10.0,0.0,0.0
-move a tiny bit forward and a lot up,0.0,1.0,20.0,10.0,0.0,1.0
-move a tiny bit forward and a tiny bit up,0.0,1.0,1.0,10.0,0.0,0.0
-move forward and down,0.0,10.0,-10.0,10.0,0.0,1.0
-move forward and a little down,0.0,10.0,-5.0,10.0,0.0,0.0
-move forward and a lot down,0.0,10.0,-20.0,10.0,0.0,1.0
-move forward and a tiny bit down,0.0,10.0,-1.0,10.0,0.0,0.0
-move a little forward and down,0.0,5.0,-10.0,10.0,0.0,1.0
-move a little forward and a little down,0.0,5.0,-5.0,10.0,0.0,0.0
-move a little forward and a lot down,0.0,5.0,-20.0,10.0,0.0,1.0
-move a little forward and a tiny bit down,0.0,5.0,-1.0,10.0,0.0,0.0
-move a lot forward and down,0.0,20.0,-10.0,10.0,0.0,1.0
-move a lot forward and a little down,0.0,20.0,-5.0,10.0,0.0,0.0
-move a lot forward and a lot down,0.0,20.0,-20.0,10.0,0.0,1.0
-move a lot forward and a tiny bit down,0.0,20.0,-1.0,10.0,0.0,0.0
-move a tiny bit forward and down,0.0,1.0,-10.0,10.0,0.0,1.0
-move a tiny bit forward and a little down,0.0,1.0,-5.0,10.0,0.0,0.0
-move a tiny bit forward and a lot down,0.0,1.0,-20.0,10.0,0.0,1.0
-move a tiny bit forward and a tiny bit down,0.0,1.0,-1.0,10.0,0.0,0.0
-move backward and left,-10.0,-10.0,0.0,10.0,0.0,1.0
-move backward and a little left,-5.0,-10.0,0.0,10.0,0.0,0.0
-move backward and a lot left,-20.0,-10.0,0.0,10.0,0.0,1.0
-move backward and a tiny bit left,-1.0,-10.0,0.0,10.0,0.0,0.0
-move a little backward and left,-10.0,-5.0,0.0,10.0,0.0,1.0
-move a little backward and a little left,-5.0,-5.0,0.0,10.0,0.0,0.0
-move a little backward and a lot left,-20.0,-5.0,0.0,10.0,0.0,1.0
-move a little backward and a tiny bit left,-1.0,-5.0,0.0,10.0,0.0,0.0
-move a lot backward and left,-10.0,-20.0,0.0,10.0,0.0,1.0
-move a lot backward and a little left,-5.0,-20.0,0.0,10.0,0.0,0.0
-move a lot backward and a lot left,-20.0,-20.0,0.0,10.0,0.0,1.0
-move a lot backward and a tiny bit left,-1.0,-20.0,0.0,10.0,0.0,0.0
-move a tiny bit backward and left,-10.0,-1.0,0.0,10.0,0.0,1.0
-move a tiny bit backward and a little left,-5.0,-1.0,0.0,10.0,0.0,0.0
-move a tiny bit backward and a lot left,-20.0,-1.0,0.0,10.0,0.0,1.0
-move a tiny bit backward and a tiny bit left,-1.0,-1.0,0.0,10.0,0.0,0.0
-move backward and right,10.0,-10.0,0.0,10.0,0.0,1.0
-move backward and a little right,5.0,-10.0,0.0,10.0,0.0,0.0
-move backward and a lot right,20.0,-10.0,0.0,10.0,0.0,1.0
-move backward and a tiny bit right,1.0,-10.0,0.0,10.0,0.0,0.0
-move a little backward and right,10.0,-5.0,0.0,10.0,0.0,1.0
-move a little backward and a little right,5.0,-5.0,0.0,10.0,0.0,0.0
-move a little backward and a lot right,20.0,-5.0,0.0,10.0,0.0,1.0
-move a little backward and a tiny bit right,1.0,-5.0,0.0,10.0,0.0,0.0
-move a lot backward and right,10.0,-20.0,0.0,10.0,0.0,1.0
-move a lot backward and a little right,5.0,-20.0,0.0,10.0,0.0,0.0
-move a lot backward and a lot right,20.0,-20.0,0.0,10.0,0.0,1.0
-move a lot backward and a tiny bit right,1.0,-20.0,0.0,10.0,0.0,0.0
-move a tiny bit backward and right,10.0,-1.0,0.0,10.0,0.0,1.0
-move a tiny bit backward and a little right,5.0,-1.0,0.0,10.0,0.0,0.0
-move a tiny bit backward and a lot right,20.0,-1.0,0.0,10.0,0.0,1.0
-move a tiny bit backward and a tiny bit right,1.0,-1.0,0.0,10.0,0.0,0.0
-move backward and up,0.0,-10.0,10.0,10.0,0.0,1.0
-move backward and a little up,0.0,-10.0,5.0,10.0,0.0,0.0
-move backward and a lot up,0.0,-10.0,20.0,10.0,0.0,1.0
-move backward and a tiny bit up,0.0,-10.0,1.0,10.0,0.0,0.0
-move a little backward and up,0.0,-5.0,10.0,10.0,0.0,1.0
-move a little backward and a little up,0.0,-5.0,5.0,10.0,0.0,0.0
-move a little backward and a lot up,0.0,-5.0,20.0,10.0,0.0,1.0
-move a little backward and a tiny bit up,0.0,-5.0,1.0,10.0,0.0,0.0
-move a lot backward and up,0.0,-20.0,10.0,10.0,0.0,1.0
-move a lot backward and a little up,0.0,-20.0,5.0,10.0,0.0,0.0
-move a lot backward and a lot up,0.0,-20.0,20.0,10.0,0.0,1.0
-move a lot backward and a tiny bit up,0.0,-20.0,1.0,10.0,0.0,0.0
-move a tiny bit backward and up,0.0,-1.0,10.0,10.0,0.0,1.0
-move a tiny bit backward and a little up,0.0,-1.0,5.0,10.0,0.0,0.0
-move a tiny bit backward and a lot up,0.0,-1.0,20.0,10.0,0.0,1.0
-move a tiny bit backward and a tiny bit up,0.0,-1.0,1.0,10.0,0.0,0.0
-move backward and down,0.0,-10.0,-10.0,10.0,0.0,1.0
-move backward and a little down,0.0,-10.0,-5.0,10.0,0.0,0.0
-move backward and a lot down,0.0,-10.0,-20.0,10.0,0.0,1.0
-move backward and a tiny bit down,0.0,-10.0,-1.0,10.0,0.0,0.0
-move a little backward and down,0.0,-5.0,-10.0,10.0,0.0,1.0
-move a little backward and a little down,0.0,-5.0,-5.0,10.0,0.0,0.0
-move a little backward and a lot down,0.0,-5.0,-20.0,10.0,0.0,1.0
-move a little backward and a tiny bit down,0.0,-5.0,-1.0,10.0,0.0,0.0
-move a lot backward and down,0.0,-20.0,-10.0,10.0,0.0,1.0
-move a lot backward and a little down,0.0,-20.0,-5.0,10.0,0.0,0.0
-move a lot backward and a lot down,0.0,-20.0,-20.0,10.0,0.0,1.0
-move a lot backward and a tiny bit down,0.0,-20.0,-1.0,10.0,0.0,0.0
-move a tiny bit backward and down,0.0,-1.0,-10.0,10.0,0.0,1.0
-move a tiny bit backward and a little down,0.0,-1.0,-5.0,10.0,0.0,0.0
-move a tiny bit backward and a lot down,0.0,-1.0,-20.0,10.0,0.0,1.0
-move a tiny bit backward and a tiny bit down,0.0,-1.0,-1.0,10.0,0.0,0.0
-move up and left,-10.0,0.0,10.0,10.0,0.0,1.0
-move up and a little left,-5.0,0.0,10.0,10.0,0.0,0.0
-move up and a lot left,-20.0,0.0,10.0,10.0,0.0,1.0
-move up and a tiny bit left,-1.0,0.0,10.0,10.0,0.0,0.0
-move a little up and left,-10.0,0.0,5.0,10.0,0.0,1.0
-move a little up and a little left,-5.0,0.0,5.0,10.0,0.0,0.0
-move a little up and a lot left,-20.0,0.0,5.0,10.0,0.0,1.0
-move a little up and a tiny bit left,-1.0,0.0,5.0,10.0,0.0,0.0
-move a lot up and left,-10.0,0.0,20.0,10.0,0.0,1.0
-move a lot up and a little left,-5.0,0.0,20.0,10.0,0.0,0.0
-move a lot up and a lot left,-20.0,0.0,20.0,10.0,0.0,1.0
-move a lot up and a tiny bit left,-1.0,0.0,20.0,10.0,0.0,0.0
-move a tiny bit up and left,-10.0,0.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a little left,-5.0,0.0,1.0,10.0,0.0,0.0
-move a tiny bit up and a lot left,-20.0,0.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a tiny bit left,-1.0,0.0,1.0,10.0,0.0,0.0
-move up and right,10.0,0.0,10.0,10.0,0.0,1.0
-move up and a little right,5.0,0.0,10.0,10.0,0.0,0.0
-move up and a lot right,20.0,0.0,10.0,10.0,0.0,1.0
-move up and a tiny bit right,1.0,0.0,10.0,10.0,0.0,0.0
-move a little up and right,10.0,0.0,5.0,10.0,0.0,1.0
-move a little up and a little right,5.0,0.0,5.0,10.0,0.0,0.0
-move a little up and a lot right,20.0,0.0,5.0,10.0,0.0,1.0
-move a little up and a tiny bit right,1.0,0.0,5.0,10.0,0.0,0.0
-move a lot up and right,10.0,0.0,20.0,10.0,0.0,1.0
-move a lot up and a little right,5.0,0.0,20.0,10.0,0.0,0.0
-move a lot up and a lot right,20.0,0.0,20.0,10.0,0.0,1.0
-move a lot up and a tiny bit right,1.0,0.0,20.0,10.0,0.0,0.0
-move a tiny bit up and right,10.0,0.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a little right,5.0,0.0,1.0,10.0,0.0,0.0
-move a tiny bit up and a lot right,20.0,0.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a tiny bit right,1.0,0.0,1.0,10.0,0.0,0.0
-move up and forward,0.0,10.0,10.0,10.0,0.0,1.0
-move up and a little forward,0.0,5.0,10.0,10.0,0.0,0.0
-move up and a lot forward,0.0,20.0,10.0,10.0,0.0,1.0
-move up and a tiny bit forward,0.0,1.0,10.0,10.0,0.0,0.0
-move a little up and forward,0.0,10.0,5.0,10.0,0.0,1.0
-move a little up and a little forward,0.0,5.0,5.0,10.0,0.0,0.0
-move a little up and a lot forward,0.0,20.0,5.0,10.0,0.0,1.0
-move a little up and a tiny bit forward,0.0,1.0,5.0,10.0,0.0,0.0
-move a lot up and forward,0.0,10.0,20.0,10.0,0.0,1.0
-move a lot up and a little forward,0.0,5.0,20.0,10.0,0.0,0.0
-move a lot up and a lot forward,0.0,20.0,20.0,10.0,0.0,1.0
-move a lot up and a tiny bit forward,0.0,1.0,20.0,10.0,0.0,0.0
-move a tiny bit up and forward,0.0,10.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a little forward,0.0,5.0,1.0,10.0,0.0,0.0
-move a tiny bit up and a lot forward,0.0,20.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a tiny bit forward,0.0,1.0,1.0,10.0,0.0,0.0
-move up and backward,0.0,-10.0,10.0,10.0,0.0,1.0
-move up and a little backward,0.0,-5.0,10.0,10.0,0.0,0.0
-move up and a lot backward,0.0,-20.0,10.0,10.0,0.0,1.0
-move up and a tiny bit backward,0.0,-1.0,10.0,10.0,0.0,0.0
-move a little up and backward,0.0,-10.0,5.0,10.0,0.0,1.0
-move a little up and a little backward,0.0,-5.0,5.0,10.0,0.0,0.0
-move a little up and a lot backward,0.0,-20.0,5.0,10.0,0.0,1.0
-move a little up and a tiny bit backward,0.0,-1.0,5.0,10.0,0.0,0.0
-move a lot up and backward,0.0,-10.0,20.0,10.0,0.0,1.0
-move a lot up and a little backward,0.0,-5.0,20.0,10.0,0.0,0.0
-move a lot up and a lot backward,0.0,-20.0,20.0,10.0,0.0,1.0
-move a lot up and a tiny bit backward,0.0,-1.0,20.0,10.0,0.0,0.0
-move a tiny bit up and backward,0.0,-10.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a little backward,0.0,-5.0,1.0,10.0,0.0,0.0
-move a tiny bit up and a lot backward,0.0,-20.0,1.0,10.0,0.0,1.0
-move a tiny bit up and a tiny bit backward,0.0,-1.0,1.0,10.0,0.0,0.0
-move down and left,-10.0,0.0,-10.0,10.0,0.0,1.0
-move down and a little left,-5.0,0.0,-10.0,10.0,0.0,0.0
-move down and a lot left,-20.0,0.0,-10.0,10.0,0.0,1.0
-move down and a tiny bit left,-1.0,0.0,-10.0,10.0,0.0,0.0
-move a little down and left,-10.0,0.0,-5.0,10.0,0.0,1.0
-move a little down and a little left,-5.0,0.0,-5.0,10.0,0.0,0.0
-move a little down and a lot left,-20.0,0.0,-5.0,10.0,0.0,1.0
-move a little down and a tiny bit left,-1.0,0.0,-5.0,10.0,0.0,0.0
-move a lot down and left,-10.0,0.0,-20.0,10.0,0.0,1.0
-move a lot down and a little left,-5.0,0.0,-20.0,10.0,0.0,0.0
-move a lot down and a lot left,-20.0,0.0,-20.0,10.0,0.0,1.0
-move a lot down and a tiny bit left,-1.0,0.0,-20.0,10.0,0.0,0.0
-move a tiny bit down and left,-10.0,0.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a little left,-5.0,0.0,-1.0,10.0,0.0,0.0
-move a tiny bit down and a lot left,-20.0,0.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a tiny bit left,-1.0,0.0,-1.0,10.0,0.0,0.0
-move down and right,10.0,0.0,-10.0,10.0,0.0,1.0
-move down and a little right,5.0,0.0,-10.0,10.0,0.0,0.0
-move down and a lot right,20.0,0.0,-10.0,10.0,0.0,1.0
-move down and a tiny bit right,1.0,0.0,-10.0,10.0,0.0,0.0
-move a little down and right,10.0,0.0,-5.0,10.0,0.0,1.0
-move a little down and a little right,5.0,0.0,-5.0,10.0,0.0,0.0
-move a little down and a lot right,20.0,0.0,-5.0,10.0,0.0,1.0
-move a little down and a tiny bit right,1.0,0.0,-5.0,10.0,0.0,0.0
-move a lot down and right,10.0,0.0,-20.0,10.0,0.0,1.0
-move a lot down and a little right,5.0,0.0,-20.0,10.0,0.0,0.0
-move a lot down and a lot right,20.0,0.0,-20.0,10.0,0.0,1.0
-move a lot down and a tiny bit right,1.0,0.0,-20.0,10.0,0.0,0.0
-move a tiny bit down and right,10.0,0.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a little right,5.0,0.0,-1.0,10.0,0.0,0.0
-move a tiny bit down and a lot right,20.0,0.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a tiny bit right,1.0,0.0,-1.0,10.0,0.0,0.0
-move down and forward,0.0,10.0,-10.0,10.0,0.0,1.0
-move down and a little forward,0.0,5.0,-10.0,10.0,0.0,0.0
-move down and a lot forward,0.0,20.0,-10.0,10.0,0.0,1.0
-move down and a tiny bit forward,0.0,1.0,-10.0,10.0,0.0,0.0
-move a little down and forward,0.0,10.0,-5.0,10.0,0.0,1.0
-move a little down and a little forward,0.0,5.0,-5.0,10.0,0.0,0.0
-move a little down and a lot forward,0.0,20.0,-5.0,10.0,0.0,1.0
-move a little down and a tiny bit forward,0.0,1.0,-5.0,10.0,0.0,0.0
-move a lot down and forward,0.0,10.0,-20.0,10.0,0.0,1.0
-move a lot down and a little forward,0.0,5.0,-20.0,10.0,0.0,0.0
-move a lot down and a lot forward,0.0,20.0,-20.0,10.0,0.0,1.0
-move a lot down and a tiny bit forward,0.0,1.0,-20.0,10.0,0.0,0.0
-move a tiny bit down and forward,0.0,10.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a little forward,0.0,5.0,-1.0,10.0,0.0,0.0
-move a tiny bit down and a lot forward,0.0,20.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a tiny bit forward,0.0,1.0,-1.0,10.0,0.0,0.0
-move down and backward,0.0,-10.0,-10.0,10.0,0.0,1.0
-move down and a little backward,0.0,-5.0,-10.0,10.0,0.0,0.0
-move down and a lot backward,0.0,-20.0,-10.0,10.0,0.0,1.0
-move down and a tiny bit backward,0.0,-1.0,-10.0,10.0,0.0,0.0
-move a little down and backward,0.0,-10.0,-5.0,10.0,0.0,1.0
-move a little down and a little backward,0.0,-5.0,-5.0,10.0,0.0,0.0
-move a little down and a lot backward,0.0,-20.0,-5.0,10.0,0.0,1.0
-move a little down and a tiny bit backward,0.0,-1.0,-5.0,10.0,0.0,0.0
-move a lot down and backward,0.0,-10.0,-20.0,10.0,0.0,1.0
-move a lot down and a little backward,0.0,-5.0,-20.0,10.0,0.0,0.0
-move a lot down and a lot backward,0.0,-20.0,-20.0,10.0,0.0,1.0
-move a lot down and a tiny bit backward,0.0,-1.0,-20.0,10.0,0.0,0.0
-move a tiny bit down and backward,0.0,-10.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a little backward,0.0,-5.0,-1.0,10.0,0.0,0.0
-move a tiny bit down and a lot backward,0.0,-20.0,-1.0,10.0,0.0,1.0
-move a tiny bit down and a tiny bit backward,0.0,-1.0,-1.0,10.0,0.0,0.0
-rotate clockwise,0.0,0.0,0.0,0.0,90.0,1.0
-rotate a little clockwise,0.0,0.0,0.0,0.0,45.0,0.0
-rotate a lot clockwise,0.0,0.0,0.0,0.0,180.0,1.0
-rotate a tiny bit clockwise,0.0,0.0,0.0,0.0,9.0,0.0
-rotate counterclockwise,-0.0,-0.0,-0.0,-0.0,-90.0,1.0
-rotate a little counterclockwise,-0.0,-0.0,-0.0,-0.0,-45.0,-0.0
-rotate a lot counterclockwise,-0.0,-0.0,-0.0,-0.0,-180.0,1.0
-rotate a tiny bit counterclockwise,-0.0,-0.0,-0.0,-0.0,-9.0,-0.0
-stop,0.0,0.0,0.0,0.0,0.0,0.0
-open the gripper,0.0,0.0,0.0,0.0,0.0,1.0
-close the gripper,0.0,0.0,0.0,0.0,0.0,0.0
+command, x, y, z, v, r, yaw, g
+move left,-10.0,0.0,0.0,10.0,0.0,0.0,1.0
+move left slowly,-10.0,0.0,0.0,5.0,0.0,0.0,1.0
+move left quickly,-10.0,0.0,0.0,20.0,0.0,0.0,1.0
+move a little left,-5.0,0.0,0.0,10.0,0.0,0.0,1.0
+move a little left slowly,-5.0,0.0,0.0,5.0,0.0,0.0,1.0
+move a little left quickly,-5.0,0.0,0.0,20.0,0.0,0.0,1.0
+move a lot left,-20.0,0.0,0.0,10.0,0.0,0.0,1.0
+move a lot left slowly,-20.0,0.0,0.0,5.0,0.0,0.0,1.0
+move a lot left quickly,-20.0,0.0,0.0,20.0,0.0,0.0,1.0
+move a tiny bit left,-1.0,0.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left slowly,-1.0,0.0,0.0,5.0,0.0,0.0,1.0
+move a tiny bit left quickly,-1.0,0.0,0.0,20.0,0.0,0.0,1.0
+move right,10.0,0.0,0.0,10.0,0.0,0.0,1.0
+move right slowly,10.0,0.0,0.0,5.0,0.0,0.0,1.0
+move right quickly,10.0,0.0,0.0,20.0,0.0,0.0,1.0
+move a little right,5.0,0.0,0.0,10.0,0.0,0.0,1.0
+move a little right slowly,5.0,0.0,0.0,5.0,0.0,0.0,1.0
+move a little right quickly,5.0,0.0,0.0,20.0,0.0,0.0,1.0
+move a lot right,20.0,0.0,0.0,10.0,0.0,0.0,1.0
+move a lot right slowly,20.0,0.0,0.0,5.0,0.0,0.0,1.0
+move a lot right quickly,20.0,0.0,0.0,20.0,0.0,0.0,1.0
+move a tiny bit right,1.0,0.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right slowly,1.0,0.0,0.0,5.0,0.0,0.0,1.0
+move a tiny bit right quickly,1.0,0.0,0.0,20.0,0.0,0.0,1.0
+move forward,0.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward slowly,0.0,10.0,0.0,5.0,0.0,0.0,1.0
+move forward quickly,0.0,10.0,0.0,20.0,0.0,0.0,1.0
+move a little forward,0.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward slowly,0.0,5.0,0.0,5.0,0.0,0.0,1.0
+move a little forward quickly,0.0,5.0,0.0,20.0,0.0,0.0,1.0
+move a lot forward,0.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward slowly,0.0,20.0,0.0,5.0,0.0,0.0,1.0
+move a lot forward quickly,0.0,20.0,0.0,20.0,0.0,0.0,1.0
+move a tiny bit forward,0.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward slowly,0.0,1.0,0.0,5.0,0.0,0.0,1.0
+move a tiny bit forward quickly,0.0,1.0,0.0,20.0,0.0,0.0,1.0
+move backward,0.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward slowly,0.0,-10.0,0.0,5.0,0.0,0.0,1.0
+move backward quickly,0.0,-10.0,0.0,20.0,0.0,0.0,1.0
+move a little backward,0.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward slowly,0.0,-5.0,0.0,5.0,0.0,0.0,1.0
+move a little backward quickly,0.0,-5.0,0.0,20.0,0.0,0.0,1.0
+move a lot backward,0.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward slowly,0.0,-20.0,0.0,5.0,0.0,0.0,1.0
+move a lot backward quickly,0.0,-20.0,0.0,20.0,0.0,0.0,1.0
+move a tiny bit backward,0.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward slowly,0.0,-1.0,0.0,5.0,0.0,0.0,1.0
+move a tiny bit backward quickly,0.0,-1.0,0.0,20.0,0.0,0.0,1.0
+move up,0.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up slowly,0.0,0.0,10.0,5.0,0.0,0.0,1.0
+move up quickly,0.0,0.0,10.0,20.0,0.0,0.0,1.0
+move a little up,0.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up slowly,0.0,0.0,5.0,5.0,0.0,0.0,1.0
+move a little up quickly,0.0,0.0,5.0,20.0,0.0,0.0,1.0
+move a lot up,0.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up slowly,0.0,0.0,20.0,5.0,0.0,0.0,1.0
+move a lot up quickly,0.0,0.0,20.0,20.0,0.0,0.0,1.0
+move a tiny bit up,0.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up slowly,0.0,0.0,1.0,5.0,0.0,0.0,1.0
+move a tiny bit up quickly,0.0,0.0,1.0,20.0,0.0,0.0,1.0
+move down,0.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down slowly,0.0,0.0,-10.0,5.0,0.0,0.0,1.0
+move down quickly,0.0,0.0,-10.0,20.0,0.0,0.0,1.0
+move a little down,0.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down slowly,0.0,0.0,-5.0,5.0,0.0,0.0,1.0
+move a little down quickly,0.0,0.0,-5.0,20.0,0.0,0.0,1.0
+move a lot down,0.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down slowly,0.0,0.0,-20.0,5.0,0.0,0.0,1.0
+move a lot down quickly,0.0,0.0,-20.0,20.0,0.0,0.0,1.0
+move a tiny bit down,0.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down slowly,0.0,0.0,-1.0,5.0,0.0,0.0,1.0
+move a tiny bit down quickly,0.0,0.0,-1.0,20.0,0.0,0.0,1.0
+move left,-10.0,0.0,0.0,10.0,0.0,0.0,0.0
+move left slowly,-10.0,0.0,0.0,5.0,0.0,0.0,0.0
+move left quickly,-10.0,0.0,0.0,20.0,0.0,0.0,0.0
+move a little left,-5.0,0.0,0.0,10.0,0.0,0.0,0.0
+move a little left slowly,-5.0,0.0,0.0,5.0,0.0,0.0,0.0
+move a little left quickly,-5.0,0.0,0.0,20.0,0.0,0.0,0.0
+move a lot left,-20.0,0.0,0.0,10.0,0.0,0.0,0.0
+move a lot left slowly,-20.0,0.0,0.0,5.0,0.0,0.0,0.0
+move a lot left quickly,-20.0,0.0,0.0,20.0,0.0,0.0,0.0
+move a tiny bit left,-1.0,0.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left slowly,-1.0,0.0,0.0,5.0,0.0,0.0,0.0
+move a tiny bit left quickly,-1.0,0.0,0.0,20.0,0.0,0.0,0.0
+move right,10.0,0.0,0.0,10.0,0.0,0.0,0.0
+move right slowly,10.0,0.0,0.0,5.0,0.0,0.0,0.0
+move right quickly,10.0,0.0,0.0,20.0,0.0,0.0,0.0
+move a little right,5.0,0.0,0.0,10.0,0.0,0.0,0.0
+move a little right slowly,5.0,0.0,0.0,5.0,0.0,0.0,0.0
+move a little right quickly,5.0,0.0,0.0,20.0,0.0,0.0,0.0
+move a lot right,20.0,0.0,0.0,10.0,0.0,0.0,0.0
+move a lot right slowly,20.0,0.0,0.0,5.0,0.0,0.0,0.0
+move a lot right quickly,20.0,0.0,0.0,20.0,0.0,0.0,0.0
+move a tiny bit right,1.0,0.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right slowly,1.0,0.0,0.0,5.0,0.0,0.0,0.0
+move a tiny bit right quickly,1.0,0.0,0.0,20.0,0.0,0.0,0.0
+move forward,0.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward slowly,0.0,10.0,0.0,5.0,0.0,0.0,0.0
+move forward quickly,0.0,10.0,0.0,20.0,0.0,0.0,0.0
+move a little forward,0.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward slowly,0.0,5.0,0.0,5.0,0.0,0.0,0.0
+move a little forward quickly,0.0,5.0,0.0,20.0,0.0,0.0,0.0
+move a lot forward,0.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward slowly,0.0,20.0,0.0,5.0,0.0,0.0,0.0
+move a lot forward quickly,0.0,20.0,0.0,20.0,0.0,0.0,0.0
+move a tiny bit forward,0.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward slowly,0.0,1.0,0.0,5.0,0.0,0.0,0.0
+move a tiny bit forward quickly,0.0,1.0,0.0,20.0,0.0,0.0,0.0
+move backward,0.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward slowly,0.0,-10.0,0.0,5.0,0.0,0.0,0.0
+move backward quickly,0.0,-10.0,0.0,20.0,0.0,0.0,0.0
+move a little backward,0.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward slowly,0.0,-5.0,0.0,5.0,0.0,0.0,0.0
+move a little backward quickly,0.0,-5.0,0.0,20.0,0.0,0.0,0.0
+move a lot backward,0.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward slowly,0.0,-20.0,0.0,5.0,0.0,0.0,0.0
+move a lot backward quickly,0.0,-20.0,0.0,20.0,0.0,0.0,0.0
+move a tiny bit backward,0.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward slowly,0.0,-1.0,0.0,5.0,0.0,0.0,0.0
+move a tiny bit backward quickly,0.0,-1.0,0.0,20.0,0.0,0.0,0.0
+move up,0.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up slowly,0.0,0.0,10.0,5.0,0.0,0.0,0.0
+move up quickly,0.0,0.0,10.0,20.0,0.0,0.0,0.0
+move a little up,0.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up slowly,0.0,0.0,5.0,5.0,0.0,0.0,0.0
+move a little up quickly,0.0,0.0,5.0,20.0,0.0,0.0,0.0
+move a lot up,0.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up slowly,0.0,0.0,20.0,5.0,0.0,0.0,0.0
+move a lot up quickly,0.0,0.0,20.0,20.0,0.0,0.0,0.0
+move a tiny bit up,0.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up slowly,0.0,0.0,1.0,5.0,0.0,0.0,0.0
+move a tiny bit up quickly,0.0,0.0,1.0,20.0,0.0,0.0,0.0
+move down,0.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down slowly,0.0,0.0,-10.0,5.0,0.0,0.0,0.0
+move down quickly,0.0,0.0,-10.0,20.0,0.0,0.0,0.0
+move a little down,0.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down slowly,0.0,0.0,-5.0,5.0,0.0,0.0,0.0
+move a little down quickly,0.0,0.0,-5.0,20.0,0.0,0.0,0.0
+move a lot down,0.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down slowly,0.0,0.0,-20.0,5.0,0.0,0.0,0.0
+move a lot down quickly,0.0,0.0,-20.0,20.0,0.0,0.0,0.0
+move a tiny bit down,0.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down slowly,0.0,0.0,-1.0,5.0,0.0,0.0,0.0
+move a tiny bit down quickly,0.0,0.0,-1.0,20.0,0.0,0.0,0.0
+move left and forward,-10.0,10.0,0.0,10.0,0.0,0.0,1.0
+move left and a little forward,-10.0,5.0,0.0,10.0,0.0,0.0,1.0
+move left and a lot forward,-10.0,20.0,0.0,10.0,0.0,0.0,1.0
+move left and a tiny bit forward,-10.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a little left and forward,-5.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a little left and a little forward,-5.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little left and a lot forward,-5.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a little left and a tiny bit forward,-5.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and forward,-20.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and a little forward,-20.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and a lot forward,-20.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and a tiny bit forward,-20.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and forward,-1.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a little forward,-1.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a lot forward,-1.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a tiny bit forward,-1.0,1.0,0.0,10.0,0.0,0.0,1.0
+move left and backward,-10.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move left and a little backward,-10.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move left and a lot backward,-10.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move left and a tiny bit backward,-10.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a little left and backward,-5.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a little left and a little backward,-5.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little left and a lot backward,-5.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a little left and a tiny bit backward,-5.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and backward,-20.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and a little backward,-20.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and a lot backward,-20.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot left and a tiny bit backward,-20.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and backward,-1.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a little backward,-1.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a lot backward,-1.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a tiny bit backward,-1.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move left and up,-10.0,0.0,10.0,10.0,0.0,0.0,1.0
+move left and a little up,-10.0,0.0,5.0,10.0,0.0,0.0,1.0
+move left and a lot up,-10.0,0.0,20.0,10.0,0.0,0.0,1.0
+move left and a tiny bit up,-10.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a little left and up,-5.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a little left and a little up,-5.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little left and a lot up,-5.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a little left and a tiny bit up,-5.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a lot left and up,-20.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a lot left and a little up,-20.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a lot left and a lot up,-20.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot left and a tiny bit up,-20.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit left and up,-1.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a little up,-1.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a lot up,-1.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a tiny bit up,-1.0,0.0,1.0,10.0,0.0,0.0,1.0
+move left and down,-10.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move left and a little down,-10.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move left and a lot down,-10.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move left and a tiny bit down,-10.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a little left and down,-5.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a little left and a little down,-5.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little left and a lot down,-5.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a little left and a tiny bit down,-5.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a lot left and down,-20.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a lot left and a little down,-20.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a lot left and a lot down,-20.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot left and a tiny bit down,-20.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit left and down,-1.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a little down,-1.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a lot down,-1.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit left and a tiny bit down,-1.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move right and forward,10.0,10.0,0.0,10.0,0.0,0.0,1.0
+move right and a little forward,10.0,5.0,0.0,10.0,0.0,0.0,1.0
+move right and a lot forward,10.0,20.0,0.0,10.0,0.0,0.0,1.0
+move right and a tiny bit forward,10.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a little right and forward,5.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a little right and a little forward,5.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little right and a lot forward,5.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a little right and a tiny bit forward,5.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and forward,20.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and a little forward,20.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and a lot forward,20.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and a tiny bit forward,20.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and forward,1.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a little forward,1.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a lot forward,1.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a tiny bit forward,1.0,1.0,0.0,10.0,0.0,0.0,1.0
+move right and backward,10.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move right and a little backward,10.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move right and a lot backward,10.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move right and a tiny bit backward,10.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a little right and backward,5.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a little right and a little backward,5.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little right and a lot backward,5.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a little right and a tiny bit backward,5.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and backward,20.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and a little backward,20.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and a lot backward,20.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot right and a tiny bit backward,20.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and backward,1.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a little backward,1.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a lot backward,1.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a tiny bit backward,1.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move right and up,10.0,0.0,10.0,10.0,0.0,0.0,1.0
+move right and a little up,10.0,0.0,5.0,10.0,0.0,0.0,1.0
+move right and a lot up,10.0,0.0,20.0,10.0,0.0,0.0,1.0
+move right and a tiny bit up,10.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a little right and up,5.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a little right and a little up,5.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little right and a lot up,5.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a little right and a tiny bit up,5.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a lot right and up,20.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a lot right and a little up,20.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a lot right and a lot up,20.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot right and a tiny bit up,20.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit right and up,1.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a little up,1.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a lot up,1.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a tiny bit up,1.0,0.0,1.0,10.0,0.0,0.0,1.0
+move right and down,10.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move right and a little down,10.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move right and a lot down,10.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move right and a tiny bit down,10.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a little right and down,5.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a little right and a little down,5.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little right and a lot down,5.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a little right and a tiny bit down,5.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a lot right and down,20.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a lot right and a little down,20.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a lot right and a lot down,20.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot right and a tiny bit down,20.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit right and down,1.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a little down,1.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a lot down,1.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit right and a tiny bit down,1.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move forward and left,-10.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward and a little left,-5.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward and a lot left,-20.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward and a tiny bit left,-1.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and left,-10.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and a little left,-5.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and a lot left,-20.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and a tiny bit left,-1.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and left,-10.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and a little left,-5.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and a lot left,-20.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and a tiny bit left,-1.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and left,-10.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a little left,-5.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a lot left,-20.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a tiny bit left,-1.0,1.0,0.0,10.0,0.0,0.0,1.0
+move forward and right,10.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward and a little right,5.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward and a lot right,20.0,10.0,0.0,10.0,0.0,0.0,1.0
+move forward and a tiny bit right,1.0,10.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and right,10.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and a little right,5.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and a lot right,20.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a little forward and a tiny bit right,1.0,5.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and right,10.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and a little right,5.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and a lot right,20.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a lot forward and a tiny bit right,1.0,20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and right,10.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a little right,5.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a lot right,20.0,1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a tiny bit right,1.0,1.0,0.0,10.0,0.0,0.0,1.0
+move forward and up,0.0,10.0,10.0,10.0,0.0,0.0,1.0
+move forward and a little up,0.0,10.0,5.0,10.0,0.0,0.0,1.0
+move forward and a lot up,0.0,10.0,20.0,10.0,0.0,0.0,1.0
+move forward and a tiny bit up,0.0,10.0,1.0,10.0,0.0,0.0,1.0
+move a little forward and up,0.0,5.0,10.0,10.0,0.0,0.0,1.0
+move a little forward and a little up,0.0,5.0,5.0,10.0,0.0,0.0,1.0
+move a little forward and a lot up,0.0,5.0,20.0,10.0,0.0,0.0,1.0
+move a little forward and a tiny bit up,0.0,5.0,1.0,10.0,0.0,0.0,1.0
+move a lot forward and up,0.0,20.0,10.0,10.0,0.0,0.0,1.0
+move a lot forward and a little up,0.0,20.0,5.0,10.0,0.0,0.0,1.0
+move a lot forward and a lot up,0.0,20.0,20.0,10.0,0.0,0.0,1.0
+move a lot forward and a tiny bit up,0.0,20.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and up,0.0,1.0,10.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a little up,0.0,1.0,5.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a lot up,0.0,1.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a tiny bit up,0.0,1.0,1.0,10.0,0.0,0.0,1.0
+move forward and down,0.0,10.0,-10.0,10.0,0.0,0.0,1.0
+move forward and a little down,0.0,10.0,-5.0,10.0,0.0,0.0,1.0
+move forward and a lot down,0.0,10.0,-20.0,10.0,0.0,0.0,1.0
+move forward and a tiny bit down,0.0,10.0,-1.0,10.0,0.0,0.0,1.0
+move a little forward and down,0.0,5.0,-10.0,10.0,0.0,0.0,1.0
+move a little forward and a little down,0.0,5.0,-5.0,10.0,0.0,0.0,1.0
+move a little forward and a lot down,0.0,5.0,-20.0,10.0,0.0,0.0,1.0
+move a little forward and a tiny bit down,0.0,5.0,-1.0,10.0,0.0,0.0,1.0
+move a lot forward and down,0.0,20.0,-10.0,10.0,0.0,0.0,1.0
+move a lot forward and a little down,0.0,20.0,-5.0,10.0,0.0,0.0,1.0
+move a lot forward and a lot down,0.0,20.0,-20.0,10.0,0.0,0.0,1.0
+move a lot forward and a tiny bit down,0.0,20.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and down,0.0,1.0,-10.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a little down,0.0,1.0,-5.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a lot down,0.0,1.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit forward and a tiny bit down,0.0,1.0,-1.0,10.0,0.0,0.0,1.0
+move backward and left,-10.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward and a little left,-5.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward and a lot left,-20.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward and a tiny bit left,-1.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and left,-10.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and a little left,-5.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and a lot left,-20.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and a tiny bit left,-1.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and left,-10.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and a little left,-5.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and a lot left,-20.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and a tiny bit left,-1.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and left,-10.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a little left,-5.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a lot left,-20.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a tiny bit left,-1.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move backward and right,10.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward and a little right,5.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward and a lot right,20.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move backward and a tiny bit right,1.0,-10.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and right,10.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and a little right,5.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and a lot right,20.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a little backward and a tiny bit right,1.0,-5.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and right,10.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and a little right,5.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and a lot right,20.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a lot backward and a tiny bit right,1.0,-20.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and right,10.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a little right,5.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a lot right,20.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a tiny bit right,1.0,-1.0,0.0,10.0,0.0,0.0,1.0
+move backward and up,0.0,-10.0,10.0,10.0,0.0,0.0,1.0
+move backward and a little up,0.0,-10.0,5.0,10.0,0.0,0.0,1.0
+move backward and a lot up,0.0,-10.0,20.0,10.0,0.0,0.0,1.0
+move backward and a tiny bit up,0.0,-10.0,1.0,10.0,0.0,0.0,1.0
+move a little backward and up,0.0,-5.0,10.0,10.0,0.0,0.0,1.0
+move a little backward and a little up,0.0,-5.0,5.0,10.0,0.0,0.0,1.0
+move a little backward and a lot up,0.0,-5.0,20.0,10.0,0.0,0.0,1.0
+move a little backward and a tiny bit up,0.0,-5.0,1.0,10.0,0.0,0.0,1.0
+move a lot backward and up,0.0,-20.0,10.0,10.0,0.0,0.0,1.0
+move a lot backward and a little up,0.0,-20.0,5.0,10.0,0.0,0.0,1.0
+move a lot backward and a lot up,0.0,-20.0,20.0,10.0,0.0,0.0,1.0
+move a lot backward and a tiny bit up,0.0,-20.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and up,0.0,-1.0,10.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a little up,0.0,-1.0,5.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a lot up,0.0,-1.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a tiny bit up,0.0,-1.0,1.0,10.0,0.0,0.0,1.0
+move backward and down,0.0,-10.0,-10.0,10.0,0.0,0.0,1.0
+move backward and a little down,0.0,-10.0,-5.0,10.0,0.0,0.0,1.0
+move backward and a lot down,0.0,-10.0,-20.0,10.0,0.0,0.0,1.0
+move backward and a tiny bit down,0.0,-10.0,-1.0,10.0,0.0,0.0,1.0
+move a little backward and down,0.0,-5.0,-10.0,10.0,0.0,0.0,1.0
+move a little backward and a little down,0.0,-5.0,-5.0,10.0,0.0,0.0,1.0
+move a little backward and a lot down,0.0,-5.0,-20.0,10.0,0.0,0.0,1.0
+move a little backward and a tiny bit down,0.0,-5.0,-1.0,10.0,0.0,0.0,1.0
+move a lot backward and down,0.0,-20.0,-10.0,10.0,0.0,0.0,1.0
+move a lot backward and a little down,0.0,-20.0,-5.0,10.0,0.0,0.0,1.0
+move a lot backward and a lot down,0.0,-20.0,-20.0,10.0,0.0,0.0,1.0
+move a lot backward and a tiny bit down,0.0,-20.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and down,0.0,-1.0,-10.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a little down,0.0,-1.0,-5.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a lot down,0.0,-1.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit backward and a tiny bit down,0.0,-1.0,-1.0,10.0,0.0,0.0,1.0
+move up and left,-10.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up and a little left,-5.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up and a lot left,-20.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up and a tiny bit left,-1.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a little up and left,-10.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a little left,-5.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a lot left,-20.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a tiny bit left,-1.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a lot up and left,-10.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a little left,-5.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a lot left,-20.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a tiny bit left,-1.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit up and left,-10.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a little left,-5.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a lot left,-20.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a tiny bit left,-1.0,0.0,1.0,10.0,0.0,0.0,1.0
+move up and right,10.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up and a little right,5.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up and a lot right,20.0,0.0,10.0,10.0,0.0,0.0,1.0
+move up and a tiny bit right,1.0,0.0,10.0,10.0,0.0,0.0,1.0
+move a little up and right,10.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a little right,5.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a lot right,20.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a tiny bit right,1.0,0.0,5.0,10.0,0.0,0.0,1.0
+move a lot up and right,10.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a little right,5.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a lot right,20.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a tiny bit right,1.0,0.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit up and right,10.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a little right,5.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a lot right,20.0,0.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a tiny bit right,1.0,0.0,1.0,10.0,0.0,0.0,1.0
+move up and forward,0.0,10.0,10.0,10.0,0.0,0.0,1.0
+move up and a little forward,0.0,5.0,10.0,10.0,0.0,0.0,1.0
+move up and a lot forward,0.0,20.0,10.0,10.0,0.0,0.0,1.0
+move up and a tiny bit forward,0.0,1.0,10.0,10.0,0.0,0.0,1.0
+move a little up and forward,0.0,10.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a little forward,0.0,5.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a lot forward,0.0,20.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a tiny bit forward,0.0,1.0,5.0,10.0,0.0,0.0,1.0
+move a lot up and forward,0.0,10.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a little forward,0.0,5.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a lot forward,0.0,20.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a tiny bit forward,0.0,1.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit up and forward,0.0,10.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a little forward,0.0,5.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a lot forward,0.0,20.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a tiny bit forward,0.0,1.0,1.0,10.0,0.0,0.0,1.0
+move up and backward,0.0,-10.0,10.0,10.0,0.0,0.0,1.0
+move up and a little backward,0.0,-5.0,10.0,10.0,0.0,0.0,1.0
+move up and a lot backward,0.0,-20.0,10.0,10.0,0.0,0.0,1.0
+move up and a tiny bit backward,0.0,-1.0,10.0,10.0,0.0,0.0,1.0
+move a little up and backward,0.0,-10.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a little backward,0.0,-5.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a lot backward,0.0,-20.0,5.0,10.0,0.0,0.0,1.0
+move a little up and a tiny bit backward,0.0,-1.0,5.0,10.0,0.0,0.0,1.0
+move a lot up and backward,0.0,-10.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a little backward,0.0,-5.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a lot backward,0.0,-20.0,20.0,10.0,0.0,0.0,1.0
+move a lot up and a tiny bit backward,0.0,-1.0,20.0,10.0,0.0,0.0,1.0
+move a tiny bit up and backward,0.0,-10.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a little backward,0.0,-5.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a lot backward,0.0,-20.0,1.0,10.0,0.0,0.0,1.0
+move a tiny bit up and a tiny bit backward,0.0,-1.0,1.0,10.0,0.0,0.0,1.0
+move down and left,-10.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down and a little left,-5.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down and a lot left,-20.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down and a tiny bit left,-1.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a little down and left,-10.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a little left,-5.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a lot left,-20.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a tiny bit left,-1.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a lot down and left,-10.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a little left,-5.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a lot left,-20.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a tiny bit left,-1.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit down and left,-10.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a little left,-5.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a lot left,-20.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a tiny bit left,-1.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move down and right,10.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down and a little right,5.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down and a lot right,20.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move down and a tiny bit right,1.0,0.0,-10.0,10.0,0.0,0.0,1.0
+move a little down and right,10.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a little right,5.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a lot right,20.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a tiny bit right,1.0,0.0,-5.0,10.0,0.0,0.0,1.0
+move a lot down and right,10.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a little right,5.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a lot right,20.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a tiny bit right,1.0,0.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit down and right,10.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a little right,5.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a lot right,20.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a tiny bit right,1.0,0.0,-1.0,10.0,0.0,0.0,1.0
+move down and forward,0.0,10.0,-10.0,10.0,0.0,0.0,1.0
+move down and a little forward,0.0,5.0,-10.0,10.0,0.0,0.0,1.0
+move down and a lot forward,0.0,20.0,-10.0,10.0,0.0,0.0,1.0
+move down and a tiny bit forward,0.0,1.0,-10.0,10.0,0.0,0.0,1.0
+move a little down and forward,0.0,10.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a little forward,0.0,5.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a lot forward,0.0,20.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a tiny bit forward,0.0,1.0,-5.0,10.0,0.0,0.0,1.0
+move a lot down and forward,0.0,10.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a little forward,0.0,5.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a lot forward,0.0,20.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a tiny bit forward,0.0,1.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit down and forward,0.0,10.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a little forward,0.0,5.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a lot forward,0.0,20.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a tiny bit forward,0.0,1.0,-1.0,10.0,0.0,0.0,1.0
+move down and backward,0.0,-10.0,-10.0,10.0,0.0,0.0,1.0
+move down and a little backward,0.0,-5.0,-10.0,10.0,0.0,0.0,1.0
+move down and a lot backward,0.0,-20.0,-10.0,10.0,0.0,0.0,1.0
+move down and a tiny bit backward,0.0,-1.0,-10.0,10.0,0.0,0.0,1.0
+move a little down and backward,0.0,-10.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a little backward,0.0,-5.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a lot backward,0.0,-20.0,-5.0,10.0,0.0,0.0,1.0
+move a little down and a tiny bit backward,0.0,-1.0,-5.0,10.0,0.0,0.0,1.0
+move a lot down and backward,0.0,-10.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a little backward,0.0,-5.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a lot backward,0.0,-20.0,-20.0,10.0,0.0,0.0,1.0
+move a lot down and a tiny bit backward,0.0,-1.0,-20.0,10.0,0.0,0.0,1.0
+move a tiny bit down and backward,0.0,-10.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a little backward,0.0,-5.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a lot backward,0.0,-20.0,-1.0,10.0,0.0,0.0,1.0
+move a tiny bit down and a tiny bit backward,0.0,-1.0,-1.0,10.0,0.0,0.0,1.0
+move left and forward,-10.0,10.0,0.0,10.0,0.0,0.0,0.0
+move left and a little forward,-10.0,5.0,0.0,10.0,0.0,0.0,0.0
+move left and a lot forward,-10.0,20.0,0.0,10.0,0.0,0.0,0.0
+move left and a tiny bit forward,-10.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a little left and forward,-5.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a little left and a little forward,-5.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little left and a lot forward,-5.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a little left and a tiny bit forward,-5.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and forward,-20.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and a little forward,-20.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and a lot forward,-20.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and a tiny bit forward,-20.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and forward,-1.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a little forward,-1.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a lot forward,-1.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a tiny bit forward,-1.0,1.0,0.0,10.0,0.0,0.0,0.0
+move left and backward,-10.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move left and a little backward,-10.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move left and a lot backward,-10.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move left and a tiny bit backward,-10.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a little left and backward,-5.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a little left and a little backward,-5.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little left and a lot backward,-5.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a little left and a tiny bit backward,-5.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and backward,-20.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and a little backward,-20.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and a lot backward,-20.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot left and a tiny bit backward,-20.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and backward,-1.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a little backward,-1.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a lot backward,-1.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a tiny bit backward,-1.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move left and up,-10.0,0.0,10.0,10.0,0.0,0.0,0.0
+move left and a little up,-10.0,0.0,5.0,10.0,0.0,0.0,0.0
+move left and a lot up,-10.0,0.0,20.0,10.0,0.0,0.0,0.0
+move left and a tiny bit up,-10.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a little left and up,-5.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a little left and a little up,-5.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little left and a lot up,-5.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a little left and a tiny bit up,-5.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a lot left and up,-20.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a lot left and a little up,-20.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a lot left and a lot up,-20.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot left and a tiny bit up,-20.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit left and up,-1.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a little up,-1.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a lot up,-1.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a tiny bit up,-1.0,0.0,1.0,10.0,0.0,0.0,0.0
+move left and down,-10.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move left and a little down,-10.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move left and a lot down,-10.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move left and a tiny bit down,-10.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a little left and down,-5.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a little left and a little down,-5.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little left and a lot down,-5.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a little left and a tiny bit down,-5.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a lot left and down,-20.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a lot left and a little down,-20.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a lot left and a lot down,-20.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot left and a tiny bit down,-20.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit left and down,-1.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a little down,-1.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a lot down,-1.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit left and a tiny bit down,-1.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move right and forward,10.0,10.0,0.0,10.0,0.0,0.0,0.0
+move right and a little forward,10.0,5.0,0.0,10.0,0.0,0.0,0.0
+move right and a lot forward,10.0,20.0,0.0,10.0,0.0,0.0,0.0
+move right and a tiny bit forward,10.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a little right and forward,5.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a little right and a little forward,5.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little right and a lot forward,5.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a little right and a tiny bit forward,5.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and forward,20.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and a little forward,20.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and a lot forward,20.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and a tiny bit forward,20.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and forward,1.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a little forward,1.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a lot forward,1.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a tiny bit forward,1.0,1.0,0.0,10.0,0.0,0.0,0.0
+move right and backward,10.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move right and a little backward,10.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move right and a lot backward,10.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move right and a tiny bit backward,10.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a little right and backward,5.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a little right and a little backward,5.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little right and a lot backward,5.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a little right and a tiny bit backward,5.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and backward,20.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and a little backward,20.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and a lot backward,20.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot right and a tiny bit backward,20.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and backward,1.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a little backward,1.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a lot backward,1.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a tiny bit backward,1.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move right and up,10.0,0.0,10.0,10.0,0.0,0.0,0.0
+move right and a little up,10.0,0.0,5.0,10.0,0.0,0.0,0.0
+move right and a lot up,10.0,0.0,20.0,10.0,0.0,0.0,0.0
+move right and a tiny bit up,10.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a little right and up,5.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a little right and a little up,5.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little right and a lot up,5.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a little right and a tiny bit up,5.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a lot right and up,20.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a lot right and a little up,20.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a lot right and a lot up,20.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot right and a tiny bit up,20.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit right and up,1.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a little up,1.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a lot up,1.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a tiny bit up,1.0,0.0,1.0,10.0,0.0,0.0,0.0
+move right and down,10.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move right and a little down,10.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move right and a lot down,10.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move right and a tiny bit down,10.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a little right and down,5.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a little right and a little down,5.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little right and a lot down,5.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a little right and a tiny bit down,5.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a lot right and down,20.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a lot right and a little down,20.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a lot right and a lot down,20.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot right and a tiny bit down,20.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit right and down,1.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a little down,1.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a lot down,1.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit right and a tiny bit down,1.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move forward and left,-10.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward and a little left,-5.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward and a lot left,-20.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward and a tiny bit left,-1.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and left,-10.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and a little left,-5.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and a lot left,-20.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and a tiny bit left,-1.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and left,-10.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and a little left,-5.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and a lot left,-20.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and a tiny bit left,-1.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and left,-10.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a little left,-5.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a lot left,-20.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a tiny bit left,-1.0,1.0,0.0,10.0,0.0,0.0,0.0
+move forward and right,10.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward and a little right,5.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward and a lot right,20.0,10.0,0.0,10.0,0.0,0.0,0.0
+move forward and a tiny bit right,1.0,10.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and right,10.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and a little right,5.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and a lot right,20.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a little forward and a tiny bit right,1.0,5.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and right,10.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and a little right,5.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and a lot right,20.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a lot forward and a tiny bit right,1.0,20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and right,10.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a little right,5.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a lot right,20.0,1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a tiny bit right,1.0,1.0,0.0,10.0,0.0,0.0,0.0
+move forward and up,0.0,10.0,10.0,10.0,0.0,0.0,0.0
+move forward and a little up,0.0,10.0,5.0,10.0,0.0,0.0,0.0
+move forward and a lot up,0.0,10.0,20.0,10.0,0.0,0.0,0.0
+move forward and a tiny bit up,0.0,10.0,1.0,10.0,0.0,0.0,0.0
+move a little forward and up,0.0,5.0,10.0,10.0,0.0,0.0,0.0
+move a little forward and a little up,0.0,5.0,5.0,10.0,0.0,0.0,0.0
+move a little forward and a lot up,0.0,5.0,20.0,10.0,0.0,0.0,0.0
+move a little forward and a tiny bit up,0.0,5.0,1.0,10.0,0.0,0.0,0.0
+move a lot forward and up,0.0,20.0,10.0,10.0,0.0,0.0,0.0
+move a lot forward and a little up,0.0,20.0,5.0,10.0,0.0,0.0,0.0
+move a lot forward and a lot up,0.0,20.0,20.0,10.0,0.0,0.0,0.0
+move a lot forward and a tiny bit up,0.0,20.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and up,0.0,1.0,10.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a little up,0.0,1.0,5.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a lot up,0.0,1.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a tiny bit up,0.0,1.0,1.0,10.0,0.0,0.0,0.0
+move forward and down,0.0,10.0,-10.0,10.0,0.0,0.0,0.0
+move forward and a little down,0.0,10.0,-5.0,10.0,0.0,0.0,0.0
+move forward and a lot down,0.0,10.0,-20.0,10.0,0.0,0.0,0.0
+move forward and a tiny bit down,0.0,10.0,-1.0,10.0,0.0,0.0,0.0
+move a little forward and down,0.0,5.0,-10.0,10.0,0.0,0.0,0.0
+move a little forward and a little down,0.0,5.0,-5.0,10.0,0.0,0.0,0.0
+move a little forward and a lot down,0.0,5.0,-20.0,10.0,0.0,0.0,0.0
+move a little forward and a tiny bit down,0.0,5.0,-1.0,10.0,0.0,0.0,0.0
+move a lot forward and down,0.0,20.0,-10.0,10.0,0.0,0.0,0.0
+move a lot forward and a little down,0.0,20.0,-5.0,10.0,0.0,0.0,0.0
+move a lot forward and a lot down,0.0,20.0,-20.0,10.0,0.0,0.0,0.0
+move a lot forward and a tiny bit down,0.0,20.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and down,0.0,1.0,-10.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a little down,0.0,1.0,-5.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a lot down,0.0,1.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit forward and a tiny bit down,0.0,1.0,-1.0,10.0,0.0,0.0,0.0
+move backward and left,-10.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward and a little left,-5.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward and a lot left,-20.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward and a tiny bit left,-1.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and left,-10.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and a little left,-5.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and a lot left,-20.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and a tiny bit left,-1.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and left,-10.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and a little left,-5.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and a lot left,-20.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and a tiny bit left,-1.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and left,-10.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a little left,-5.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a lot left,-20.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a tiny bit left,-1.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move backward and right,10.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward and a little right,5.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward and a lot right,20.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move backward and a tiny bit right,1.0,-10.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and right,10.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and a little right,5.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and a lot right,20.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a little backward and a tiny bit right,1.0,-5.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and right,10.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and a little right,5.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and a lot right,20.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a lot backward and a tiny bit right,1.0,-20.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and right,10.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a little right,5.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a lot right,20.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a tiny bit right,1.0,-1.0,0.0,10.0,0.0,0.0,0.0
+move backward and up,0.0,-10.0,10.0,10.0,0.0,0.0,0.0
+move backward and a little up,0.0,-10.0,5.0,10.0,0.0,0.0,0.0
+move backward and a lot up,0.0,-10.0,20.0,10.0,0.0,0.0,0.0
+move backward and a tiny bit up,0.0,-10.0,1.0,10.0,0.0,0.0,0.0
+move a little backward and up,0.0,-5.0,10.0,10.0,0.0,0.0,0.0
+move a little backward and a little up,0.0,-5.0,5.0,10.0,0.0,0.0,0.0
+move a little backward and a lot up,0.0,-5.0,20.0,10.0,0.0,0.0,0.0
+move a little backward and a tiny bit up,0.0,-5.0,1.0,10.0,0.0,0.0,0.0
+move a lot backward and up,0.0,-20.0,10.0,10.0,0.0,0.0,0.0
+move a lot backward and a little up,0.0,-20.0,5.0,10.0,0.0,0.0,0.0
+move a lot backward and a lot up,0.0,-20.0,20.0,10.0,0.0,0.0,0.0
+move a lot backward and a tiny bit up,0.0,-20.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and up,0.0,-1.0,10.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a little up,0.0,-1.0,5.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a lot up,0.0,-1.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a tiny bit up,0.0,-1.0,1.0,10.0,0.0,0.0,0.0
+move backward and down,0.0,-10.0,-10.0,10.0,0.0,0.0,0.0
+move backward and a little down,0.0,-10.0,-5.0,10.0,0.0,0.0,0.0
+move backward and a lot down,0.0,-10.0,-20.0,10.0,0.0,0.0,0.0
+move backward and a tiny bit down,0.0,-10.0,-1.0,10.0,0.0,0.0,0.0
+move a little backward and down,0.0,-5.0,-10.0,10.0,0.0,0.0,0.0
+move a little backward and a little down,0.0,-5.0,-5.0,10.0,0.0,0.0,0.0
+move a little backward and a lot down,0.0,-5.0,-20.0,10.0,0.0,0.0,0.0
+move a little backward and a tiny bit down,0.0,-5.0,-1.0,10.0,0.0,0.0,0.0
+move a lot backward and down,0.0,-20.0,-10.0,10.0,0.0,0.0,0.0
+move a lot backward and a little down,0.0,-20.0,-5.0,10.0,0.0,0.0,0.0
+move a lot backward and a lot down,0.0,-20.0,-20.0,10.0,0.0,0.0,0.0
+move a lot backward and a tiny bit down,0.0,-20.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and down,0.0,-1.0,-10.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a little down,0.0,-1.0,-5.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a lot down,0.0,-1.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit backward and a tiny bit down,0.0,-1.0,-1.0,10.0,0.0,0.0,0.0
+move up and left,-10.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up and a little left,-5.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up and a lot left,-20.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up and a tiny bit left,-1.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a little up and left,-10.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a little left,-5.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a lot left,-20.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a tiny bit left,-1.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a lot up and left,-10.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a little left,-5.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a lot left,-20.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a tiny bit left,-1.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit up and left,-10.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a little left,-5.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a lot left,-20.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a tiny bit left,-1.0,0.0,1.0,10.0,0.0,0.0,0.0
+move up and right,10.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up and a little right,5.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up and a lot right,20.0,0.0,10.0,10.0,0.0,0.0,0.0
+move up and a tiny bit right,1.0,0.0,10.0,10.0,0.0,0.0,0.0
+move a little up and right,10.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a little right,5.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a lot right,20.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a tiny bit right,1.0,0.0,5.0,10.0,0.0,0.0,0.0
+move a lot up and right,10.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a little right,5.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a lot right,20.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a tiny bit right,1.0,0.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit up and right,10.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a little right,5.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a lot right,20.0,0.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a tiny bit right,1.0,0.0,1.0,10.0,0.0,0.0,0.0
+move up and forward,0.0,10.0,10.0,10.0,0.0,0.0,0.0
+move up and a little forward,0.0,5.0,10.0,10.0,0.0,0.0,0.0
+move up and a lot forward,0.0,20.0,10.0,10.0,0.0,0.0,0.0
+move up and a tiny bit forward,0.0,1.0,10.0,10.0,0.0,0.0,0.0
+move a little up and forward,0.0,10.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a little forward,0.0,5.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a lot forward,0.0,20.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a tiny bit forward,0.0,1.0,5.0,10.0,0.0,0.0,0.0
+move a lot up and forward,0.0,10.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a little forward,0.0,5.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a lot forward,0.0,20.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a tiny bit forward,0.0,1.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit up and forward,0.0,10.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a little forward,0.0,5.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a lot forward,0.0,20.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a tiny bit forward,0.0,1.0,1.0,10.0,0.0,0.0,0.0
+move up and backward,0.0,-10.0,10.0,10.0,0.0,0.0,0.0
+move up and a little backward,0.0,-5.0,10.0,10.0,0.0,0.0,0.0
+move up and a lot backward,0.0,-20.0,10.0,10.0,0.0,0.0,0.0
+move up and a tiny bit backward,0.0,-1.0,10.0,10.0,0.0,0.0,0.0
+move a little up and backward,0.0,-10.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a little backward,0.0,-5.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a lot backward,0.0,-20.0,5.0,10.0,0.0,0.0,0.0
+move a little up and a tiny bit backward,0.0,-1.0,5.0,10.0,0.0,0.0,0.0
+move a lot up and backward,0.0,-10.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a little backward,0.0,-5.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a lot backward,0.0,-20.0,20.0,10.0,0.0,0.0,0.0
+move a lot up and a tiny bit backward,0.0,-1.0,20.0,10.0,0.0,0.0,0.0
+move a tiny bit up and backward,0.0,-10.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a little backward,0.0,-5.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a lot backward,0.0,-20.0,1.0,10.0,0.0,0.0,0.0
+move a tiny bit up and a tiny bit backward,0.0,-1.0,1.0,10.0,0.0,0.0,0.0
+move down and left,-10.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down and a little left,-5.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down and a lot left,-20.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down and a tiny bit left,-1.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a little down and left,-10.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a little left,-5.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a lot left,-20.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a tiny bit left,-1.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a lot down and left,-10.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a little left,-5.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a lot left,-20.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a tiny bit left,-1.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit down and left,-10.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a little left,-5.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a lot left,-20.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a tiny bit left,-1.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move down and right,10.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down and a little right,5.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down and a lot right,20.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move down and a tiny bit right,1.0,0.0,-10.0,10.0,0.0,0.0,0.0
+move a little down and right,10.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a little right,5.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a lot right,20.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a tiny bit right,1.0,0.0,-5.0,10.0,0.0,0.0,0.0
+move a lot down and right,10.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a little right,5.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a lot right,20.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a tiny bit right,1.0,0.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit down and right,10.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a little right,5.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a lot right,20.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a tiny bit right,1.0,0.0,-1.0,10.0,0.0,0.0,0.0
+move down and forward,0.0,10.0,-10.0,10.0,0.0,0.0,0.0
+move down and a little forward,0.0,5.0,-10.0,10.0,0.0,0.0,0.0
+move down and a lot forward,0.0,20.0,-10.0,10.0,0.0,0.0,0.0
+move down and a tiny bit forward,0.0,1.0,-10.0,10.0,0.0,0.0,0.0
+move a little down and forward,0.0,10.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a little forward,0.0,5.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a lot forward,0.0,20.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a tiny bit forward,0.0,1.0,-5.0,10.0,0.0,0.0,0.0
+move a lot down and forward,0.0,10.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a little forward,0.0,5.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a lot forward,0.0,20.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a tiny bit forward,0.0,1.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit down and forward,0.0,10.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a little forward,0.0,5.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a lot forward,0.0,20.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a tiny bit forward,0.0,1.0,-1.0,10.0,0.0,0.0,0.0
+move down and backward,0.0,-10.0,-10.0,10.0,0.0,0.0,0.0
+move down and a little backward,0.0,-5.0,-10.0,10.0,0.0,0.0,0.0
+move down and a lot backward,0.0,-20.0,-10.0,10.0,0.0,0.0,0.0
+move down and a tiny bit backward,0.0,-1.0,-10.0,10.0,0.0,0.0,0.0
+move a little down and backward,0.0,-10.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a little backward,0.0,-5.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a lot backward,0.0,-20.0,-5.0,10.0,0.0,0.0,0.0
+move a little down and a tiny bit backward,0.0,-1.0,-5.0,10.0,0.0,0.0,0.0
+move a lot down and backward,0.0,-10.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a little backward,0.0,-5.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a lot backward,0.0,-20.0,-20.0,10.0,0.0,0.0,0.0
+move a lot down and a tiny bit backward,0.0,-1.0,-20.0,10.0,0.0,0.0,0.0
+move a tiny bit down and backward,0.0,-10.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a little backward,0.0,-5.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a lot backward,0.0,-20.0,-1.0,10.0,0.0,0.0,0.0
+move a tiny bit down and a tiny bit backward,0.0,-1.0,-1.0,10.0,0.0,0.0,0.0
+rotate clockwise,0.0,0.0,0.0,0.0,90.0,0.0,1.0
+rotate a little clockwise,0.0,0.0,0.0,0.0,45.0,0.0,1.0
+rotate a lot clockwise,0.0,0.0,0.0,0.0,180.0,0.0,1.0
+rotate a tiny bit clockwise,0.0,0.0,0.0,0.0,9.0,0.0,1.0
+rotate counterclockwise,-0.0,-0.0,-0.0,-0.0,-90.0,-0.0,1.0
+rotate a little counterclockwise,-0.0,-0.0,-0.0,-0.0,-45.0,-0.0,1.0
+rotate a lot counterclockwise,-0.0,-0.0,-0.0,-0.0,-180.0,-0.0,1.0
+rotate a tiny bit counterclockwise,-0.0,-0.0,-0.0,-0.0,-9.0,-0.0,1.0
+rotate clockwise,0.0,0.0,0.0,0.0,90.0,0.0,0.0
+rotate a little clockwise,0.0,0.0,0.0,0.0,45.0,0.0,0.0
+rotate a lot clockwise,0.0,0.0,0.0,0.0,180.0,0.0,0.0
+rotate a tiny bit clockwise,0.0,0.0,0.0,0.0,9.0,0.0,0.0
+rotate counterclockwise,-0.0,-0.0,-0.0,-0.0,-90.0,-0.0,-0.0
+rotate a little counterclockwise,-0.0,-0.0,-0.0,-0.0,-45.0,-0.0,-0.0
+rotate a lot counterclockwise,-0.0,-0.0,-0.0,-0.0,-180.0,-0.0,-0.0
+rotate a tiny bit counterclockwise,-0.0,-0.0,-0.0,-0.0,-9.0,-0.0,-0.0
+turn left,-0.0,-0.0,-0.0,-0.0,-0.0,-90.0,1.0
+turn a little left,-0.0,-0.0,-0.0,-0.0,-0.0,-45.0,1.0
+turn a lot left,-0.0,-0.0,-0.0,-0.0,-0.0,-180.0,1.0
+turn a tiny bit left,-0.0,-0.0,-0.0,-0.0,-0.0,-9.0,1.0
+turn right,0.0,0.0,0.0,0.0,0.0,90.0,1.0
+turn a little right,0.0,0.0,0.0,0.0,0.0,45.0,1.0
+turn a lot right,0.0,0.0,0.0,0.0,0.0,180.0,1.0
+turn a tiny bit right,0.0,0.0,0.0,0.0,0.0,9.0,1.0
+turn left,-0.0,-0.0,-0.0,-0.0,-0.0,-90.0,-0.0
+turn a little left,-0.0,-0.0,-0.0,-0.0,-0.0,-45.0,-0.0
+turn a lot left,-0.0,-0.0,-0.0,-0.0,-0.0,-180.0,-0.0
+turn a tiny bit left,-0.0,-0.0,-0.0,-0.0,-0.0,-9.0,-0.0
+turn right,0.0,0.0,0.0,0.0,0.0,90.0,0.0
+turn a little right,0.0,0.0,0.0,0.0,0.0,45.0,0.0
+turn a lot right,0.0,0.0,0.0,0.0,0.0,180.0,0.0
+turn a tiny bit right,0.0,0.0,0.0,0.0,0.0,9.0,0.0
+stop,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+open the gripper,0.0,0.0,0.0,0.0,0.0,0.0,1.0
+close the gripper,0.0,0.0,0.0,0.0,0.0,0.0,0.0

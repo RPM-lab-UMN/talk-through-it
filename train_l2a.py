@@ -24,187 +24,206 @@ def get_dataset(values, directions, speeds, clip_model):
     commands = []
     labels = []
     dist = 10
-    for d in directions:
-        for v in values:
-            for s in speeds:
-                # generate command
-                command = 'move ' + v + d + s
-                # generate the label
-                label = np.array([0, 0, 0, 0, 0, 0], dtype=np.float32)
-                if 'left' in d:
-                    label[0] = -dist
-                elif 'right' in d:
-                    label[0] = dist
-                if 'forward' in d:
-                    label[1] = dist
-                elif 'backward' in d:
-                    label[1] = -dist
-                if 'up' in d:
-                    label[2] = dist
-                elif 'down' in d:
-                    label[2] = -dist
-                # modify label based on value
+    for i in range(2):
+        for d in directions:
+            for v in values:
+                for s in speeds:
+                    # generate command
+                    command = 'move ' + v + d + s
+                    # generate the label
+                    label = np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32)
+                    if 'left' in d:
+                        label[0] = -dist
+                    elif 'right' in d:
+                        label[0] = dist
+                    if 'forward' in d:
+                        label[1] = dist
+                    elif 'backward' in d:
+                        label[1] = -dist
+                    if 'up' in d:
+                        label[2] = dist
+                    elif 'down' in d:
+                        label[2] = -dist
+                    # modify label based on value
+                    if 'a little' in v:
+                        label = label / 2
+                    elif 'a lot' in v:
+                        label = label * 2
+                    elif 'a tiny bit' in v:
+                        label = label / 10
+                    # divide by sqrt 2 if two directions
+                    # if 'and' in d:
+                    #     label = label / 2**0.5
+                    # set the speed label
+                    label[3] = dist
+                    if 'slowly' in s:
+                        label[3] = dist / 2
+                    elif 'quickly' in s:
+                        label[3] = dist * 2
+                    # alternate gripper label
+                    # TODO double instead of alternating
+                    if i == 0:
+                        label[-1] = 1
+                    # append command and label
+                    commands.append(command)
+                    labels.append(label)
+
+    # append command for 'move a lot backward and a little up'
+    for i in range(2):
+        for d1 in directions:
+            for d2 in directions:
+                for v1 in values:
+                    for v2 in values:
+                        # generate command
+                        command = 'move ' + v1 + d1 + ' and ' + v2 + d2
+                        # generate the label
+                        label = np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32)
+                        # first part
+                        if 'left' in d1:
+                            i1 = 0
+                            i2 = 1
+                            i3 = 2
+                            if 'left' in d2:
+                                continue
+                            elif 'right' in d2:
+                                continue
+                            label[i1] = -dist
+                        elif 'right' in d1:
+                            i1 = 0
+                            i2 = 1
+                            i3 = 2
+                            if 'left' in d2:
+                                continue
+                            elif 'right' in d2:
+                                continue
+                            label[i1] = dist
+                        if 'forward' in d1:
+                            i1 = 1
+                            i2 = 0
+                            i3 = 2
+                            if 'forward' in d2:
+                                continue
+                            elif 'backward' in d2:
+                                continue
+                            label[i1] = dist
+                        elif 'backward' in d1:
+                            i1 = 1
+                            i2 = 0
+                            i3 = 2
+                            if 'forward' in d2:
+                                continue
+                            elif 'backward' in d2:
+                                continue
+                            label[i1] = -dist
+                        if 'up' in d1:
+                            i1 = 2
+                            i2 = 0
+                            i3 = 1
+                            if 'up' in d2:
+                                continue
+                            elif 'down' in d2:
+                                continue
+                            label[i1] = dist
+                        elif 'down' in d1:
+                            i1 = 2
+                            i2 = 0
+                            i3 = 1
+                            if 'up' in d2:
+                                continue
+                            elif 'down' in d2:
+                                continue
+                            label[i1] = -dist
+                        if 'a little' in v1:
+                            label = label / 2
+                        elif 'a lot' in v1:
+                            label = label * 2
+                        elif 'a tiny bit' in v1:
+                            label = label / 10
+
+                        # second part
+                        if 'left' in d2:
+                            label[0] = -dist
+                        elif 'right' in d2:
+                            label[0] = dist
+                        if 'forward' in d2:
+                            label[1] = dist
+                        elif 'backward' in d2:
+                            label[1] = -dist
+                        if 'up' in d2:
+                            label[2] = dist
+                        elif 'down' in d2:
+                            label[2] = -dist
+                        # modify label based on value
+                        if 'a little' in v2:
+                            label[i2] = label[i2] / 2
+                            label[i3] = label[i3] / 2
+                        elif 'a lot' in v2:
+                            label[i2] = label[i2] * 2
+                            label[i3] = label[i3] * 2
+                        elif 'a tiny bit' in v2:
+                            label[i2] = label[i2] / 10
+                            label[i3] = label[i3] / 10
+                        # set the speed label
+                        label[3] = dist
+                        # alternate gripper label
+                        if i == 0:
+                            label[-1] = 1
+
+                        # append command and label
+                        commands.append(command)
+                        labels.append(label)
+
+    # append commands for rotate clockwise and counterclockwise
+    directions = ['clockwise', 'counterclockwise']
+    for i in range(2):
+        for d in directions:
+            for v in values:
+                commands.append('rotate ' + v + d)
+                label = np.array([0, 0, 0, 0, 90, 0, 0], dtype=np.float32)
                 if 'a little' in v:
                     label = label / 2
                 elif 'a lot' in v:
                     label = label * 2
                 elif 'a tiny bit' in v:
                     label = label / 10
-                # divide by sqrt 2 if two directions
-                # if 'and' in d:
-                #     label = label / 2**0.5
-                # set the speed label
-                label[3] = dist
-                if 'slowly' in s:
-                    label[3] = dist / 2
-                elif 'quickly' in s:
-                    label[3] = dist * 2
-                # alternate gripper label
-                # TODO double instead of alternating
-                if i % 2 == 0:
+                if 'counterclockwise' in d:
+                    label = -label
+                if i == 0:
                     label[-1] = 1
-                # append command and label
-                commands.append(command)
                 labels.append(label)
-                i += 1
 
-    # append command for 'move a lot backward and a little up'
-    for d1 in directions:
-        for d2 in directions:
-            for v1 in values:
-                for v2 in values:
-                    # generate command
-                    command = 'move ' + v1 + d1 + ' and ' + v2 + d2
-                    # generate the label
-                    label = np.array([0, 0, 0, 0, 0, 0], dtype=np.float32)
-                    # first part
-                    if 'left' in d1:
-                        i1 = 0
-                        i2 = 1
-                        i3 = 2
-                        if 'left' in d2:
-                            continue
-                        elif 'right' in d2:
-                            continue
-                        label[i1] = -dist
-                    elif 'right' in d1:
-                        i1 = 0
-                        i2 = 1
-                        i3 = 2
-                        if 'left' in d2:
-                            continue
-                        elif 'right' in d2:
-                            continue
-                        label[i1] = dist
-                    if 'forward' in d1:
-                        i1 = 1
-                        i2 = 0
-                        i3 = 2
-                        if 'forward' in d2:
-                            continue
-                        elif 'backward' in d2:
-                            continue
-                        label[i1] = dist
-                    elif 'backward' in d1:
-                        i1 = 1
-                        i2 = 0
-                        i3 = 2
-                        if 'forward' in d2:
-                            continue
-                        elif 'backward' in d2:
-                            continue
-                        label[i1] = -dist
-                    if 'up' in d1:
-                        i1 = 2
-                        i2 = 0
-                        i3 = 1
-                        if 'up' in d2:
-                            continue
-                        elif 'down' in d2:
-                            continue
-                        label[i1] = dist
-                    elif 'down' in d1:
-                        i1 = 2
-                        i2 = 0
-                        i3 = 1
-                        if 'up' in d2:
-                            continue
-                        elif 'down' in d2:
-                            continue
-                        label[i1] = -dist
-                    if 'a little' in v1:
-                        label = label / 2
-                    elif 'a lot' in v1:
-                        label = label * 2
-                    elif 'a tiny bit' in v1:
-                        label = label / 10
-
-                    # second part
-                    if 'left' in d2:
-                        label[0] = -dist
-                    elif 'right' in d2:
-                        label[0] = dist
-                    if 'forward' in d2:
-                        label[1] = dist
-                    elif 'backward' in d2:
-                        label[1] = -dist
-                    if 'up' in d2:
-                        label[2] = dist
-                    elif 'down' in d2:
-                        label[2] = -dist
-                    # modify label based on value
-                    if 'a little' in v2:
-                        label[i2] = label[i2] / 2
-                        label[i3] = label[i3] / 2
-                    elif 'a lot' in v2:
-                        label[i2] = label[i2] * 2
-                        label[i3] = label[i3] * 2
-                    elif 'a tiny bit' in v2:
-                        label[i2] = label[i2] / 10
-                        label[i3] = label[i3] / 10
-                    # set the speed label
-                    label[3] = dist
-                    # alternate gripper label
-                    if i % 2 == 0:
-                        label[-1] = 1
-
-                    # append command and label
-                    commands.append(command)
-                    labels.append(label)
-                    i += 1
-
-    # append commands for rotate clockwise and counterclockwise
-    directions = ['clockwise', 'counterclockwise']
-    for d in directions:
-        for v in values:
-            commands.append('rotate ' + v + d)
-            label = np.array([0, 0, 0, 0, 90, 0], dtype=np.float32)
-            if 'a little' in v:
-                label = label / 2
-            elif 'a lot' in v:
-                label = label * 2
-            elif 'a tiny bit' in v:
-                label = label / 10
-            if 'counterclockwise' in d:
-                label = -label
-            if i % 2 == 0:
-                label[-1] = 1
-            labels.append(label)
-            i += 1
+    # append commands for turn left and right
+    directions = ['left', 'right']
+    for i in range(2):
+        for d in directions:
+            for v in values:
+                commands.append('turn ' + v + d)
+                label = np.array([0, 0, 0, 0, 0, 90, 0], dtype=np.float32)
+                if 'a little' in v:
+                    label = label / 2
+                elif 'a lot' in v:
+                    label = label * 2
+                elif 'a tiny bit' in v:
+                    label = label / 10
+                if 'left' in d:
+                    label = -label
+                if i == 0:
+                    label[-1] = 1
+                labels.append(label)
 
     # append stop command
     commands.append('stop')
-    labels.append(np.array([0, 0, 0, 0, 0, 0], dtype=np.float32))
+    labels.append(np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32))
     # append gripper commands
     commands.append('open the gripper')
-    labels.append(np.array([0, 0, 0, 0, 0, 1], dtype=np.float32))
+    labels.append(np.array([0, 0, 0, 0, 0, 0, 1], dtype=np.float32))
     commands.append('close the gripper')
-    labels.append(np.array([0, 0, 0, 0, 0, 0], dtype=np.float32))
+    labels.append(np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32))
 
     # save to csv file
     with open('commands.csv', 'w') as f:
         # write header
-        f.write('command, x, y, z, v, r, g\n')
+        f.write('command, x, y, z, v, r, yaw, g\n')
         for i in range(len(commands)):
             # write x y and z values with 1 decimal place
             f.write(commands[i] + ',' + 
@@ -255,12 +274,14 @@ def get_dataset(values, directions, speeds, clip_model):
         z = np.random.uniform(-dist, dist) * 2
         # random v
         v = np.random.uniform(0, dist) * 2
-        # random r
+        # random roll
         r = np.random.randint(-180, 180)
+        # random yaw
+        yaw = np.random.randint(-180, 180)
         # random g
         g = np.random.randint(0, 2)
         # create label
-        label = np.array([x, y, z, v, r, g], dtype=np.float32)
+        label = np.array([x, y, z, v, r, yaw, g], dtype=np.float32)
         # create sample
         samples.append((label, text_features[-2], label))
         labels_p.append(label)
@@ -277,15 +298,17 @@ def get_dataset(values, directions, speeds, clip_model):
         z = np.random.uniform(-dist, dist) * 2
         # random v
         v = np.random.uniform(0, dist) * 2
-        # random r
+        # random roll
         r = np.random.randint(-180, 180)
+        # random yaw
+        yaw = np.random.randint(-180, 180)
         # random g
         g = np.random.randint(0, 2)
         # create label
-        label = np.array([x, y, z, v, r, g], dtype=np.float32)
+        label = np.array([x, y, z, v, r, yaw, g], dtype=np.float32)
         # create sample
         label2 = -label.copy()
-        label2[3:] *= -1
+        label2[-1] *= -1
         samples.append((label, text_features[-1], label2))
         labels_p.append(label)
         labels2.append(label2)
@@ -321,7 +344,7 @@ train_dataset = LangDataset(samples)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=512, shuffle=True)
 
 # initialize MLP model
-l2a = L2A(h1 = 1030).to(device)
+l2a = L2A(h1 = 1031).to(device)
 
 # training loop
 epochs = 30
@@ -334,10 +357,10 @@ best_loss = 1e9
 epoch_loss = 0
 for epoch in range(epochs):
     # cut learning rate after n epochs
-    if epoch == 25:
+    if epoch == 15:
         for g in optimizer.param_groups:
             g['lr'] = 1e-4
-    if epoch == 40:
+    if epoch == 25:
         for g in optimizer.param_groups:
             g['lr'] = 1e-5
     # loop through data loader

@@ -321,7 +321,8 @@ class InteractiveEnv():
                 continue
             break
         gripper_state_prev = obs['low_dim_state'][0]
-        prev_action = torch.zeros((1, 6)).to(self.env_device)
+        action_len = 7
+        prev_action = torch.zeros((1, action_len)).to(self.env_device)
         prev_action[0, -1] = 1
         # create the episode folder
         episode_idx = 0
@@ -364,7 +365,7 @@ class InteractiveEnv():
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
                 self.record_seed += 1
                 obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, 6)).to(self.env_device)
+                prev_action = torch.zeros((1, action_len)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             elif command == 'reset': # TODO don't change tasks
@@ -373,8 +374,9 @@ class InteractiveEnv():
                 # update the episode directory
                 self.record_seed += 1
                 # env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
+                env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
                 obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, 6)).to(self.env_device)
+                prev_action = torch.zeros((1, action_len)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             elif command == 'set':
@@ -384,7 +386,7 @@ class InteractiveEnv():
                 demo = []
                 keypoints = []
                 obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, 6)).to(self.env_device)
+                prev_action = torch.zeros((1, action_len)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             elif command == 'var':
@@ -396,7 +398,7 @@ class InteractiveEnv():
                 if variation >= num_variations:
                     variation = 0
                 obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, 6)).to(self.env_device)
+                prev_action = torch.zeros((1, action_len)).to(self.env_device)
                 prev_action[0, -1] = 1
                 continue
             elif command == 'k':

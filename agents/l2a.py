@@ -12,7 +12,7 @@ class L2A(nn.Module):
         self.fc1 = nn.Linear(h1, 256)
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(256, 256)
-        self.fc3 = nn.Linear(256, 5)
+        self.fc3 = nn.Linear(256, 6)
         self.fcg = nn.Linear(256, 1)
         self.sigmoid = nn.Sigmoid()
 
@@ -36,9 +36,9 @@ class L2A(nn.Module):
     
     def loss(self, y, g, label):
         # calculate huber loss for xyzvr
-        xyzvr_loss = 10 * nn.functional.huber_loss(y, label[:, :5])
+        xyzvr_loss = 10 * nn.functional.huber_loss(y, label[:, :6])
         # calculate binary cross entropy loss for gripper
-        gripper_loss = nn.functional.binary_cross_entropy(g.squeeze(1), label[:, 5])
+        gripper_loss = nn.functional.binary_cross_entropy(g.squeeze(1), label[:, 6])
         # return total loss
         return xyzvr_loss + gripper_loss
     
@@ -57,10 +57,12 @@ class L2A(nn.Module):
         # update the orientation based on r
         curr_quat = obs['gripper_pose'][3:]
         r = xyzvr.detach().cpu().numpy()[0,4]
+        yaw = xyzvr.detach().cpu().numpy()[0,5]
         # convert quaternion to rotation matrix
         r1 = R.from_quat(curr_quat)
         r2 = R.from_euler('z', r, degrees=True)
-        new_quat = r1.__mul__(r2).as_quat()
+        r3 = R.from_euler('x', yaw, degrees=True)
+        new_quat = r1.__mul__(r2).__mul__(r3).as_quat()
         gripper = g.detach().cpu().numpy()[0]
         action = np.concatenate((xyz, new_quat, gripper, [1]))
         return action, prev_action

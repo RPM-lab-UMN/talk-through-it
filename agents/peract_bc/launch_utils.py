@@ -1,5 +1,6 @@
 import logging
 from typing import List
+import os
 
 import numpy as np
 from rlbench.backend.observation import Observation
@@ -22,7 +23,7 @@ from helpers.clip.core.clip import build_model, load_clip, tokenize
 from omegaconf import DictConfig
 
 REWARD_SCALE = 100.0
-LOW_DIM_SIZE = 4
+LOW_DIM_SIZE = 2
 
 def create_replay(batch_size: int,
                   timesteps: int,
@@ -241,7 +242,15 @@ def fill_replay(cfg: DictConfig,
         descs = demo._observations[0].misc['descriptions']
 
         # extract keypoints
-        episode_keypoints = demo_loading_utils.keypoint_discovery(demo, method=keypoint_method)
+        if keypoint_method == 'txt':
+            # read from keypoints.txt
+            episode_keypoints = []
+            path = 'all_variations/episodes/episode%s/keypoints.txt' % d_idx
+            with open(os.path.join(cfg.rlbench.demo_path, task, path), 'r') as f:
+                for line in f.readlines():
+                    episode_keypoints.append(int(line.strip()))
+        else:
+            episode_keypoints = demo_loading_utils.keypoint_discovery(demo, method=keypoint_method)
 
         if rank == 0:
             logging.info(f"Loading Demo({d_idx}) - found {len(episode_keypoints)} keypoints - {task}")

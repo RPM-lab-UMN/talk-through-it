@@ -23,17 +23,30 @@ rlbench:
           100, 100, 100,
           100, 100, 100, 
           100, 100, 100]
+  # tasks: [open_drawer_motions, slide_block_motions]
+  # demos: [16, 16]
   demo_path: /home/user/School/peract_l2r/data
-  episode_length: 100
+  episode_length: 600
   cameras: [front, left_shoulder, right_shoulder, wrist]
   # cameras: [front]
   camera_resolution: [128, 128]
   # scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
   scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
   include_lang_goal_in_obs: True
-  # fine_tune_tasks: ['kitchen_open_fridge', 'kitchen_move_above', 'kitchen_move_front']
-  # fine_tune_demos: [1, 64, 64]
-  # fine_tune_weight: 66000
+  fine_tune_tasks: [open_drawer, slide_block, sweep_to_dustpan,
+                    meat_off_grill, turn_tap, put_item_in_drawer,
+                    close_jar, reach_and_drag, stack_blocks,
+                    light_bulb_in, put_money_in_safe, place_wine_at_rack,
+                    put_groceries_in_cupboard, push_buttons, # TODO put or place groceries?
+                    stack_cups, place_cups]
+  fine_tune_demos: [2, 2, 2, 
+                    2, 2, 2, 
+                    2, 2, 2, 
+                    2, 2, 2,
+                    2, 2,
+                    2, 2]
+  # fine_tune_tasks: [open_drawer, slide_block]
+  # fine_tune_demos: [2, 2]
 
 replay:
   batch_size: 4
@@ -47,13 +60,15 @@ replay:
 framework:
   gpu: 1
   log_freq: 100
-  save_freq: 5000
+  # save_freq: 5000
+  save_freq: 1000
   tensorboard_logging: False
   csv_logging: True
-  training_iterations: 200001
-  logdir: '/home/user/School/peract_l2r/logs/multi_motions_8'
-  use_start_weight: False
-  start_weight: '/home/user/School/peract_l2r/logs/open_drawer_motions/open_drawer_motions/PERACT_BC/seed0/weights/82000'
+  # training_iterations: 200001
+  training_iterations: 20001
+  logdir: '/home/user/School/peract_l2r/logs/fine_tune_1'
+  use_start_weight: True
+  start_weight: '/home/user/School/peract_l2r/logs/multi_motions_8/multi/PERACT_BC/seed0/weights/200000'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0
