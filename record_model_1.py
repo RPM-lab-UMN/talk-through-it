@@ -1,5 +1,3 @@
-from asyncio import create_task
-import gc
 import logging
 import os
 import sys
@@ -51,6 +49,7 @@ class InteractiveEnv():
         self.classifier = classifier
         self.env_device = env_device
         self.record_seed = record_seed
+        self.variation = 0
 
     def start(self, weight,
               env_config):
@@ -312,18 +311,7 @@ class InteractiveEnv():
             self.agent.load_weights(weight_path)
 
         # reset the task
-        variation = 0
-        while True:
-            try:
-                obs = env.reset_to_seed(variation, self.record_seed, interactive=True)
-            except Exception as e:
-                self.record_seed += 1
-                continue
-            break
-        gripper_state_prev = obs['low_dim_state'][0]
         action_len = 7
-        prev_action = torch.zeros((1, action_len)).to(self.env_device)
-        prev_action[0, -1] = 1
         # create the episode folder
         episode_idx = 0
         episode_root = ''
@@ -341,6 +329,27 @@ class InteractiveEnv():
         keypoints = []
         task_idx = 0
         max_task_idx = len(self.cfg.rlbench.tasks)
+
+        def reset_task():
+            global demo
+            demo = []
+            global keypoints
+            keypoints = []
+            while True:
+                try:
+                    env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
+                    obs = env.reset_to_seed(self.variation, self.record_seed)
+                except Exception as e:
+                    print('reset_task exception:', e)
+                    self.record_seed += 1
+                    continue
+                break
+            prev_action = torch.zeros((1, action_len)).to(self.env_device)
+            prev_action[0, -1] = 1
+            return obs, prev_action
+
+        obs, prev_action = reset_task()
+        gripper_state_prev = obs['low_dim_state'][0]
         while True:
             command = input("Enter a command: ")
             if command == 'quit':
@@ -358,48 +367,28 @@ class InteractiveEnv():
             elif command == 'save':
                 # write the demo to file
                 self.save_demo(Demo(demo), episode_dir, self.eval_env._observation_config, variation_descriptions, keypoints=keypoints)
-                demo = []
-                keypoints = []
                 # update the episode directory
                 episode_idx += 1
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
                 self.record_seed += 1
-                obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, action_len)).to(self.env_device)
-                prev_action[0, -1] = 1
+                obs, prev_action = reset_task()
                 continue
             elif command == 'reset': # TODO don't change tasks
-                demo = []
-                keypoints = []
-                # update the episode directory
                 self.record_seed += 1
-                # env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
-                env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
-                obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, action_len)).to(self.env_device)
-                prev_action[0, -1] = 1
+                obs, prev_action = reset_task()
                 continue
             elif command == 'set':
-                variation = 0
+                self.variation = 0
                 task_idx += 1
-                env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
-                demo = []
-                keypoints = []
-                obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, action_len)).to(self.env_device)
-                prev_action[0, -1] = 1
+                obs, prev_action = reset_task()
                 continue
             elif command == 'var':
-                variation += 1
-                demo = []
-                keypoints = []
+                self.variation += 1
                 # get number of variations in task
                 num_variations = env._task.variation_count()
-                if variation >= num_variations:
-                    variation = 0
-                obs = env.reset_to_seed(variation, self.record_seed)
-                prev_action = torch.zeros((1, action_len)).to(self.env_device)
-                prev_action[0, -1] = 1
+                if self.variation >= num_variations:
+                    self.variation = 0
+                reset_task()
                 continue
             elif command == 'k':
                 keypoints.append(len(demo)-1)
