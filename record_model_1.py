@@ -346,6 +346,8 @@ class InteractiveEnv():
                 break
             prev_action = torch.zeros((1, action_len)).to(self.env_device)
             prev_action[0, -1] = 1
+            self.eval_env._episodes_this_task = 0
+            print('lang goal:', self.eval_env._lang_goal)
             return obs, prev_action
 
         obs, prev_action = reset_task()
@@ -414,7 +416,7 @@ class InteractiveEnv():
                     act_result = self.agent.act(0, prepped_data,
                                             deterministic=eval)
                     # edit act result to maintain gripper state
-                    act_result.action[-2] = gripper_state_prev
+                    # act_result.action[-2] = gripper_state_prev
                     transition, demo_piece = env.record_step(act_result)
                     demo.extend(demo_piece)
                     # print the timestep from low_dim_state
