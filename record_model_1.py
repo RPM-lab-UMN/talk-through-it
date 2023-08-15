@@ -372,8 +372,8 @@ class InteractiveEnv():
                 # update the episode directory
                 episode_idx += 1
                 episode_dir = os.path.join(episode_root, 'episode' + str(episode_idx))
-                self.record_seed += 1
-                obs, prev_action = reset_task()
+                # self.record_seed += 1
+                # obs, prev_action = reset_task()
                 continue
             elif command == 'reset': # TODO don't change tasks
                 self.record_seed += 1

@@ -153,7 +153,7 @@ def eval_seed(train_cfg,
     del agent
     gc.collect()
     torch.cuda.empty_cache()
-
+# TODO average success in csv 
 
 @hydra.main(config_path='conf', config_name='eval')
 def main(eval_cfg: DictConfig) -> None:
