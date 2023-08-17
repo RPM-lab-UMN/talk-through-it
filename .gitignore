@@ -7,3 +7,4 @@ interactive_test.py
 *.log
 text_classifier.pt
 manual_backup
+scratch.sh
