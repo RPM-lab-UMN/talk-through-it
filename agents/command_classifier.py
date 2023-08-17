@@ -29,7 +29,7 @@ class CommandClassifier(nn.Module):
         self.sentence_emb = None
 
         # load the l2a weights
-        self.l2a = L2A(h1=1031).to(device)
+        self.l2a = L2A(h1=1032).to(device)
         self.l2a.load_state_dict(torch.load(l2a_weights))
 
         # load the embeddings

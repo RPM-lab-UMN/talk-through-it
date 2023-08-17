@@ -19,11 +19,12 @@ class LangDataset(data.Dataset):
         return len(self.samples)
 
 def get_dataset(values, directions, speeds, clip_model):
-    device = 'cuda:1'
+    device = 'cuda:0'
     i = 0
     commands = []
     labels = []
     dist = 10
+    label_len = 8
     for i in range(2):
         for d in directions:
             for v in values:
@@ -31,7 +32,7 @@ def get_dataset(values, directions, speeds, clip_model):
                     # generate command
                     command = 'move ' + v + d + s
                     # generate the label
-                    label = np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32)
+                    label = np.zeros(label_len, dtype=np.float32)
                     if 'left' in d:
                         label[0] = -dist
                     elif 'right' in d:
@@ -77,7 +78,7 @@ def get_dataset(values, directions, speeds, clip_model):
                         # generate command
                         command = 'move ' + v1 + d1 + ' and ' + v2 + d2
                         # generate the label
-                        label = np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32)
+                        label = np.zeros(label_len, dtype=np.float32)
                         # first part
                         if 'left' in d1:
                             i1 = 0
@@ -179,7 +180,8 @@ def get_dataset(values, directions, speeds, clip_model):
         for d in directions:
             for v in values:
                 commands.append('rotate ' + v + d)
-                label = np.array([0, 0, 0, 0, 90, 0, 0], dtype=np.float32)
+                label = np.zeros(label_len, dtype=np.float32)
+                label[4] = 90
                 if 'a little' in v:
                     label = label / 2
                 elif 'a lot' in v:
@@ -198,7 +200,8 @@ def get_dataset(values, directions, speeds, clip_model):
         for d in directions:
             for v in values:
                 commands.append('turn ' + v + d)
-                label = np.array([0, 0, 0, 0, 0, 90, 0], dtype=np.float32)
+                label = np.zeros(label_len, dtype=np.float32)
+                label[6] = 90
                 if 'a little' in v:
                     label = label / 2
                 elif 'a lot' in v:
@@ -211,19 +214,43 @@ def get_dataset(values, directions, speeds, clip_model):
                     label[-1] = 1
                 labels.append(label)
 
+    # append commands for turn up and down
+    directions = ['up', 'down']
+    for i in range(2):
+        for d in directions:
+            for v in values:
+                commands.append('turn ' + v + d)
+                label = np.zeros(label_len, dtype=np.float32)
+                label[5] = 90
+                if 'a little' in v:
+                    label = label / 2
+                elif 'a lot' in v:
+                    label = label * 2
+                elif 'a tiny bit' in v:
+                    label = label / 10
+                if 'up' in d:
+                    label = -label
+                if i == 0:
+                    label[-1] = 1
+                labels.append(label)
+
     # append stop command
     commands.append('stop')
-    labels.append(np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32))
+    label = np.zeros(label_len, dtype=np.float32)
+    labels.append(label)
     # append gripper commands
     commands.append('open the gripper')
-    labels.append(np.array([0, 0, 0, 0, 0, 0, 1], dtype=np.float32))
+    label = np.zeros(label_len, dtype=np.float32)
+    label[-1] = 1
+    labels.append(label)
     commands.append('close the gripper')
-    labels.append(np.array([0, 0, 0, 0, 0, 0, 0], dtype=np.float32))
+    label = np.zeros(label_len, dtype=np.float32)
+    labels.append(label)
 
     # save to csv file
     with open('commands.csv', 'w') as f:
         # write header
-        f.write('command, x, y, z, v, r, yaw, g\n')
+        f.write('command, x, y, z, v, r, p, yaw, g\n')
         for i in range(len(commands)):
             # write x y and z values with 1 decimal place
             f.write(commands[i] + ',' + 
@@ -235,8 +262,12 @@ def get_dataset(values, directions, speeds, clip_model):
     commands2.append('move back')
 
     # get all text embeddings from CLIP
-    tokens = clip.tokenize(commands2).to(device)
-    text_features = clip_model.encode_text(tokens).float()
+    with torch.no_grad():
+        tokens1 = clip.tokenize(commands2[:500]).to(device).detach()
+        tokens2 = clip.tokenize(commands2[500:]).to(device).detach()
+        text_features1 = clip_model.encode_text(tokens1).detach().float().cpu()
+        text_features2 = clip_model.encode_text(tokens2).detach().float().cpu()
+        text_features = torch.cat((text_features1, text_features2), dim=0).numpy()
     combo_commands = []
     samples = []
     labels_p = []
@@ -255,14 +286,20 @@ def get_dataset(values, directions, speeds, clip_model):
                 labels_p.append(labels[i])
                 labels2.append(label)
             else:
+                # only take 25% of this type
+                skip = False
+                if np.random.uniform() > 0.25:
+                    skip = True
                 label2 = labels[j].copy()
                 label2[-1] = labels[i][-1] # gripper should pass through
                 # override label2 if gripper command
                 if 'gripper' in commands2[j]:
                     label2 = labels[j]
-                samples.append((labels[i], text_features[j], label2))
-                labels_p.append(labels[i])
-                labels2.append(label2)
+                    skip = False
+                if not skip:
+                    samples.append((labels[i], text_features[j], label2))
+                    labels_p.append(labels[i])
+                    labels2.append(label2)
 
     # create additional keep moving samples
     for i in range(256):
@@ -276,12 +313,14 @@ def get_dataset(values, directions, speeds, clip_model):
         v = np.random.uniform(0, dist) * 2
         # random roll
         r = np.random.randint(-180, 180)
+        # random pitch
+        p = np.random.randint(-180, 180)
         # random yaw
         yaw = np.random.randint(-180, 180)
         # random g
         g = np.random.randint(0, 2)
         # create label
-        label = np.array([x, y, z, v, r, yaw, g], dtype=np.float32)
+        label = np.array([x, y, z, v, r, p, yaw, g], dtype=np.float32)
         # create sample
         samples.append((label, text_features[-2], label))
         labels_p.append(label)
@@ -300,12 +339,14 @@ def get_dataset(values, directions, speeds, clip_model):
         v = np.random.uniform(0, dist) * 2
         # random roll
         r = np.random.randint(-180, 180)
+        # random pitch
+        p = np.random.randint(-180, 180)
         # random yaw
         yaw = np.random.randint(-180, 180)
         # random g
         g = np.random.randint(0, 2)
         # create label
-        label = np.array([x, y, z, v, r, yaw, g], dtype=np.float32)
+        label = np.array([x, y, z, v, r, p, yaw, g], dtype=np.float32)
         # create sample
         label2 = -label.copy()
         label2[-1] *= -1
@@ -331,7 +372,7 @@ values = ['', 'a little ', 'a lot ', 'a tiny bit ']
 directions = ['left', 'right', 'forward', 'backward', 'up', 'down']
 speeds = ['', ' slowly', ' quickly']
 # initialize CLIP model
-device = 'cuda:1'
+device = 'cuda:0'
 # create the clip model
 model, _ = load_clip('RN50', jit=False, device=device)
 clip_model = build_model(model.state_dict())
@@ -344,10 +385,10 @@ train_dataset = LangDataset(samples)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=512, shuffle=True)
 
 # initialize MLP model
-l2a = L2A(h1 = 1031).to(device)
+l2a = L2A(h1 = 1032).to(device)
 
 # training loop
-epochs = 30
+epochs = 130
 lr = 5e-4
 optimizer = torch.optim.Adam(l2a.parameters(), lr=lr)
 loss_fn = torch.nn.MSELoss()
@@ -357,12 +398,12 @@ best_loss = 1e9
 epoch_loss = 0
 for epoch in range(epochs):
     # cut learning rate after n epochs
-    if epoch == 15:
+    if epoch == 100:
         for g in optimizer.param_groups:
             g['lr'] = 1e-4
-    if epoch == 25:
+    if epoch == 110:
         for g in optimizer.param_groups:
-            g['lr'] = 1e-5
+            g['lr'] = 5e-5
     # loop through data loader
     for i, (previous, command, label) in enumerate(train_loader):
         # move to device
@@ -390,12 +431,12 @@ for epoch in range(epochs):
         torch.save(l2a.state_dict(), 'l2a.pt')
     epoch_loss = 0
 
-# plot losses
-plt.plot(train_losses, label='train')
-plt.legend()
-plt.title('Losses')
-ax = plt.gca()
-ax.set_ylim([0, 1])
-plt.show()
+# plot losses # TODO save to file instead of displaying
+# plt.plot(train_losses, label='train')
+# plt.legend()
+# plt.title('Losses')
+# ax = plt.gca()
+# ax.set_ylim([0, 100])
+# plt.show()
 
 

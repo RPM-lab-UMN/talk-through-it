@@ -311,7 +311,7 @@ class InteractiveEnv():
             self.agent.load_weights(weight_path)
 
         # reset the task
-        action_len = 7
+        action_len = 8
         # create the episode folder
         episode_idx = 0
         episode_root = ''
@@ -337,7 +337,8 @@ class InteractiveEnv():
             keypoints = []
             while True:
                 try:
-                    env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
+                    if max_task_idx > 1:
+                        env.set_task(self.cfg.rlbench.tasks[task_idx % max_task_idx])
                     obs = env.reset_to_seed(self.variation, self.record_seed)
                 except Exception as e:
                     print('reset_task exception:', e)
@@ -361,10 +362,11 @@ class InteractiveEnv():
                 demo = []
                 keypoints = []
                 # prompt for task name
-                task_name = input("Enter a task name: ")
+                task_name = input("Enter a task name: ") # TODO automatic task name
                 episode_dir = set_task_dir(task_name)
                 # prompt for language goal
-                variation_descriptions = [input("Enter a language goal: ")]
+                # variation_descriptions = [input("Enter a language goal: ")] # TODO automatic lang goal
+                variation_descriptions = [self.eval_env._lang_goal]
                 continue
             elif command == 'save':
                 # write the demo to file
