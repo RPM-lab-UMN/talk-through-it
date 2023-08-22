@@ -5,26 +5,26 @@ ddp:
   num_devices: 1
 
 rlbench:
-  task_name: 'put_money_in_safe_motions'
-  tasks: [put_money_in_safe_motions]
+  # task_name: 'put_money_in_safe_motions'
+  # tasks: [put_money_in_safe_motions]
   # task_name: 'move_front'
   # tasks: [move_front]
-  # task_name: 'multi'
+  task_name: 'multi'
   # task_name: 'open_drawer_motions'
-  # tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
-  #         meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
-  #         close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
-  #         light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions,
-  #         put_groceries_in_cupboard_motions, place_shape_motions, push_buttons_motions,
-  #         insert_onto_square_peg_motions, stack_cups_motions, place_cups_motions]
-  # demos: [100, 100, 100, 
-  #         100, 100, 100, 
-  #         100, 100, 100, 
-  #         100, 100, 100,
-  #         100, 100, 100, 
-  #         100, 100, 100]
+  tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
+          meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
+          close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
+          light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions,
+          put_groceries_in_cupboard_motions, push_buttons_motions,
+          stack_cups_motions]
+  demos: [100, 100, 100, 
+          100, 100, 100, 
+          100, 100, 100, 
+          100, 100, 100,
+          100, 100, 
+          100]
   # tasks: [open_drawer_motions, slide_block_motions]
-  demos: [100]
+  # demos: [100]
   demo_path: /home/user/School/peract_l2r/data
   episode_length: 600
   cameras: [front, left_shoulder, right_shoulder, wrist]
@@ -35,25 +35,23 @@ rlbench:
   include_lang_goal_in_obs: True
 
   fine_tune_tasks: [open_drawer, slide_block, sweep_to_dustpan,
-                    meat_off_grill, turn_tap, put_item_in_drawer,
-                    close_jar, reach_and_drag, stack_blocks,
-                    light_bulb_in, put_money_in_safe, place_wine_at_rack,
+                    meat_off_grill, turn_tap, put_item_in_drawer_lv2,
+                    close_jar, reach_and_drag, stack_blocks_lv2,
+                    put_money_in_safe, place_wine_at_rack,
                     put_groceries_in_cupboard, push_buttons, 
-                    stack_cups, place_cups]
+                    stack_cups_lv2]
   # fine_tune_demos: [2, 2, 2, 
   #                   2, 2, 2, 
   #                   2, 2, 2, 
   #                   2, 2, 2,
   #                   2, 2,
   #                   2, 2]
-  fine_tune_demos: [4, 4, 4,
-                    4, 4, 4,
-                    4, 4, 4,
-                    4, 4, 4,
-                    4, 4,
-                    4, 4]
-  # fine_tune_tasks: [open_drawer, slide_block]
-  # fine_tune_demos: [2, 2]
+  fine_tune_demos: [10, 10, 10,
+                    10, 10, 10,
+                    10, 10, 10,
+                    10, 10,
+                    10, 10,
+                    10]
 
 replay:
   batch_size: 4
@@ -71,11 +69,11 @@ framework:
   save_freq: 5000
   tensorboard_logging: False
   csv_logging: True
-  # training_iterations: 200001
-  training_iterations: 50001
-  logdir: '/home/user/School/peract_l2r/logs/money_in_safe'
-  use_start_weight: False
-  start_weight: '/home/user/School/peract_l2r/logs/multi_motions_8/multi/PERACT_BC/seed0/weights/200000'
+  training_iterations: 100001
+  # training_iterations: 50001
+  logdir: '/home/user/School/peract_l2r/logs/fine_tune_3'
+  use_start_weight: True
+  start_weight: '/home/user/School/peract_l2r/logs/multi_motions_9/multi/PERACT_BC/seed0/weights/195000'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

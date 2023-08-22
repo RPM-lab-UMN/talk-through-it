@@ -103,6 +103,7 @@ def generate_commands():
 
     # put in safe motions
     text = ['move in front of the money',
+            'move above the money',
             'move in front of the top shelf',
             'move in front of the middle shelf',
             'move in front of the bottom shelf']
