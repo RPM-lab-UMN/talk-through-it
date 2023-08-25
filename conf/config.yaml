@@ -40,18 +40,24 @@ rlbench:
                     put_money_in_safe, place_wine_at_rack,
                     put_groceries_in_cupboard, push_buttons, 
                     stack_cups_lv2]
-  # fine_tune_demos: [2, 2, 2, 
-  #                   2, 2, 2, 
-  #                   2, 2, 2, 
-  #                   2, 2, 2,
-  #                   2, 2,
-  #                   2, 2]
-  fine_tune_demos: [10, 10, 10,
-                    10, 10, 10,
-                    10, 10, 10,
-                    10, 10,
-                    10, 10,
-                    10]
+  fine_tune_demos: [2, 2, 2, 
+                    2, 2, 2, 
+                    2, 2, 2, 
+                    2, 2,
+                    2, 2,
+                    2]
+  # fine_tune_demos: [5, 5, 5,
+  #                   5, 5, 5,
+  #                   5, 5, 5,
+  #                   5, 5,
+  #                   5, 5,
+  #                   5]
+  # fine_tune_demos: [10, 10, 10,
+  #                   10, 10, 10,
+  #                   10, 10, 10,
+  #                   10, 10,
+  #                   10, 10,
+  #                   10]
 
 replay:
   batch_size: 4
@@ -71,7 +77,7 @@ framework:
   csv_logging: True
   training_iterations: 100001
   # training_iterations: 50001
-  logdir: '/home/user/School/peract_l2r/logs/fine_tune_3'
+  logdir: '/home/user/School/peract_l2r/logs/fine_tune_5'
   use_start_weight: True
   start_weight: '/home/user/School/peract_l2r/logs/multi_motions_9/multi/PERACT_BC/seed0/weights/195000'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
