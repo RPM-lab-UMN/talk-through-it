@@ -59,7 +59,8 @@ def eval_seed(train_cfg,
         env_device=env_device,
         rollout_generator=rg,
         num_eval_runs=len(tasks),
-        multi_task=multi_task)
+        multi_task=multi_task,
+        desc_indices=eval_cfg.rlbench.eval_desc_indices)
 
     manager = Manager()
     save_load_lock = manager.Lock()

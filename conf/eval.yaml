@@ -5,20 +5,20 @@ rlbench:
     task_name: 'multi'
     # task_name: 'put_money_in_safe_motions'
     # tasks: [put_money_in_safe]
-    # tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
-    #         meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
-    #         close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
-    #         light_bulb_in_motions, put_money_in_safe_motions, place_wine_at_rack_motions,
-    #         put_groceries_in_cupboard_motions, push_buttons_motions,
-    #         stack_cups_motions]
-    tasks: [open_drawer, slide_block_to_color_target, sweep_to_dustpan_of_size,
-            meat_off_grill, turn_tap, put_item_in_drawer_lv2,
-            close_jar, reach_and_drag, stack_blocks_lv2,
-            put_money_in_safe, place_wine_at_rack_location,
-            put_groceries_in_cupboard, push_buttons,
-            stack_cups_lv2] # TODO push buttons lv2
+    tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
+            meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
+            close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
+            put_money_in_safe_motions, place_wine_at_rack_motions,
+            put_groceries_in_cupboard_motions, push_buttons_motions,
+            stack_cups_motions]
+    # tasks: [open_drawer, slide_block_to_color_target, sweep_to_dustpan_of_size,
+    #         meat_off_grill, turn_tap, put_item_in_drawer_lv2,
+    #         close_jar, reach_and_drag, stack_blocks_lv2,
+    #         put_money_in_safe, place_wine_at_rack_location,
+    #         put_groceries_in_cupboard, push_buttons,
+    #         stack_cups_lv2] # TODO push buttons lv2
     demo_path: /home/user/School/peract_l2r/data
-    episode_length: 20
+    episode_length: 5
     cameras: [front, left_shoulder, right_shoulder, wrist]
     camera_resolution: [128, 128]
     # scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
@@ -27,10 +27,11 @@ rlbench:
     time_in_state: True
     # headless: False
     headless: True
+    eval_desc_indices: [0, 1, 2, 3]
 
 framework:
-    gpu: 1
-    logdir: '/home/user/School/peract_l2r/logs/fine_tune_5'
+    gpu: 0
+    logdir: '/home/user/School/peract_l2r/logs/lang_1'
     # logdir: '/home/user/School/peract_l2r/logs/multi_motions_9'
     start_seed: 0
     record_every_n: 5
@@ -38,10 +39,10 @@ framework:
     eval_envs: 4
     eval_from_eps_number: 1000
     # eval_from_eps_number: 0
-    eval_episodes: 40
+    eval_episodes: 25
     eval_type: 'missing'
     # eval_type: 'last'
-    # eval_type: 52000
+    # eval_type: 100000
     eval_save_metrics: True
     interactive_weight: 195000
     record_seed: 1000

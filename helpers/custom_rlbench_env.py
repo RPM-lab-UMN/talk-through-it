@@ -509,7 +509,7 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
 
         return self._previous_obs_dict
     
-    def reset_to_seed(self, variation, seed, interactive=False):
+    def reset_to_seed(self, variation, seed, interactive=False, desc_index=0):
         # if self._episodes_this_task == self._swap_task_every:
         #     self._set_new_task()
         #     self._episodes_this_task = 0
@@ -518,7 +518,7 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
 
         self._i = 0
         self._task.set_variation(variation)
-        self._previous_obs_dict = super(CustomMultiTaskRLBenchEnv, self).reset(seed, interactive)
+        self._previous_obs_dict = super(CustomMultiTaskRLBenchEnv, self).reset(seed, interactive, desc_index)
         self._record_current_episode = (
                 self.eval and self._episode_index % self._record_every_n == 0)
         self._episode_index += 1

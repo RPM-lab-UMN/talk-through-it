@@ -254,8 +254,12 @@ def fill_replay(cfg: DictConfig,
 
         if rank == 0:
             logging.info(f"Loading Demo({d_idx}) - found {len(episode_keypoints)} keypoints - {task}")
-        # loop through all descriptions
-        for j in range(len(descs)):
+        # loop through descriptions from config
+        desc_indices = cfg.rlbench.lang_variations
+        descriptions = []
+        for i in range(len(desc_indices)):
+            descriptions.append(descs[desc_indices[i]])
+        for j in range(len(descriptions)):
             for i in range(len(demo) - 1):
                 if not demo_augmentation and i > 0:
                     break
@@ -263,7 +267,7 @@ def fill_replay(cfg: DictConfig,
                     continue
 
                 obs = demo[i]
-                desc = descs[j]
+                desc = descriptions[j]
                 # if our starting point is past one of the keypoints, then remove it
                 while len(episode_keypoints) > 0 and i >= episode_keypoints[0]:
                     episode_keypoints = episode_keypoints[1:]
