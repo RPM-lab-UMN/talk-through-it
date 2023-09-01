@@ -1,0 +1,436 @@
+Only use instructions from the following list:
+rotate clockwise
+rotate a little clockwise
+rotate a lot clockwise
+rotate a tiny bit clockwise
+rotate counterclockwise
+rotate a little counterclockwise
+rotate a lot counterclockwise
+rotate a tiny bit counterclockwise
+turn left
+turn a little left
+turn a lot left
+turn a tiny bit left
+turn right
+turn a little right
+turn a lot right
+turn a tiny bit right
+turn up
+turn a little up
+turn a lot up
+turn a tiny bit up
+turn down
+turn a little down
+turn a lot down
+turn a tiny bit down
+stop
+close the gripper
+open the gripper
+move left
+move a little left
+move a lot left
+move a tiny bit left
+move right
+move a little right
+move a lot right
+move a tiny bit right
+move forward
+move a little forward
+move a lot forward
+move a tiny bit forward
+move backward
+move a little backward
+move a lot backward
+move a tiny bit backward
+move up
+move a little up
+move a lot up
+move a tiny bit up
+move down
+move a little down
+move a lot down
+move a tiny bit down
+move left and forward
+move left and a little forward
+move left and a lot forward
+move left and a tiny bit forward
+move a little left and forward
+move a little left and a little forward
+move a little left and a lot forward
+move a little left and a tiny bit forward
+move a lot left and forward
+move a lot left and a little forward
+move a lot left and a lot forward
+move a lot left and a tiny bit forward
+move a tiny bit left and forward
+move a tiny bit left and a little forward
+move a tiny bit left and a lot forward
+move a tiny bit left and a tiny bit forward
+move left and backward
+move left and a little backward
+move left and a lot backward
+move left and a tiny bit backward
+move a little left and backward
+move a little left and a little backward
+move a little left and a lot backward
+move a little left and a tiny bit backward
+move a lot left and backward
+move a lot left and a little backward
+move a lot left and a lot backward
+move a lot left and a tiny bit backward
+move a tiny bit left and backward
+move a tiny bit left and a little backward
+move a tiny bit left and a lot backward
+move a tiny bit left and a tiny bit backward
+move left and up
+move left and a little up
+move left and a lot up
+move left and a tiny bit up
+move a little left and up
+move a little left and a little up
+move a little left and a lot up
+move a little left and a tiny bit up
+move a lot left and up
+move a lot left and a little up
+move a lot left and a lot up
+move a lot left and a tiny bit up
+move a tiny bit left and up
+move a tiny bit left and a little up
+move a tiny bit left and a lot up
+move a tiny bit left and a tiny bit up
+move left and down
+move left and a little down
+move left and a lot down
+move left and a tiny bit down
+move a little left and down
+move a little left and a little down
+move a little left and a lot down
+move a little left and a tiny bit down
+move a lot left and down
+move a lot left and a little down
+move a lot left and a lot down
+move a lot left and a tiny bit down
+move a tiny bit left and down
+move a tiny bit left and a little down
+move a tiny bit left and a lot down
+move a tiny bit left and a tiny bit down
+move right and forward
+move right and a little forward
+move right and a lot forward
+move right and a tiny bit forward
+move a little right and forward
+move a little right and a little forward
+move a little right and a lot forward
+move a little right and a tiny bit forward
+move a lot right and forward
+move a lot right and a little forward
+move a lot right and a lot forward
+move a lot right and a tiny bit forward
+move a tiny bit right and forward
+move a tiny bit right and a little forward
+move a tiny bit right and a lot forward
+move a tiny bit right and a tiny bit forward
+move right and backward
+move right and a little backward
+move right and a lot backward
+move right and a tiny bit backward
+move a little right and backward
+move a little right and a little backward
+move a little right and a lot backward
+move a little right and a tiny bit backward
+move a lot right and backward
+move a lot right and a little backward
+move a lot right and a lot backward
+move a lot right and a tiny bit backward
+move a tiny bit right and backward
+move a tiny bit right and a little backward
+move a tiny bit right and a lot backward
+move a tiny bit right and a tiny bit backward
+move right and up
+move right and a little up
+move right and a lot up
+move right and a tiny bit up
+move a little right and up
+move a little right and a little up
+move a little right and a lot up
+move a little right and a tiny bit up
+move a lot right and up
+move a lot right and a little up
+move a lot right and a lot up
+move a lot right and a tiny bit up
+move a tiny bit right and up
+move a tiny bit right and a little up
+move a tiny bit right and a lot up
+move a tiny bit right and a tiny bit up
+move right and down
+move right and a little down
+move right and a lot down
+move right and a tiny bit down
+move a little right and down
+move a little right and a little down
+move a little right and a lot down
+move a little right and a tiny bit down
+move a lot right and down
+move a lot right and a little down
+move a lot right and a lot down
+move a lot right and a tiny bit down
+move a tiny bit right and down
+move a tiny bit right and a little down
+move a tiny bit right and a lot down
+move a tiny bit right and a tiny bit down
+move forward and left
+move forward and a little left
+move forward and a lot left
+move forward and a tiny bit left
+move a little forward and left
+move a little forward and a little left
+move a little forward and a lot left
+move a little forward and a tiny bit left
+move a lot forward and left
+move a lot forward and a little left
+move a lot forward and a lot left
+move a lot forward and a tiny bit left
+move a tiny bit forward and left
+move a tiny bit forward and a little left
+move a tiny bit forward and a lot left
+move a tiny bit forward and a tiny bit left
+move forward and right
+move forward and a little right
+move forward and a lot right
+move forward and a tiny bit right
+move a little forward and right
+move a little forward and a little right
+move a little forward and a lot right
+move a little forward and a tiny bit right
+move a lot forward and right
+move a lot forward and a little right
+move a lot forward and a lot right
+move a lot forward and a tiny bit right
+move a tiny bit forward and right
+move a tiny bit forward and a little right
+move a tiny bit forward and a lot right
+move a tiny bit forward and a tiny bit right
+move forward and up
+move forward and a little up
+move forward and a lot up
+move forward and a tiny bit up
+move a little forward and up
+move a little forward and a little up
+move a little forward and a lot up
+move a little forward and a tiny bit up
+move a lot forward and up
+move a lot forward and a little up
+move a lot forward and a lot up
+move a lot forward and a tiny bit up
+move a tiny bit forward and up
+move a tiny bit forward and a little up
+move a tiny bit forward and a lot up
+move a tiny bit forward and a tiny bit up
+move forward and down
+move forward and a little down
+move forward and a lot down
+move forward and a tiny bit down
+move a little forward and down
+move a little forward and a little down
+move a little forward and a lot down
+move a little forward and a tiny bit down
+move a lot forward and down
+move a lot forward and a little down
+move a lot forward and a lot down
+move a lot forward and a tiny bit down
+move a tiny bit forward and down
+move a tiny bit forward and a little down
+move a tiny bit forward and a lot down
+move a tiny bit forward and a tiny bit down
+move backward and left
+move backward and a little left
+move backward and a lot left
+move backward and a tiny bit left
+move a little backward and left
+move a little backward and a little left
+move a little backward and a lot left
+move a little backward and a tiny bit left
+move a lot backward and left
+move a lot backward and a little left
+move a lot backward and a lot left
+move a lot backward and a tiny bit left
+move a tiny bit backward and left
+move a tiny bit backward and a little left
+move a tiny bit backward and a lot left
+move a tiny bit backward and a tiny bit left
+move backward and right
+move backward and a little right
+move backward and a lot right
+move backward and a tiny bit right
+move a little backward and right
+move a little backward and a little right
+move a little backward and a lot right
+move a little backward and a tiny bit right
+move a lot backward and right
+move a lot backward and a little right
+move a lot backward and a lot right
+move a lot backward and a tiny bit right
+move a tiny bit backward and right
+move a tiny bit backward and a little right
+move a tiny bit backward and a lot right
+move a tiny bit backward and a tiny bit right
+move backward and up
+move backward and a little up
+move backward and a lot up
+move backward and a tiny bit up
+move a little backward and up
+move a little backward and a little up
+move a little backward and a lot up
+move a little backward and a tiny bit up
+move a lot backward and up
+move a lot backward and a little up
+move a lot backward and a lot up
+move a lot backward and a tiny bit up
+move a tiny bit backward and up
+move a tiny bit backward and a little up
+move a tiny bit backward and a lot up
+move a tiny bit backward and a tiny bit up
+move backward and down
+move backward and a little down
+move backward and a lot down
+move backward and a tiny bit down
+move a little backward and down
+move a little backward and a little down
+move a little backward and a lot down
+move a little backward and a tiny bit down
+move a lot backward and down
+move a lot backward and a little down
+move a lot backward and a lot down
+move a lot backward and a tiny bit down
+move a tiny bit backward and down
+move a tiny bit backward and a little down
+move a tiny bit backward and a lot down
+move a tiny bit backward and a tiny bit down
+move up and left
+move up and a little left
+move up and a lot left
+move up and a tiny bit left
+move a little up and left
+move a little up and a little left
+move a little up and a lot left
+move a little up and a tiny bit left
+move a lot up and left
+move a lot up and a little left
+move a lot up and a lot left
+move a lot up and a tiny bit left
+move a tiny bit up and left
+move a tiny bit up and a little left
+move a tiny bit up and a lot left
+move a tiny bit up and a tiny bit left
+move up and right
+move up and a little right
+move up and a lot right
+move up and a tiny bit right
+move a little up and right
+move a little up and a little right
+move a little up and a lot right
+move a little up and a tiny bit right
+move a lot up and right
+move a lot up and a little right
+move a lot up and a lot right
+move a lot up and a tiny bit right
+move a tiny bit up and right
+move a tiny bit up and a little right
+move a tiny bit up and a lot right
+move a tiny bit up and a tiny bit right
+move up and forward
+move up and a little forward
+move up and a lot forward
+move up and a tiny bit forward
+move a little up and forward
+move a little up and a little forward
+move a little up and a lot forward
+move a little up and a tiny bit forward
+move a lot up and forward
+move a lot up and a little forward
+move a lot up and a lot forward
+move a lot up and a tiny bit forward
+move a tiny bit up and forward
+move a tiny bit up and a little forward
+move a tiny bit up and a lot forward
+move a tiny bit up and a tiny bit forward
+move up and backward
+move up and a little backward
+move up and a lot backward
+move up and a tiny bit backward
+move a little up and backward
+move a little up and a little backward
+move a little up and a lot backward
+move a little up and a tiny bit backward
+move a lot up and backward
+move a lot up and a little backward
+move a lot up and a lot backward
+move a lot up and a tiny bit backward
+move a tiny bit up and backward
+move a tiny bit up and a little backward
+move a tiny bit up and a lot backward
+move a tiny bit up and a tiny bit backward
+move down and left
+move down and a little left
+move down and a lot left
+move down and a tiny bit left
+move a little down and left
+move a little down and a little left
+move a little down and a lot left
+move a little down and a tiny bit left
+move a lot down and left
+move a lot down and a little left
+move a lot down and a lot left
+move a lot down and a tiny bit left
+move a tiny bit down and left
+move a tiny bit down and a little left
+move a tiny bit down and a lot left
+move a tiny bit down and a tiny bit left
+move down and right
+move down and a little right
+move down and a lot right
+move down and a tiny bit right
+move a little down and right
+move a little down and a little right
+move a little down and a lot right
+move a little down and a tiny bit right
+move a lot down and right
+move a lot down and a little right
+move a lot down and a lot right
+move a lot down and a tiny bit right
+move a tiny bit down and right
+move a tiny bit down and a little right
+move a tiny bit down and a lot right
+move a tiny bit down and a tiny bit right
+move down and forward
+move down and a little forward
+move down and a lot forward
+move down and a tiny bit forward
+move a little down and forward
+move a little down and a little forward
+move a little down and a lot forward
+move a little down and a tiny bit forward
+move a lot down and forward
+move a lot down and a little forward
+move a lot down and a lot forward
+move a lot down and a tiny bit forward
+move a tiny bit down and forward
+move a tiny bit down and a little forward
+move a tiny bit down and a lot forward
+move a tiny bit down and a tiny bit forward
+move down and backward
+move down and a little backward
+move down and a lot backward
+move down and a tiny bit backward
+move a little down and backward
+move a little down and a little backward
+move a little down and a lot backward
+move a little down and a tiny bit backward
+move a lot down and backward
+move a lot down and a little backward
+move a lot down and a lot backward
+move a lot down and a tiny bit backward
+move a tiny bit down and backward
+move a tiny bit down and a little backward
+move a tiny bit down and a lot backward
+move a tiny bit down and a tiny bit backward

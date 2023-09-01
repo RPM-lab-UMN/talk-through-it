@@ -58,7 +58,7 @@ rlbench:
   #                   10, 10,
   #                   10, 10,
   #                   10]
-  lang_variations: [0, 1, 2, 3]
+  lang_variations: [0]
 
 replay:
   batch_size: 4
@@ -78,7 +78,7 @@ framework:
   csv_logging: True
   training_iterations: 300001
   # training_iterations: 50001
-  logdir: '/home/user/School/peract_l2r/logs/lang_1'
+  logdir: '/home/user/School/peract_l2r/logs/lang_2'
   use_start_weight: False
   start_weight: '/home/user/School/peract_l2r/logs/multi_motions_9/multi/PERACT_BC/seed0/weights/195000'
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels

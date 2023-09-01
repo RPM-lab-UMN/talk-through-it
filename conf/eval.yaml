@@ -4,7 +4,7 @@ method:
 rlbench:
     task_name: 'multi'
     # task_name: 'put_money_in_safe_motions'
-    # tasks: [put_money_in_safe]
+    # tasks: [turn_tap_motions, put_money_in_safe_motions]
     tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
             meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
             close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
@@ -27,11 +27,11 @@ rlbench:
     time_in_state: True
     # headless: False
     headless: True
-    eval_desc_indices: [0, 1, 2, 3]
+    eval_desc_indices: [0]
 
 framework:
     gpu: 0
-    logdir: '/home/user/School/peract_l2r/logs/lang_1'
+    logdir: '/home/user/School/peract_l2r/logs/lang_2'
     # logdir: '/home/user/School/peract_l2r/logs/multi_motions_9'
     start_seed: 0
     record_every_n: 5
@@ -42,7 +42,7 @@ framework:
     eval_episodes: 25
     eval_type: 'missing'
     # eval_type: 'last'
-    # eval_type: 100000
+    # eval_type: 295000
     eval_save_metrics: True
     interactive_weight: 195000
     record_seed: 1000

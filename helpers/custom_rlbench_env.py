@@ -391,6 +391,7 @@ class CustomMultiTaskRLBenchEnv(MultiTaskRLBenchEnv):
             obs = self.extract_obs(obs)
             self._previous_obs_dict = obs
         except (IKError, ConfigurationPathError, InvalidActionError) as e:
+            print('action exception')
             terminal = True
             reward = 0.0
 

@@ -1,0 +1,187 @@
+move in front of the top handle
+move in front of the middle handle
+move in front of the bottom handle
+move in front of the block
+move left of the block
+move right of the block
+move behind the block
+move in front of the broom
+move above the chicken
+move above the steak
+move to the right tap
+move to the left tap
+move above the block
+move above the lid
+move above the red jar
+move above the maroon jar
+move above the lime jar
+move above the green jar
+move above the blue jar
+move above the navy jar
+move above the yellow jar
+move above the cyan jar
+move above the magenta jar
+move above the silver jar
+move above the gray jar
+move above the orange jar
+move above the olive jar
+move above the purple jar
+move above the teal jar
+move above the azure jar
+move above the violet jar
+move above the rose jar
+move above the black jar
+move above the white jar
+move above the platform
+move above the left red block
+move above the right red block
+move above the left maroon block
+move above the right maroon block
+move above the left lime block
+move above the right lime block
+move above the left green block
+move above the right green block
+move above the left blue block
+move above the right blue block
+move above the left navy block
+move above the right navy block
+move above the left yellow block
+move above the right yellow block
+move above the left cyan block
+move above the right cyan block
+move above the left magenta block
+move above the right magenta block
+move above the left silver block
+move above the right silver block
+move above the left gray block
+move above the right gray block
+move above the left orange block
+move above the right orange block
+move above the left olive block
+move above the right olive block
+move above the left purple block
+move above the right purple block
+move above the left teal block
+move above the right teal block
+move above the left azure block
+move above the right azure block
+move above the left violet block
+move above the right violet block
+move above the left rose block
+move above the right rose block
+move above the left black block
+move above the right black block
+move above the left white block
+move above the right white block
+move in front of the money
+move above the money
+move in front of the top shelf
+move in front of the middle shelf
+move in front of the bottom shelf
+move in front of the bottle
+move in front of the near side of the rack
+move in front of the far side of the rack
+move in front of the middle of the rack
+move in front of the cupboard
+move above the crackers
+move above the chocolate jello
+move above the strawberry jello
+move above the soup
+move above the tuna
+move above the spam
+move above the coffee
+move above the mustard
+move above the sugar
+move above the cube
+move above the cube hole
+move above the cylinder
+move above the cylinder hole
+move above the prism
+move above the prism hole
+move above the star
+move above the star hole
+move above the moon
+move above the moon hole
+move above the red button
+move above the maroon button
+move above the lime button
+move above the green button
+move above the blue button
+move above the navy button
+move above the yellow button
+move above the cyan button
+move above the magenta button
+move above the silver button
+move above the gray button
+move above the orange button
+move above the olive button
+move above the purple button
+move above the teal button
+move above the azure button
+move above the violet button
+move above the rose button
+move above the black button
+move above the white button
+move above the square ring
+move above the red peg
+move above the maroon peg
+move above the lime peg
+move above the green peg
+move above the blue peg
+move above the navy peg
+move above the yellow peg
+move above the cyan peg
+move above the magenta peg
+move above the silver peg
+move above the gray peg
+move above the orange peg
+move above the olive peg
+move above the purple peg
+move above the teal peg
+move above the azure peg
+move above the violet peg
+move above the rose peg
+move above the black peg
+move above the white peg
+move above the left edge of the red cup
+move a lot above the red cup
+move above the left edge of the maroon cup
+move a lot above the maroon cup
+move above the left edge of the lime cup
+move a lot above the lime cup
+move above the left edge of the green cup
+move a lot above the green cup
+move above the left edge of the blue cup
+move a lot above the blue cup
+move above the left edge of the navy cup
+move a lot above the navy cup
+move above the left edge of the yellow cup
+move a lot above the yellow cup
+move above the left edge of the cyan cup
+move a lot above the cyan cup
+move above the left edge of the magenta cup
+move a lot above the magenta cup
+move above the left edge of the silver cup
+move a lot above the silver cup
+move above the left edge of the gray cup
+move a lot above the gray cup
+move above the left edge of the orange cup
+move a lot above the orange cup
+move above the left edge of the olive cup
+move a lot above the olive cup
+move above the left edge of the purple cup
+move a lot above the purple cup
+move above the left edge of the teal cup
+move a lot above the teal cup
+move above the left edge of the azure cup
+move a lot above the azure cup
+move above the left edge of the violet cup
+move a lot above the violet cup
+move above the left edge of the rose cup
+move a lot above the rose cup
+move above the left edge of the black cup
+move a lot above the black cup
+move above the left edge of the white cup
+move a lot above the white cup
+move above the left cup
+move left of the rack

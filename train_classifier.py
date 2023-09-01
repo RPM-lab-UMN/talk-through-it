@@ -28,6 +28,9 @@ class CommandDataset(data.Dataset):
         return len(self.commands)
 
 def generate_commands():
+    # extract color names from colors
+    for i, c in enumerate(colors):
+        colors[i] = c[0]
     # move above task
     text1 = ['move above the ', 'go above the ']
     text2 = ['red ', 'green ', 'blue ', '']
@@ -169,6 +172,11 @@ def generate_commands():
     text = ['move above the left cup',
             'move left of the rack']
     commands.extend(text)
+
+    # write commands to txt file
+    # with open('prompt_common_2.txt', 'w') as f:
+    #     for command in commands:
+    #         f.write(command + '\n')
 
     return commands
 
