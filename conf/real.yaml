@@ -1,0 +1,62 @@
+ddp:
+    master_addr: "localhost"
+    master_port: "29500"
+    visualize_port: "29500"
+    num_devices: 1
+
+rlbench:
+    task_name: "carl_multi"
+    demo_path: /media/baldeeb/ssd2/Data/RLBench/peract
+    tasks: [sweep_demo]
+    demos: [100]
+    cameras: [overhead]
+    # tasks: [open_drawer_motions,      slide_block_motions,        sweep_to_dustpan_motions, 
+    #       meat_off_grill_motions,     turn_tap_motions,           put_item_in_drawer_motions,
+    #       close_jar_motions,          reach_and_drag_motions,     stack_blocks_motions,
+    #       put_money_in_safe_motions,  place_wine_at_rack_motions, put_groceries_in_cupboard_motions, 
+    #       push_buttons_motions,       stack_cups_motions]
+    # demos: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+    episode_length: 600
+    # cameras: [front, left_shoulder, right_shoulder, wrist]
+    camera_resolution: [128, 128]
+    
+    scene_bounds: [-1.3, -1.5, -1.6, 1.7, 1.5, 1.6]
+    include_lang_goal_in_obs: True
+    lang_variations: [0]
+replay:
+    batch_size: 4
+    timesteps: 1
+    prioritisation: False
+    task_uniform: True # uniform sampling of tasks for multi-task buffers
+    use_disk: True
+    path: '/tmp/arm/replay' # only used when use_disk is True.
+    max_parallel_processes: 32
+
+framework:
+    log_freq: 100
+    save_freq: 100
+    train_envs: 1
+    replay_ratio: ${replay.batch_size}
+    transitions_before_train: 200
+    tensorboard_logging: True
+    csv_logging: True
+    training_iterations: 60000
+    gpu: 0
+    env_gpu: 0
+    logdir: '/home/baldeeb/Code/carl/logs'
+    use_start_weight: False
+    start_weight: 
+    logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
+    seeds: 1
+    start_seed: 0
+    load_existing_weights: False
+    num_weights_to_keep: 60 # older checkpoints will be deleted chronologically
+    num_workers: 0
+    record_every_n: 5
+
+defaults:
+    - method: PERACT_BC
+
+hydra:
+    run:
+        dir: ${framework.logdir}/${rlbench.task_name}/${method.name}

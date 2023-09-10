@@ -5,7 +5,8 @@ import os
 import numpy as np
 from rlbench.backend.observation import Observation
 from rlbench.observation_config import ObservationConfig
-import rlbench.utils as rlbench_utils
+import helpers.rlbench_util as rlbench_utils
+# import rlbench.utils as rlbench_utils
 from rlbench.demo import Demo
 from yarr.replay_buffer.prioritized_replay_buffer import ObservationElement
 from yarr.replay_buffer.replay_buffer import ReplayElement, ReplayBuffer
