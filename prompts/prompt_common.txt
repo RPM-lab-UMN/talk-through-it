@@ -1,4 +1,5 @@
-Only use instructions from the following list:
+Do not add numbers or capitalization to the instructions.
+Only use these exact instructions:
 rotate clockwise
 rotate a little clockwise
 rotate a lot clockwise

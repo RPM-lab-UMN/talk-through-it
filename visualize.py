@@ -94,7 +94,7 @@ def main(cfg: DictConfig) -> None:
     train_data_iter = iter(dataset)
 
     # loop for number of demos
-    for _ in range(cfg.rlbench.demos):
+    for _ in range(cfg.rlbench.demos[0]):
         # sample from dataset
         batch = next(train_data_iter)
         lang_goal = batch['lang_goal'][0][0][0]

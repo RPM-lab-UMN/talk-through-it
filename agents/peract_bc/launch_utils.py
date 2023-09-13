@@ -1,3 +1,4 @@
+from email.mime import image
 import logging
 from typing import List
 import os
@@ -40,6 +41,8 @@ def create_replay(batch_size: int,
     max_token_seq_len = 77
     lang_feat_dim = 1024
     lang_emb_dim = 512
+
+    image_size = [image_size[1], image_size[0]]
 
     # low_dim_state
     observation_elements = []

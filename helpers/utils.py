@@ -138,6 +138,7 @@ def create_voxel_scene(
     _, d, h, w = voxel_grid.shape
     v = voxel_grid.transpose((1, 2, 3, 0))
     occupancy = v[:, :, :, -1] != 0
+    occupancy[0,0,0] = True # debugging
     alpha = np.expand_dims(np.full_like(occupancy, alpha, dtype=np.float32), -1)
     rgb = np.concatenate([(v[:, :, :, 3:6] + 1)/ 2.0, alpha], axis=-1)
 

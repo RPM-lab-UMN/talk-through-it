@@ -1,4 +1,4 @@
 The environment contains a robot arm and a set of three drawers.
 The drawers are to the right of the robot.
 There is a top drawer, a middle drawer, and a bottom drawer.
-Give the robot a list of instructions to open the {top} drawer.
+Give the robot a list of instructions to open the {var} drawer.
