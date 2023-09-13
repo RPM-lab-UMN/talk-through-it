@@ -94,8 +94,9 @@ class Config:
 
         self.TTT_FILE = 'task_design.ttt'
 
-        self.DEPTH_SCALE = 2**24 - 1
-        # self.DEPTH_SCALE = ( ( 2**21 ) - 1.0 ) # 2**24 - 1
+        # self.DEPTH_SCALE = 2097151  # Spot ( 2**21 ) - 1.0 
+        self.DEPTH_SCALE = 16777215 # Originally ( 2**24 ) - 1.0 
+
 
 
 def get_stored_demos(amount: int, image_paths: bool, dataset_root: str,

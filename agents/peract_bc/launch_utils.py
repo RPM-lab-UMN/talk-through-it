@@ -50,11 +50,11 @@ def create_replay(batch_size: int,
     # rgb, depth, intrinsics, extrinsics
     for cname in cameras:
         observation_elements.append(
-            ObservationElement('%s_rgb' % cname, (3, *image_size,), np.float32))
+            ObservationElement('%s_rgb' % cname, (3, image_size[1], image_size[0],), np.float32))
         observation_elements.append(
-            ObservationElement('%s_depth' % cname, (1, *image_size,), np.float32))
+            ObservationElement('%s_depth' % cname, (1, image_size[1], image_size[0],), np.float32))
         observation_elements.append(
-            ObservationElement('%s_point_cloud' % cname, (3, *image_size),
+            ObservationElement('%s_point_cloud' % cname, (3, image_size[1], image_size[0]),
                                 np.float32))  # see pyrep/objects/vision_sensor.py on how pointclouds are extracted from depth frames
         observation_elements.append(
             ObservationElement('%s_camera_extrinsics' % cname, (4, 4,), np.float32))
