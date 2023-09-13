@@ -5,7 +5,7 @@ name: 'PERACT_BC'
 # Voxelization
 image_crop_size: 64
 bounds_offset: [0.15]
-voxel_sizes: [200]
+voxel_sizes: [50]
 
 # Perceiver
 num_latents: 2048

@@ -7,7 +7,7 @@ ddp:
 rlbench:
     task_name: "carl_multi"
     demo_path: /media/baldeeb/ssd2/Data/RLBench/peract
-    tasks: [test]
+    tasks: [sweep_demo]
     demos: [100]
     cameras: [overhead]
     # tasks: [open_drawer_motions,      slide_block_motions,        sweep_to_dustpan_motions, 
