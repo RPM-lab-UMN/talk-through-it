@@ -49,6 +49,8 @@ class InteractiveEnv():
         self.classifier = classifier
         self.env_device = env_device
         self.record_seed = record_seed
+        if self.record_seed is None:
+            self.record_seed = np.random.randint(0, 9999999)
         self.variation = 0
 
     def start(self, weight,
@@ -428,11 +430,14 @@ class InteractiveEnv():
                         obs_history[k].append(transition.observation[k])
                         obs_history[k].pop(0)
                     # ask user to continue or break
-                    break # TODO configure this
+                    # break # TODO configure this
                     print('Press b to break, any other key to continue')
                     key = readchar.readkey()
                     if key == 'b':
                         break
+                    elif key == 'k':
+                        keypoints.append(len(demo)-1)
+                        print('keypoints: ', keypoints)
             else:
                 # use l2a model
                 text_embed = self.classifier.sentence_emb
