@@ -1,9 +1,0 @@
-turn right
-move a little forward
-turn left
-move a little up
-open the gripper
-move a little down
-close the gripper
-move a little up
-open the gripper
