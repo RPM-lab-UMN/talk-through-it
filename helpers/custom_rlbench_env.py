@@ -250,10 +250,10 @@ class CustomRLBenchEnv(RLBenchEnv):
 
         return self._previous_obs_dict
     
-    def reset_to_seed(self, variation, seed, interactive=False):
+    def reset_to_seed(self, variation, seed, desc_index=0):
         self._i = 0
         self._task.set_variation(variation)
-        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed, interactive)
+        self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed, desc_index)
         self._record_current_episode = (
                 self.eval and self._episode_index % self._record_every_n == 0)
         self._episode_index += 1
