@@ -4,7 +4,7 @@ method:
 rlbench:
     task_name: 'multi'
     # task_name: 'put_money_in_safe_motions'
-    # tasks: [turn_tap_motions, put_money_in_safe_motions]
+    # tasks: [sweep_to_dustpan_of_size]
     # tasks: [open_drawer_motions, slide_block_motions, sweep_to_dustpan_motions, 
     #         meat_off_grill_motions, turn_tap_motions, put_item_in_drawer_motions,
     #         close_jar_motions, reach_and_drag_motions, stack_blocks_motions,
@@ -18,9 +18,10 @@ rlbench:
             put_groceries_in_cupboard, push_buttons, 
             stack_cups_lv2] # TODO push buttons lv2
     # tasks: [meat_off_grill, open_drawer]
+    # tasks: [put_item_in_drawer, stack_blocks, push_buttons_lv3, stack_cups]
 
     demo_path: /home/user/School/peract_l2r/data
-    episode_length: 25
+    episode_length: 5
     cameras: [front, left_shoulder, right_shoulder, wrist]
     camera_resolution: [128, 128]
     # scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
@@ -34,9 +35,9 @@ rlbench:
 framework:
     gpu: 0
     # logdir: '/home/user/School/peract_l2r/logs/finetune_meat_off_grill'
-    logdir: '/home/user/School/peract_l2r/logs/base_10_scripted'
-    # logdir: '/home/user/School/peract_l2r/logs/fine_tune_7'
-    start_seed: 0
+    # logdir: /home/user/School/peract_l2r/logs/lang_2
+    logdir: /home/user/School/peract_l2r/logs/lv1_to_lv2_10_demos
+    start_seed: 2
     record_every_n: 5
 
     eval_envs: 4
@@ -44,11 +45,11 @@ framework:
     eval_from_eps_number: 2000
     # eval_from_eps_number: 0
     eval_episodes: 25
-    eval_type: 'missing'
+    # eval_type: 'missing'
     # eval_type: 'last'
-    # eval_type: [100000]
+    eval_type: [160000]
     eval_save_metrics: True
-    interactive_weight: 95000
+    interactive_weight: 75000
     record_seed: null
 
 cinematic_recorder:

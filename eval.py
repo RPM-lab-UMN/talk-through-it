@@ -117,8 +117,11 @@ def eval_seed(train_cfg,
         print("Last weight:", weight_folders)
 
     # evaluate a specific checkpoint
-    elif type(eval_cfg.framework.eval_type) == int:
-        weight_folders = [int(eval_cfg.framework.eval_type)]
+    elif type(eval_cfg.framework.eval_type) == ListConfig:
+        weight_folders = []
+        # append each integer to the weight folder list
+        for i in range(len(eval_cfg.framework.eval_type)):
+            weight_folders.append(int(eval_cfg.framework.eval_type[i]))
         print("Weight:", weight_folders)
 
     else:
