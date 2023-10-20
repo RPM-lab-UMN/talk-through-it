@@ -58,20 +58,20 @@ rlbench:
 
   # fine_tune_tasks: [meat_off_grill]
   # fine_tune_demos: [10]
-  fine_tune_tasks: [open_drawer, slide_block, sweep_to_dustpan,
+  fine_tune_tasks2: [open_drawer, slide_block, sweep_to_dustpan,
                     meat_off_grill, turn_tap, put_item_in_drawer_lv2,
                     close_jar, reach_and_drag, stack_blocks_lv2,
                     put_money_in_safe, place_wine_at_rack,
                     put_groceries_in_cupboard, push_buttons, 
-                    stack_cups_lv2,
-                    put_item_in_drawer_lv3, stack_blocks_lv3, push_buttons_lv3, stack_cups_lv3]
-  fine_tune_demos: [10, 10, 10,
+                    stack_cups_lv2]
+  fine_tune_demos2: [10, 10, 10,
                     10, 10, 10,
                     10, 10, 10,
                     10, 10,
                     10, 10,
-                    10,
-                    10, 10, 10, 10]
+                    10]
+  fine_tune_tasks3: [put_item_in_drawer_lv3, stack_blocks_lv3, push_buttons_lv3, stack_cups_lv3]
+  fine_tune_demos3: [10, 10, 10, 10]
   # fine_tune_demos: [2, 2, 2, 
   #                   2, 2, 2, 
   #                   2, 2, 2, 
@@ -104,10 +104,10 @@ framework:
   csv_logging: True
   training_iterations: 100001
   # training_iterations: 50001
-  logdir: '/home/user/School/peract_l2r/logs/base_10_scripted'
+  logdir: '/home/user/School/peract_l2r/logs/lv2_to_lv3_10_demos_2'
   use_start_weight: True
   # start_weight: '/home/user/School/peract_l2r/logs/fine_tune_6/multi/PERACT_BC/seed0/weights/95000'
-  start_weight: /home/user/School/peract_l2r/logs/lang_2/multi/PERACT_BC/seed1/weights/160000
+  start_weight: /home/user/School/peract_l2r/logs/lv1_to_lv2_10_demos/multi/PERACT_BC/seed2/weights/75000
   logging_level: 20 # https://docs.python.org/3/library/logging.html#levels
   seeds: 1
   start_seed: 0

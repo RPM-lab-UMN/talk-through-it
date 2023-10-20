@@ -26,7 +26,7 @@ def run_seed(rank,
              multi_task,
              seed,
              world_size,
-             fine_tune = False) -> None:
+             fine_tune = 0) -> None:
     dist.init_process_group("gloo",
                             rank=rank,
                             world_size=world_size)
@@ -37,7 +37,9 @@ def run_seed(rank,
     task_folder = task if not multi_task else 'multi'
     replay_path = os.path.join(cfg.replay.path, task_folder, cfg.method.name, 'seed%d' % seed)
 
-    if fine_tune:
+    if fine_tune == 2:
+        batch_size = cfg.replay.batch_size - 2
+    elif fine_tune == 1:
         batch_size = cfg.replay.batch_size - 1
     else:
         batch_size = cfg.replay.batch_size
@@ -59,7 +61,7 @@ def run_seed(rank,
         cfg.method.rotation_resolution, cfg.method.crop_augmentation,
         keypoint_method=cfg.method.keypoint_method)
     
-    if fine_tune:
+    if fine_tune >= 1:
         # create second replay buffer with demos for fine tuning
         fine_replay_path = os.path.join(cfg.replay.path, task_folder, cfg.method.name, 'seed%d_fine' % seed)
         fine_replay_buffer = peract_bc.launch_utils.create_replay(
@@ -70,11 +72,33 @@ def run_seed(rank,
             cfg.method.voxel_sizes,
             cfg.rlbench.camera_resolution)
         
-        fine_tasks = cfg.rlbench.fine_tune_tasks
-        fine_demos = cfg.rlbench.fine_tune_demos
+        fine_tasks = cfg.rlbench.fine_tune_tasks2
+        fine_demos = cfg.rlbench.fine_tune_demos2
         peract_bc.launch_utils.fill_multi_task_replay(
             cfg, obs_config, rank,
             fine_replay_buffer, fine_tasks, fine_demos,
+            cfg.method.demo_augmentation, cfg.method.demo_augmentation_every_n,
+            cams, cfg.rlbench.scene_bounds,
+            cfg.method.voxel_sizes, cfg.method.bounds_offset,
+            cfg.method.rotation_resolution, cfg.method.crop_augmentation,
+            keypoint_method='txt')
+        
+    if fine_tune >= 2:
+        # create second replay buffer with demos for fine tuning
+        replay_path3 = os.path.join(cfg.replay.path, task_folder, cfg.method.name, 'seed%d_fine' % seed)
+        replay_buffer3 = peract_bc.launch_utils.create_replay(
+            1, 
+            cfg.replay.timesteps,
+            replay_path3 if cfg.replay.use_disk else None,
+            cams, 
+            cfg.method.voxel_sizes,
+            cfg.rlbench.camera_resolution)
+        
+        tasks3 = cfg.rlbench.fine_tune_tasks3
+        demos3 = cfg.rlbench.fine_tune_demos3
+        peract_bc.launch_utils.fill_multi_task_replay(
+            cfg, obs_config, rank,
+            replay_buffer3, tasks3, demos3,
             cfg.method.demo_augmentation, cfg.method.demo_augmentation_every_n,
             cams, cfg.rlbench.scene_bounds,
             cfg.method.voxel_sizes, cfg.method.bounds_offset,
@@ -84,7 +108,8 @@ def run_seed(rank,
     agent = peract_bc.launch_utils.create_agent(cfg)
 
     wrapped_replay = PyTorchReplayBuffer(replay_buffer, num_workers=cfg.framework.num_workers)
-    fine_wrapped_replay = PyTorchReplayBuffer(fine_replay_buffer, num_workers=cfg.framework.num_workers) if fine_tune else None
+    wrapped_replay2 = PyTorchReplayBuffer(fine_replay_buffer, num_workers=cfg.framework.num_workers) if fine_tune >= 1 else None
+    wrapped_replay3 = PyTorchReplayBuffer(replay_buffer3, num_workers=cfg.framework.num_workers) if fine_tune >= 2 else None
     stat_accum = SimpleAccumulator(eval_video_fps=30)
 
     cwd = os.getcwd()
@@ -99,7 +124,8 @@ def run_seed(rank,
     train_runner = OfflineTrainRunner(
         agent=agent,
         wrapped_replay_buffer=wrapped_replay,
-        fine_wrapped_replay_buffer=fine_wrapped_replay,
+        wrapped_replay_buffer2=wrapped_replay2,
+        wrapped_replay_buffer3=wrapped_replay3,
         train_device=cfg.framework.gpu,
         stat_accumulator=stat_accum,
         iterations=cfg.framework.training_iterations,

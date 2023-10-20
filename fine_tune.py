@@ -73,7 +73,7 @@ def main(cfg: DictConfig) -> None:
         logging.info('Starting seed %d.' % seed)
 
         world_size = cfg.ddp.num_devices
-        fine_tune = True
+        fine_tune = 2 # 0: no fine tune, 1: fine tune lv2, 2: fine tune lv2 and lv3
         mp.spawn(run_seed_fn.run_seed,
                  args=(cfg,
                        obs_config,
