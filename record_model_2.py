@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+import csv
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 
@@ -120,6 +121,7 @@ class InteractiveEnv():
         # replace the language goal with user input
         command = ''
         while command != 'quit':
+            print(obs)
             command = input("Enter a command: ")
             if command == 'reset':
                 eval_demo_seed += 1
@@ -317,7 +319,8 @@ class InteractiveEnv():
         # create the episode folder
         episode_idx = 0
         episode_root = ''
-        def set_task_dir(task_name='open_drawer'):
+        # def set_task_dir(task_name='open_drawer'):
+        def set_task_dir(task_name='meat_off_grill'):
             global episode_root
             episode_root = '/home/user/School/peract_l2r/data/' + task_name + '/all_variations/episodes/'
             global episode_idx 
@@ -329,8 +332,14 @@ class InteractiveEnv():
         command = ''
         demo = []
         keypoints = []
-        task_idx = 0
+        # -----------------------------------------------------------------
+        self.variation = 0
+        task_idx = 2
+        for task,id in zip(self.cfg.rlbench.tasks, range(len(self.cfg.rlbench.tasks))):
+            print(id, task)
         max_task_idx = len(self.cfg.rlbench.tasks)
+        print('task:', self.cfg.rlbench.tasks[task_idx % max_task_idx])
+        # -----------------------------------------------------------------
 
         def reset_task():
             global demo
@@ -354,7 +363,31 @@ class InteractiveEnv():
             return obs, prev_action
 
         obs, prev_action = reset_task()
+        demo.append(obs)
         gripper_state_prev = obs['low_dim_state'][0]
+
+        # -----------------------------------------------------------------
+        time = 0
+
+        goal = self.eval_env._lang_goal
+        # goal = input("Enter a goal: ")
+        # Filename: /tmp/VLM/Spark/conv/front_rgb/{frame_number}.png
+        image = Image.fromarray(obs['front_rgb'].transpose(1, 2, 0), mode='RGB')
+        image.save('/tmp/VLM/Spark/conv/front_rgb/' + str(len(demo)) + '.png')
+        # Filename: /tmp/VLM/Spark/conv/wrist_rgb/{frame_number}.png
+        wrist_image = Image.fromarray(obs['wrist_rgb'].transpose(1, 2, 0), mode='RGB')
+        wrist_image.save('/tmp/VLM/Spark/conv/wrist_rgb/' + str(len(demo)) + '.png')
+
+        csv_data = []
+        csv_data.append((goal, None))
+        csv_data.append((len(demo), None))
+
+        with open('/tmp/VLM/Spark/conv/seq.csv', "w") as f:
+            writer = csv.writer(f)
+            writer.writerows(csv_data)
+
+        # -----------------------------------------------------------------
+
         while True:
             command = input("Enter a command: ")
             if command == 'quit':
@@ -382,7 +415,29 @@ class InteractiveEnv():
             elif command == 'reset': # TODO don't change tasks
                 self.record_seed += 1
                 obs, prev_action = reset_task()
-                continue
+
+                # -----------------------------------------------------------------
+                time = len(demo) -1
+                current_time = len(demo) - time
+                goal = self.eval_env._lang_goal
+                # goal = input("Enter a goal: ")
+                # Filename: /tmp/VLM/Spark/conv/front_rgb/{frame_number}.png
+                image = Image.fromarray(obs['front_rgb'].transpose(1, 2, 0), mode='RGB')
+                image.save('/tmp/VLM/Spark/conv/front_rgb/' + str(current_time) + '.png')
+                # Filename: /tmp/VLM/Spark/conv/wrist_rgb/{frame_number}.png
+                wrist_image = Image.fromarray(obs['wrist_rgb'].transpose(1, 2, 0), mode='RGB')
+                wrist_image.save('/tmp/VLM/Spark/conv/wrist_rgb/' + str(current_time) + '.png')
+
+                csv_data = []
+                csv_data.append((goal, None))
+                csv_data.append((current_time, None))
+
+                with open('/tmp/VLM/Spark/conv/seq.csv', "w") as f:
+                    writer = csv.writer(f)
+                    writer.writerows(csv_data)
+
+                continue                
+                # -----------------------------------------------------------------
             elif command == 'set':
                 self.variation = 0
                 task_idx += 1
@@ -394,8 +449,26 @@ class InteractiveEnv():
                 num_variations = env._task.variation_count()
                 if self.variation >= num_variations:
                     self.variation = 0
-                reset_task()
-                continue
+                obs, prev_action = reset_task()
+                # -----------------------------------------------------------------
+                time = len(demo) - 1
+                current_time = len(demo) - time
+                goal = self.eval_env._lang_goal
+                image = Image.fromarray(obs['front_rgb'].transpose(1, 2, 0), mode='RGB')
+                image.save('/tmp/VLM/Spark/conv/front_rgb/' + str(current_time) + '.png')
+                # Filename: /tmp/VLM/Spark/conv/wrist_rgb/{frame_number}.png
+                wrist_image = Image.fromarray(obs['wrist_rgb'].transpose(1, 2, 0), mode='RGB')
+                wrist_image.save('/tmp/VLM/Spark/conv/wrist_rgb/' + str(current_time) + '.png')
+                
+                csv_data = []
+                csv_data.append((goal, None))
+                csv_data.append((current_time, None))
+
+                with open('/tmp/VLM/Spark/conv/seq.csv', "w") as f:
+                    writer = csv.writer(f)
+                    writer.writerows(csv_data)
+                continue                
+                # -----------------------------------------------------------------
             elif command == 'k':
                 keypoints.append(len(demo)-1)
                 print('keypoints: ', keypoints)
@@ -414,30 +487,19 @@ class InteractiveEnv():
                 env._i = 0 
                 obs_history = {k: [np.array(v, dtype=self._get_type(v))] * timesteps for k, v in obs.items()}
                 # for _ in range(6):
-                while True:
+
+                # -----------------------------------------------------------------
+                for i in range(8):
                     prepped_data = {k:torch.tensor([v], device=self.env_device) for k, v in obs_history.items()}
 
                     act_result = self.agent.act(0, prepped_data,
                                             deterministic=eval)
-                    # edit act result to maintain gripper state
-                    # act_result.action[-2] = gripper_state_prev
                     transition, demo_piece = env.record_step(act_result)
                     demo.extend(demo_piece)
-                    # print the timestep from low_dim_state
-                    # print(transition.observation['low_dim_state'][-1])
-
                     for k in obs_history.keys():
                         obs_history[k].append(transition.observation[k])
                         obs_history[k].pop(0)
-                    # ask user to continue or break
-                    break # TODO configure this
-                    print('Press b to break, any other key to continue')
-                    key = readchar.readkey()
-                    if key == 'b':
-                        break
-                    elif key == 'k':
-                        keypoints.append(len(demo)-1)
-                        print('keypoints: ', keypoints)
+                # -----------------------------------------------------------------
             else:
                 # use l2a model
                 text_embed = self.classifier.sentence_emb
@@ -449,6 +511,24 @@ class InteractiveEnv():
             # record gripper state
             gripper_state_prev = obs['low_dim_state'][0]
             # extend the demo
+
+
+            # -----------------------------------------------------------------
+            # Filename: /tmp/VLM/Spark/conv/front_rgb/{frame_number}.png
+            current_time = len(demo) - time
+            image = Image.fromarray(obs['front_rgb'].transpose(1, 2, 0), mode='RGB')
+            image.save('/tmp/VLM/Spark/conv/front_rgb/' + str(current_time) + '.png')
+            # Filename: /tmp/VLM/Spark/conv/wrist_rgb/{frame_number}.png
+            wrist_image = Image.fromarray(obs['wrist_rgb'].transpose(1, 2, 0), mode='RGB')
+            wrist_image.save('/tmp/VLM/Spark/conv/wrist_rgb/' + str(current_time) + '.png')
+            
+            csv_data[-1] = (csv_data[-1][0], command)
+            csv_data.append((current_time, None))
+
+            with open('/tmp/VLM/Spark/conv/seq.csv', "w") as f:
+                writer = csv.writer(f)
+                writer.writerows(csv_data)
+            # -----------------------------------------------------------------
 
 def eval_seed(train_cfg,
               eval_cfg,

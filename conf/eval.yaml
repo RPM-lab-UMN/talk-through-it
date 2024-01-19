@@ -11,25 +11,25 @@ rlbench:
     #         put_money_in_safe_motions, place_wine_at_rack_motions,
     #         put_groceries_in_cupboard_motions, push_buttons_motions,
     #         stack_cups_motions]
-    tasks: [open_drawer, slide_block_to_color_target, sweep_to_dustpan_of_size,
-            meat_off_grill, turn_tap, put_item_in_drawer_lv2,
-            close_jar, reach_and_drag, stack_blocks_lv2,
-            put_money_in_safe, place_wine_at_rack_location,
-            put_groceries_in_cupboard, push_buttons, 
-            stack_cups_lv2] # TODO push buttons lv2
+    # tasks: [open_drawer, slide_block_to_color_target, sweep_to_dustpan_of_size,
+    #         meat_off_grill, turn_tap, put_item_in_drawer_lv2,
+    #         close_jar, reach_and_drag, stack_blocks_lv2,
+    #         put_money_in_safe, place_wine_at_rack_location,
+    #         put_groceries_in_cupboard, push_buttons, 
+    #         stack_cups_lv2] # TODO push buttons lv2
     # tasks: [meat_off_grill, open_drawer]
-    # tasks: [put_item_in_drawer, stack_blocks, push_buttons_lv3, stack_cups]
+    tasks: [sweep_to_dustpan_of_size, slide_block_to_color_target]
 
     demo_path: /home/user/School/peract_l2r/data
-    episode_length: 5
+    episode_length: 25
     cameras: [front, left_shoulder, right_shoulder, wrist]
     camera_resolution: [128, 128]
     # scene_bounds: [-0.3, -0.5, 0.8, 0.7, 0.5, 1.8]
     scene_bounds: [-0.3, -0.5, 0.6, 0.7, 0.5, 1.6]
     include_lang_goal_in_obs: True
     time_in_state: True
-    # headless: False
-    headless: True
+    headless: False
+    # headless: True
     eval_desc_indices: [0]
 
 framework:
@@ -38,22 +38,26 @@ framework:
     # logdir: /home/user/School/peract_l2r/logs/lang_2
     logdir: /home/user/School/peract_l2r/logs/lv1_to_lv2_10_demos
     start_seed: 2
-    record_every_n: 5
+    record_every_n: 1
 
     eval_envs: 4
     # 0 was motions training, 1000 for eval, 2000 for test
     eval_from_eps_number: 2000
     # eval_from_eps_number: 0
-    eval_episodes: 25
+    eval_episodes: 5
     # eval_type: 'missing'
     # eval_type: 'last'
-    eval_type: [160000]
+    eval_type: [75000]
     eval_save_metrics: True
     interactive_weight: 75000
     record_seed: null
 
 cinematic_recorder:
-    enabled: False
+    enabled: True
+    camera_resolution: [1280, 720]
+    fps: 30
+    rotate_speed: 0.005
+    save_path: '/tmp/videos/'
 
 hydra:
     run:

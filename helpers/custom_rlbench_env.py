@@ -107,6 +107,7 @@ class CustomRLBenchEnv(RLBenchEnv):
         self._previous_obs_dict = super(CustomRLBenchEnv, self).reset(seed)
         self._record_current_episode = (
                 self.eval and self._episode_index % self._record_every_n == 0)
+        self._record_current_episode = False
         self._episode_index += 1
         self._recorded_images.clear()
         return self._previous_obs_dict
