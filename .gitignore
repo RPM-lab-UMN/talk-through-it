@@ -8,3 +8,4 @@ interactive_test.py
 text_classifier.pt
 manual_backup
 scratch.sh
+media/*
