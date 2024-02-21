@@ -107,3 +107,13 @@ Collect demonstrations using language by running record_model_1.py
 Evaluate observation-dependent models by editing conf/eval.yaml and running eval.py
 
 ## Citation
+```
+@misc{winge2024talk,
+      title={Talk Through It: End User Directed Manipulation Learning}, 
+      author={Carl Winge and Adam Imdieke and Bahaa Aldeeb and Dongyeop Kang and Karthik Desingh},
+      year={2024},
+      eprint={2402.12509},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
+}
+```
