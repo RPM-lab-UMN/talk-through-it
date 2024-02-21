@@ -13,7 +13,7 @@ Project website: [talk-through-it.github.io](https://talk-through-it.github.io)
 ## Guide
 This repository started as a clone of [PerAct](https://github.com/peract/peract). The requirements should be the same.
 
-Please open an issure if you encounter problems.
+Please open an issue if you encounter problems.
 
 ### 1. Environment
 ```bash
