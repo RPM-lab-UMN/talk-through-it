@@ -20,4 +20,47 @@ mamba activate talk
 mamba install python=3.8
 ```
 
+### 2. PyRep and Coppelia Simulator
+
+Follow instructions from the official [PyRep](https://github.com/stepjam/PyRep) repo; reproduced here for convenience:
+
+PyRep requires version **4.1** of CoppeliaSim. Download: 
+- [Ubuntu 16.04](https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu16_04.tar.xz)
+- [Ubuntu 18.04](https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu18_04.tar.xz)
+- [Ubuntu 20.04](https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu20_04.tar.xz)
+
+Once you have downloaded CoppeliaSim, you can pull PyRep from git:
+
+```bash
+cd <install_dir>
+git clone https://github.com/stepjam/PyRep.git
+cd PyRep
+```
+
+Add the following to your *~/.bashrc* file: (__NOTE__: the 'EDIT ME' in the first line)
+
+```bash
+export COPPELIASIM_ROOT=<EDIT ME>/PATH/TO/COPPELIASIM/INSTALL/DIR
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$COPPELIASIM_ROOT
+export QT_QPA_PLATFORM_PLUGIN_PATH=$COPPELIASIM_ROOT
+```
+
+Remember to source your bashrc (`source ~/.bashrc`) or 
+zshrc (`source ~/.zshrc`) after this.
+
+**Warning**: CoppeliaSim might cause conflicts with ROS workspaces. 
+
+Finally install the python library:
+
+```bash
+pip install -r requirements.txt
+pip install .
+```
+
+You should be good to go!
+You could try running one of the examples in the *examples/* folder.
+
+If you encounter errors, please use the [PyRep issue tracker](https://github.com/stepjam/PyRep/issues).
+
+
 ## Citation
