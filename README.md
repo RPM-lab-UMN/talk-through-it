@@ -10,8 +10,10 @@ to create home models that can perform primitive actions as well as higher level
 
 Project website: [talk-through-it.github.io](https://talk-through-it.github.io)
 
-## Guide (TODO)
+## Guide
 This repository started as a clone of [PerAct](https://github.com/peract/peract). The requirements should be the same.
+
+Please open an issure if you encounter problems.
 
 ### 1. Environment
 ```bash
@@ -25,14 +27,13 @@ mamba install python=3.8
 Follow instructions from the official [PyRep](https://github.com/stepjam/PyRep) repo; reproduced here for convenience:
 
 PyRep requires version **4.1** of CoppeliaSim. Download: 
-- [Ubuntu 16.04](https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu16_04.tar.xz)
-- [Ubuntu 18.04](https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu18_04.tar.xz)
-- [Ubuntu 20.04](https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu20_04.tar.xz)
+- [Ubuntu 16.04](https://www.coppeliarobotics.com/files/V4_1_0/CoppeliaSim_Edu_V4_1_0_Ubuntu16_04.tar.xz)
+- [Ubuntu 18.04](https://www.coppeliarobotics.com/files/V4_1_0/CoppeliaSim_Edu_V4_1_0_Ubuntu18_04.tar.xz)
+- [Ubuntu 20.04](https://www.coppeliarobotics.com/files/V4_1_0/CoppeliaSim_Edu_V4_1_0_Ubuntu20_04.tar.xz)
 
 Once you have downloaded CoppeliaSim, you can pull PyRep from git:
 
 ```bash
-cd <install_dir>
 git clone https://github.com/stepjam/PyRep.git
 cd PyRep
 ```
@@ -40,27 +41,69 @@ cd PyRep
 Add the following to your *~/.bashrc* file: (__NOTE__: the 'EDIT ME' in the first line)
 
 ```bash
-export COPPELIASIM_ROOT=<EDIT ME>/PATH/TO/COPPELIASIM/INSTALL/DIR
+export COPPELIASIM_ROOT=EDIT/ME/PATH/TO/COPPELIASIM/INSTALL/DIR
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$COPPELIASIM_ROOT
 export QT_QPA_PLATFORM_PLUGIN_PATH=$COPPELIASIM_ROOT
 ```
 
-Remember to source your bashrc (`source ~/.bashrc`) or 
+__Remember to source your bashrc (`source ~/.bashrc`) or 
 zshrc (`source ~/.zshrc`) after this.
-
-**Warning**: CoppeliaSim might cause conflicts with ROS workspaces. 
 
 Finally install the python library:
 
 ```bash
-pip install -r requirements.txt
-pip install .
+pip3 install -r requirements.txt
+pip3 install .
 ```
 
-You should be good to go!
-You could try running one of the examples in the *examples/* folder.
+### 3. RLBench
 
-If you encounter errors, please use the [PyRep issue tracker](https://github.com/stepjam/PyRep/issues).
+PerAct uses our [RLBench fork](https://github.com/RPM-lab-UMN/RLBench/tree/peract). 
 
+```bash
+cd <install_dir>
+git clone -b peract https://github.com/RPM-lab-UMN/RLBench.git # note: 'peract' branch
+
+cd RLBench
+pip install -r requirements.txt
+python setup.py develop
+```
+
+### 4. YARR
+
+PerAct uses our [YARR fork](https://github.com/RPM-lab-UMN/YARR/tree/peract).
+
+```bash
+cd <install_dir>
+git clone -b peract https://github.com/RPM-lab-UMN/YARR.git # note: 'peract' branch
+
+cd YARR
+pip install -r requirements.txt
+python setup.py develop
+```
+
+### 5. Talk Through It Repo
+Clone:
+```bash
+cd <install_dir>
+git clone https://github.com/RPM-lab-UMN/talk-through-it.git
+```
+
+Install:
+```bash
+cd talk-through-it
+pip install git+https://github.com/openai/CLIP.git
+mamba install einops pytorch3d
+```
+## Quickstart
+Generate Level-1 motions data using RLBench/tools/dataset_generator.py
+
+Train the observation-dependent model by editing conf/config.yaml and running train.py
+
+Train the observation-independent model by running train_l2a.py and train_classifier.py
+
+Collect demonstrations using language by running record_model_1.py
+
+Evaluate observation-dependent models by editing conf/eval.yaml and running eval.py
 
 ## Citation
