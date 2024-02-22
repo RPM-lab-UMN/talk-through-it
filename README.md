@@ -93,7 +93,7 @@ Install:
 ```bash
 cd talk-through-it
 pip install git+https://github.com/openai/CLIP.git
-mamba install einops pytorch3d
+mamba install einops pytorch3d transformers
 ```
 ## Quickstart
 Generate Level-1 motions data using RLBench/tools/dataset_generator.py
