@@ -276,13 +276,13 @@ def get_dataset(values, directions, speeds, clip_model):
         for j in range(len(commands2)): # current
             combo_commands.append(commands2[j])
             if commands2[j] == 'keep moving':
-                samples.append((labels[i], text_features[j], labels[i]))
+                samples.append((labels[i], text_features[j], labels[i], commands2[j]))
                 labels_p.append(labels[i])
                 labels2.append(labels[i])
             elif commands2[j] == 'move back':
                 label = -labels[i]
                 label[4:] *= -1
-                samples.append((labels[i], text_features[j], label))
+                samples.append((labels[i], text_features[j], label, commands2[j]))
                 labels_p.append(labels[i])
                 labels2.append(label)
             else:
@@ -297,7 +297,7 @@ def get_dataset(values, directions, speeds, clip_model):
                     label2 = labels[j]
                     skip = False
                 if not skip:
-                    samples.append((labels[i], text_features[j], label2))
+                    samples.append((labels[i], text_features[j], label2, commands2[j]))
                     labels_p.append(labels[i])
                     labels2.append(label2)
 
@@ -322,7 +322,7 @@ def get_dataset(values, directions, speeds, clip_model):
         # create label
         label = np.array([x, y, z, v, r, p, yaw, g], dtype=np.float32)
         # create sample
-        samples.append((label, text_features[-2], label))
+        samples.append((label, text_features[-2], label, 'keep moving'))
         labels_p.append(label)
         labels2.append(label)
         combo_commands.append('keep moving')
@@ -350,7 +350,7 @@ def get_dataset(values, directions, speeds, clip_model):
         # create sample
         label2 = -label.copy()
         label2[-1] *= -1
-        samples.append((label, text_features[-1], label2))
+        samples.append((label, text_features[-1], label2, 'move back'))
         labels_p.append(label)
         labels2.append(label2)
         combo_commands.append('move back')
@@ -393,15 +393,16 @@ l2a.eval()
 # loop through data loader
 success = 0
 total = 0
-for i, (previous, command, label) in enumerate(train_loader):
+for i, (previous, command, label, text) in enumerate(train_loader):
     # move to device
     previous = previous.to(device)
     command = command.to(device)
     label = label.to(device)
     # get predictions
     y, g = l2a.forward(previous, command)
-    # print y, g, label if not successful
+    # print command, y, g, label if not successful
     if not l2a.success(y, g, label):
+        print('command:', text)
         print('y:', y)
         print('g:', g)
         print('label:', label)
