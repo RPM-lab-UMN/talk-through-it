@@ -42,6 +42,29 @@ class L2A(nn.Module):
         # return total loss
         return xyzvr_loss + gripper_loss
     
+    def success(self, y, g, label):
+        # define success as within 20% of label
+        # don't include velocity in success calculation
+        y[0, 3] = 0
+        label[0, 3] = 0
+        # round g to nearest integer
+        g = torch.round(g)
+        yg = torch.cat((y, g), dim=1)
+        success = True
+        # loop through length of label
+        for i in range(len(label[0])):
+            # check if within 20% of label if label is not 0
+            if label[0, i] != 0:
+                if torch.abs(yg[0, i] - label[0, i]) > 0.2 * torch.abs(label[0, i]):
+                    success = False
+                    break
+            # check if > 1 if label is 0
+            else:
+                if torch.abs(yg[0, i]) > 1:
+                    success = False
+                    break
+        return success
+    
     def get_action(self, prev_action, command, obs):
         # get action from model
         xyzvr, g = self.forward(prev_action, command)
