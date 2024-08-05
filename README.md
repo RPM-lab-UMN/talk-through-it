@@ -108,12 +108,13 @@ Evaluate observation-dependent models by editing conf/eval.yaml and running eval
 
 ## Citation
 ```
-@misc{winge2024talk,
-      title={Talk Through It: End User Directed Manipulation Learning}, 
-      author={Carl Winge and Adam Imdieke and Bahaa Aldeeb and Dongyeop Kang and Karthik Desingh},
-      year={2024},
-      eprint={2402.12509},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO}
+@ARTICLE{10608414,
+    author={Winge, Carl and Imdieke, Adam and Aldeeb, Bahaa and Kang, Dongyeop and Desingh, Karthik},
+    journal={IEEE Robotics and Automation Letters}, 
+    title={Talk Through It: End User Directed Manipulation Learning}, 
+    year={2024},
+    pages={1-8},
+    keywords={Robots;Task analysis;Production facilities;Training;Natural languages;Grippers;Cognition;Learning from Demonstration;Incremental Learning;Human-Centered Robotics},
+    doi={10.1109/LRA.2024.3433309}
 }
 ```
